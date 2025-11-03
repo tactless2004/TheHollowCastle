@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.professorakram.simpleunityhierarchyfolder": {
+      "version": "https://github.com/ProfessorAkram/SimpleUnityHierarchyFolder.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0fba2e1b1da27648307eef4a57668ae850cbaa32"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.9",
       "depth": 0,
@@ -33,8 +40,8 @@
       "dependencies": {
         "com.unity.burst": "1.8.19",
         "com.unity.mathematics": "1.3.2",
-        "com.unity.nuget.mono-cecil": "1.11.5",
         "com.unity.test-framework": "1.4.6",
+        "com.unity.nuget.mono-cecil": "1.11.5",
         "com.unity.test-framework.performance": "3.0.3"
       },
       "url": "https://packages.unity.com"
