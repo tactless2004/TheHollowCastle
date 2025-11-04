@@ -27,17 +27,25 @@ public class PlayerMove : MonoBehaviour
         EightDirection
     }
 
+    [Header("SNAP PARAMS")]
     [SerializeField]
     private SnapType snapType = SnapType.FourDirection;
 
-    [SerializeField]
-    [Tooltip("If the isogrid is rotated, this will fix the snap")]
+    [SerializeField, Tooltip("If the isogrid is rotated, this will fix the snap")]
     private float gridRotationOffsetY = 0.0f;
 
-    [SerializeField]
-    [Tooltip("Direction the player is facing. \nREADONLY DON'T MODIFY")]
+    [SerializeField, Tooltip("Direction the player is facing. \nREADONLY DON'T MODIFY")]
     public Vector3 facing;
 
+    [SerializeField, Tooltip("If true, smoothly rotates to snap orientation instead of snapping.")]
+    private bool smoothSnap = false;
+
+    [SerializeField, Tooltip("Rotation speed for snapping when smoothSnap enable")]
+    private float rotationSpeed = 10f;
+
+    private Vector3 cachedDirection;
+
+    [Header("MOVEMENT PARAMS")]
     [SerializeField]
     private float MAX_FORCE = 10.0f;
 
@@ -46,7 +54,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private Vector3 _direction;
-
+    
     public float ForceApplied
     {
         get => _forceApplied;
@@ -62,6 +70,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         facing = Vector3.forward;
+        cachedDirection = Vector3.zero;
         if(!TryGetComponent<Rigidbody>(out rb))
         {
             Debug.LogError("Rigidbody not found on Player!");
@@ -88,24 +97,30 @@ public class PlayerMove : MonoBehaviour
         rb.AddForce(dv, ForceMode.VelocityChange);
 
         // Snap to direction
-        if(Direction != Vector3.zero) SnapDirection();
+        SnapDirection();
     }
 
     private void SnapDirection()
     {
-        Vector3 snappedDir = Direction;
+        Vector3 intendedDirection = Direction != Vector3.zero ? Direction : cachedDirection;
+
+        // If cachedDirection was Vector3.zero, just bail
+        if (intendedDirection == Vector3.zero) return;
+
+        Vector3 snappedDir = intendedDirection;
+
         if (snapType == SnapType.FourDirection)
         {
             // Whichever Axis has a higher influence on the direction, we snap that way
-            if (Mathf.Abs(Direction.x) > Mathf.Abs(Direction.z))
+            if (Mathf.Abs(intendedDirection.x) > Mathf.Abs(intendedDirection.z))
             {
                 // Snap x
-                snappedDir = new Vector3(Mathf.Sign(Direction.x), 0.0f, 0.0f);
+                snappedDir = new Vector3(Mathf.Sign(intendedDirection.x), 0.0f, 0.0f);
             }
             else
             {
                 // Snap z
-                snappedDir = new Vector3(0.0f, 0.0f, Mathf.Sign(Direction.z));
+                snappedDir = new Vector3(0.0f, 0.0f, Mathf.Sign(intendedDirection.z));
             }
         } 
         
@@ -117,8 +132,25 @@ public class PlayerMove : MonoBehaviour
         // fix local snappedDir to worldSnappedDir
         Quaternion gridRotationOffset = Quaternion.Euler(0.0f, gridRotationOffsetY, 0.0f);
         Vector3 worldSnappedDir = gridRotationOffset * snappedDir;
+
+        Quaternion snapTarget = Quaternion.LookRotation(worldSnappedDir);
+
         // Apply Snap
-        transform.rotation = Quaternion.LookRotation(worldSnappedDir);
+        if (smoothSnap)
+        {
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                snapTarget,
+                rotationSpeed * Time.fixedDeltaTime
+            );
+        }
+
+        else
+        {
+            transform.rotation = snapTarget;
+        }
+
+        cachedDirection = snappedDir;
         facing = worldSnappedDir;
     }
 }
