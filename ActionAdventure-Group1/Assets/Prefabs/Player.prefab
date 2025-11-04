@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8613821785335162109}
   - component: {fileID: 1050723458869948216}
   - component: {fileID: 2285763025187732954}
-  - component: {fileID: 4575109183587257013}
   - component: {fileID: 7361487164748213108}
   - component: {fileID: 2177400553464566293}
   m_Layer: 0
@@ -65,8 +64,6 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -88,7 +85,6 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -114,23 +110,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4575109183587257013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222212954365545417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f171aa97580f294fb117bc64d346dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveTransform
-  _direction: {x: 1, y: 0, z: 0}
-  _speed: 5
-  _moveOnAwake: 0
-  _enableEditorTesting: 0
-  _testAction: 0
 --- !u!114 &7361487164748213108
 MonoBehaviour:
   m_ObjectHideFlags: 0
