@@ -33,6 +33,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField, Tooltip("If the isogrid is rotated, this will fix the snap")]
     private float gridRotationOffsetY = 0.0f;
+    private Quaternion gridRotationOffset;
 
     [SerializeField, Tooltip("Direction the player is facing. \nREADONLY DON'T MODIFY")]
     public Vector3 facing;
@@ -71,6 +72,7 @@ public class PlayerMove : MonoBehaviour
     {
         facing = Vector3.forward;
         cachedDirection = Vector3.zero;
+        gridRotationOffset = Quaternion.Euler(0.0f, gridRotationOffsetY, 0.0f);
         if(!TryGetComponent<Rigidbody>(out rb))
         {
             Debug.LogError("Rigidbody not found on Player!");
@@ -129,8 +131,6 @@ public class PlayerMove : MonoBehaviour
             Debug.LogError("No SnapType Chosen!\nDefaulting to Eight Direction.");
         }
 
-        // fix local snappedDir to worldSnappedDir
-        Quaternion gridRotationOffset = Quaternion.Euler(0.0f, gridRotationOffsetY, 0.0f);
         Vector3 worldSnappedDir = gridRotationOffset * snappedDir;
 
         Quaternion snapTarget = Quaternion.LookRotation(worldSnappedDir);
@@ -138,16 +138,18 @@ public class PlayerMove : MonoBehaviour
         // Apply Snap
         if (smoothSnap)
         {
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                snapTarget,
-                rotationSpeed * Time.fixedDeltaTime
+            rb.MoveRotation(
+                Quaternion.Slerp(
+                    transform.rotation,
+                    snapTarget,
+                    rotationSpeed * Time.fixedDeltaTime
+                )
             );
         }
 
         else
         {
-            transform.rotation = snapTarget;
+            rb.MoveRotation(snapTarget);
         }
 
         cachedDirection = snappedDir;
