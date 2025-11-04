@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Direction the player is facing. \nREADONLY DON'T MODIFY")]
-    private Vector3 facing;
+    public Vector3 facing;
 
     [SerializeField]
     private float MAX_FORCE = 10.0f;
