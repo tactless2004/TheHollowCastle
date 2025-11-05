@@ -37,6 +37,7 @@ public class MeleeAttack : IAttack
             // (or the environment which can also be damaged maybe XD)
             if (hit.collider.TryGetComponent(out IDamageable target))
             {
+                Debug.Log($"Hit {hit.collider.name} for {baseDamage} damage!");
                 AttackData attack = new AttackData(baseDamage, damageType, source, direction);
                 target.TakeDamage(attack);
             }
