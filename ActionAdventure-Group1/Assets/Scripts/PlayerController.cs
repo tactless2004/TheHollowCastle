@@ -9,6 +9,7 @@
 * ------------------------------------------------------------
 * 2025/10/01 | Noah Zimmerman | Created Class
 * 2025/11/04 | Leyton McKinney | Modified to use PlayerMovement instead of MoveTransform
+* 2025/11/04 | Leyton McKinney | Add PlayerCombat bindings.
 *
 ************************************************************/
  
@@ -18,14 +19,19 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private PlayerMove _playerMove;
-    
+    private PlayerCombat _playerCombat;
+
     private void Start()
     {
         // Check if MoveTransform component DOES NOT EXIST
         if (!TryGetComponent<PlayerMove>(out _playerMove))
         {
             Debug.LogError("PlayerMove component missing!");
+        }
 
+        if (!TryGetComponent<PlayerCombat>(out _playerCombat))
+        {
+            Debug.LogError("PlayerCombat component missing!");
         }
     }
  
@@ -39,6 +45,16 @@ public class PlayerController : MonoBehaviour
         _playerMove.Direction = direction;
         
     }
- 
- 
+
+    public void OnMelee(InputValue value)
+    {
+        if(value.isPressed) _playerCombat.Melee();
+    }
+
+    public void OnRanged(InputValue value)
+    {
+        if (value.isPressed) _playerCombat.Ranged();
+    }
+
+
 }
