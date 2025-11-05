@@ -17,5 +17,5 @@ using UnityEngine;
 
 public interface IEnemyAttackBehavior
 {
-    void Attack(Transform enemy, Transform target);
+    void Attack(Transform enemy, Transform target, ref float lastAttackTime);
 }

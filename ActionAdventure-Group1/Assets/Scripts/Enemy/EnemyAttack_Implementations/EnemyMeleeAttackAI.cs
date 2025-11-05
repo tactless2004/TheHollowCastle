@@ -24,9 +24,7 @@ public class EnemyMeleeAttackAI : ScriptableObject, IEnemyAttackBehavior
     public float cooldown = 1.0f;
     public DamageType damageType = DamageType.Normal;
 
-    private float lastAttackTime;
-
-    public void Attack(Transform enemy, Transform target)
+    public void Attack(Transform enemy, Transform target, ref float lastAttackTime)
     {
         // If there's nothing to attack, bail
         if (target == null) return;

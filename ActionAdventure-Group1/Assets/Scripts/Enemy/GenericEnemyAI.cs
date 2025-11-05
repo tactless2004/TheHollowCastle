@@ -16,14 +16,28 @@ using UnityEngine;
 
 public class GenericEnemyAI : MonoBehaviour
 {
-    public IEnemyMovementBehavior movementBehavior;
-    public IEnemyAttackBehavior attackBehavior;
+    [Header("AI Behaviors")]
+    [SerializeField] private ScriptableObject movementBehaviorSO;
+    [SerializeField] private ScriptableObject attackBehaviorSo;
+
+    private IEnemyMovementBehavior movementBehavior;
+    private IEnemyAttackBehavior attackBehavior;
+    private float lastAttackTime;
 
     public Transform target;
 
+    private void Awake()
+    {
+        movementBehavior = movementBehaviorSO as IEnemyMovementBehavior;
+        attackBehavior = attackBehaviorSo as IEnemyAttackBehavior;
+    }
+
     private void Update()
     {
+        // If there is no target, there is nothing to do
+        if (target == null) return;
+
         movementBehavior?.Move(transform, target);
-        attackBehavior?.Attack(transform, target);
+        attackBehavior?.Attack(transform, target, ref lastAttackTime);
     }
 }

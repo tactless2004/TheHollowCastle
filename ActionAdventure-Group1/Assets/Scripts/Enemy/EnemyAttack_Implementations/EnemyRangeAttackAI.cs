@@ -23,13 +23,10 @@ public class EnemyRangeAttackAI : ScriptableObject, IEnemyAttackBehavior
     public float cooldown = 2.0f;
     public DamageType damageType = DamageType.Normal;
 
-    private float lastAttackTime;
-
-    public void Attack(Transform enemy, Transform target)
+    public void Attack(Transform enemy, Transform target, ref float lastAttackTime)
     {
         // No target, bail
         if (target == null) return;
-
         if (Time.time - lastAttackTime < cooldown) return;
 
         if (Vector3.Distance(enemy.position, target.position) <= range)
@@ -37,7 +34,7 @@ public class EnemyRangeAttackAI : ScriptableObject, IEnemyAttackBehavior
             Vector3 projectileDirection = (target.position - enemy.position).normalized;
             GameObject projectile = Instantiate(
                 projectilePrefab,
-                enemy.position + projectileDirection * 0.3f,
+                enemy.position + projectileDirection,
                 Quaternion.LookRotation(projectileDirection)
             );
 
