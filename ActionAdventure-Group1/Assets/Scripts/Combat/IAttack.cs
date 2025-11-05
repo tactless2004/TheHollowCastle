@@ -16,5 +16,5 @@ using UnityEngine;
 
 public interface IAttack
 {
-    void Exectute(Vector3 origin, Vector3 direction, GameObject source);
+    void Attack(Vector3 origin, Vector3 direction, GameObject source);
 }
