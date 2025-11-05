@@ -44,8 +44,6 @@ public class PlayerCombat : MonoBehaviour
         // Bail if the player is attacking too fast
         if (Time.time - lastMeleeAttackTime < meleeCooldown) return;
 
-        Debug.Log("MELEE!");
-
         Vector3 dir = playerMove.facing;
         meleeAttack.Attack(meleeAttackOrigin.position, dir, gameObject);
         lastMeleeAttackTime = Time.time;
@@ -55,8 +53,6 @@ public class PlayerCombat : MonoBehaviour
     {
         // If player is spamming ranged, bail
         if (Time.time - lastRangedAttackTime < rangedCooldown) return;
-
-        Debug.Log("RANGED!");
 
         Vector3 dir = playerMove.facing;
         rangedAttack.Attack(rangedAttackOrigin.position, dir, gameObject);
