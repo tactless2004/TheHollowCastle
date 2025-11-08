@@ -15,14 +15,40 @@
  
 using UnityEngine;
 
-// This has to be a monobehavior for unity to find this component, it otherwise does not need to be one :(
 public abstract class CombatEntity : MonoBehaviour
 {
+    [Header("Health")]
     [SerializeField] protected float health = 20.0f;
+    [SerializeField] protected float healthRegen = 1.0f; // health per second;
+    [SerializeField] protected const float MAXHEALTH = 20.0f;
+
+    [Header("Mana")]
     [SerializeField] protected float mana = 100.0f;
+    [SerializeField] protected float manaRegen = 1.0f; // mana per second;
+    [SerializeField] protected const float MAXMANA = 100.0f;
+
+    private float lastManaRegen;
+    private float lastHealthRegen;
 
     public virtual void Heal(float healAmount) => health += healAmount;
     public virtual void TakeDamage(WeaponData attack) => health -= attack.damage;
+    public float GetHealth() => health;
     public virtual void GainMana(float manaAmount) => mana += manaAmount;
     public virtual void ExertMain(WeaponData attack) => mana -= attack.manaCost;
+    public float GetMana() => mana;
+
+    private void Update()
+    {
+        if (Time.time - lastManaRegen > 1.0f / manaRegen)
+        {
+            mana = Mathf.Clamp(mana + 1, 0.0f, MAXMANA);
+            lastManaRegen = Time.time;
+        }
+
+        if (Time.time - lastHealthRegen > 1.0f / healthRegen)
+        {
+            health = Mathf.Clamp(health + 1, 0.0f, MAXHEALTH);
+            lastHealthRegen = Time.time;
+        }
+    }
 }

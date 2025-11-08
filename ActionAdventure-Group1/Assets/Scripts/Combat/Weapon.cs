@@ -1,8 +1,8 @@
 /************************************************************
-* COPYRIGHT:  Year
-* PROJECT: Name of Project or Assignment
+* COPYRIGHT:  2025
+* PROJECT: ActionAdventureGameNameTBA
 * FILE NAME: Weapon.cs
-* DESCRIPTION: Describes.
+* DESCRIPTION: Weapon physics implementations for melee and ranged.
 *                   
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments

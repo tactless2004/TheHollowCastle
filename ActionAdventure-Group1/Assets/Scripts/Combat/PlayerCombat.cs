@@ -1,6 +1,6 @@
 /************************************************************
 * COPYRIGHT:  Year
-* PROJECT: Name of Project or Assignment
+* PROJECT: ActionAdventureGameNameTBA
 * FILE NAME: PlayerCombat.cs
 * DESCRIPTION: Describes the Combat Behaviors of the player.
 *                   
@@ -26,14 +26,18 @@ public class PlayerCombat : MonoBehaviour
     private PlayerMove playerMove;
     private Weapon Slot1_Weapon;
     private Weapon Slot2_Weapon;
-    private float lastRangedAttackTime;
-    private float lastMeleeAttackTime;
 
     private void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
         Slot1_Weapon = new Weapon(Slot1_WeaponData as WeaponData);
         Slot2_Weapon = new Weapon(Slot2_WeaponData as WeaponData);
+    }
+
+    public void SetWeapon(int slot, WeaponData weapon)
+    {
+        if (slot == 1) Slot1_Weapon = new Weapon(weapon);
+        else Slot2_Weapon = new Weapon(weapon);
     }
 
     public void Slot1_Attack()

@@ -19,7 +19,7 @@ MonoBehaviour:
   range: 2
   attackCooldown: 1.35
   manaCost: 0
-  pickupModelPrefab: {fileID: 0}
+  pickupModelPrefab: {fileID: 8059953466907211127, guid: 121b9de15c906884681a58b7a86697d6, type: 3}
   uiSprite: {fileID: 0}
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
