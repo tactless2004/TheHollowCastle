@@ -38,6 +38,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void Slot1_Attack()
     {
+        // We need to check if it is ranged or melee, to decided where the "attack origin" is
         if (Slot1_Weapon.getWeaponData().category == WeaponCategory.Melee)
             Slot1_Weapon.Attack(meleeAttackOrigin.position, playerMove.facing, gameObject);
         else

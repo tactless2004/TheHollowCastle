@@ -24,4 +24,5 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 876032798069382608, guid: 0ca17e330a942f44e8827f01155b3321, type: 3}
-  projectileSpeed: 2
+  projectileSpeed: 10
+  effects: []

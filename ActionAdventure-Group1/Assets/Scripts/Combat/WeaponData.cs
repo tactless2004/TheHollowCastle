@@ -39,6 +39,9 @@ public class WeaponData : ScriptableObject
     [Header("Ranged Specfic")]
     public GameObject projectilePrefab;
     public float projectileSpeed = 2.0f;
+
+    [Header("Special Effects")]
+    public WeaponEffect[] effects;
 }
 
 public enum WeaponCategory

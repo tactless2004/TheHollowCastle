@@ -42,7 +42,7 @@ public class Weapon
             // If hit on melee
             if(Physics.Raycast(origin, direction, out RaycastHit hit, weapon.range))
             {
-                if (hit.collider.TryGetComponent(out IDamageable target)) target.TakeDamage(weapon);
+                if (hit.collider.TryGetComponent(out CombatEntity target)) target.TakeDamage(weapon);
             }
         }
 

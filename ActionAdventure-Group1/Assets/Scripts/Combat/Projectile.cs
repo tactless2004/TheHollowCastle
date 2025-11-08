@@ -24,9 +24,16 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        if(TryGetComponent(out Rigidbody rb))
+        {
+            this.rb = rb;
+        }
 
+        else
+        {
+            Debug.LogError("Projectile does not have a Rigidbody.");
+        }
+    }
     public void Launch(Vector3 direction, float speed, WeaponData data)
     {
         this.weaponData = data;
@@ -39,7 +46,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.TryGetComponent(out IDamageable target))
+        if(collision.collider.TryGetComponent(out CombatEntity target))
         {
             target.TakeDamage(weaponData);
         }
