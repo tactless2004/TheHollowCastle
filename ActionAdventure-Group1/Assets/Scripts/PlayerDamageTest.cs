@@ -8,6 +8,7 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
+* 2025/11/07 | Leyton McKinney | AttackData -> WeaponData
 *
 ************************************************************/
  
@@ -18,11 +19,11 @@ public class PlayerDamageTest : MonoBehaviour, IDamageable
 {
     public float health = 100.0f;
 
-    public void TakeDamage(AttackData attack)
+    public void TakeDamage(WeaponData weapon)
     {
-        health -= attack.damage;
+        health -= weapon.damage;
 
-        Debug.Log($"{name} took {attack.damage} {attack.damageType} damage.");
+        Debug.Log($"{name} took {weapon.damage} {weapon.damageType} damage.");
 
         if (health <= 0.0f) Die();
     }

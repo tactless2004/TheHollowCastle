@@ -8,6 +8,7 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
+* 2025/11/07 | Leyton McKinney | Change IDamegable to take a WeaponData, instead of AttackData.
 *
 ************************************************************/
  
@@ -16,5 +17,5 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void TakeDamage(AttackData attack);
+    void TakeDamage(WeaponData attack);
 }

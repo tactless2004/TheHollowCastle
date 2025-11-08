@@ -20,45 +20,36 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Transform rangedAttackOrigin;
     [SerializeField] private Transform meleeAttackOrigin;
-    [SerializeField] private float meleeRange = 4.0f;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float projectileSpeed = 10.0f;
-    [SerializeField] private float rangedCooldown = 0.5f;
-    [SerializeField] private float meleeCooldown = 0.5f;
+    [SerializeField] private ScriptableObject Slot1_WeaponData;
+    [SerializeField] private ScriptableObject Slot2_WeaponData;
 
     private PlayerMove playerMove;
-    private IAttack meleeAttack;
-    private IAttack rangedAttack;
+    private Weapon Slot1_Weapon;
+    private Weapon Slot2_Weapon;
     private float lastRangedAttackTime;
     private float lastMeleeAttackTime;
 
     private void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
-
-        meleeAttack = new MeleeAttack(meleeRange, 10.0f);
-        rangedAttack = new RangedAttack(projectilePrefab, projectileSpeed);
+        Slot1_Weapon = new Weapon(Slot1_WeaponData as WeaponData);
+        Slot2_Weapon = new Weapon(Slot2_WeaponData as WeaponData);
     }
 
     public void Slot1_Attack()
     {
-        Debug.Log("Slot 1 Attack");
-        // Bail if the player is attacking too fast
-        if (Time.time - lastMeleeAttackTime < meleeCooldown) return;
-
-        Vector3 dir = playerMove.facing;
-        meleeAttack.Attack(meleeAttackOrigin.position, dir, gameObject);
-        lastMeleeAttackTime = Time.time;
+        if (Slot1_Weapon.getWeaponData().category == WeaponCategory.Melee)
+            Slot1_Weapon.Attack(meleeAttackOrigin.position, playerMove.facing, gameObject);
+        else
+            Slot1_Weapon.Attack(rangedAttackOrigin.position, playerMove.facing, gameObject);
     }
 
     public void Slot2_Attack()
     {
-        Debug.Log("Slot 2 Attack");
-        // If player is spamming ranged, bail
-        if (Time.time - lastRangedAttackTime < rangedCooldown) return;
-
-        Vector3 dir = playerMove.facing;
-        rangedAttack.Attack(rangedAttackOrigin.position, dir, gameObject);
-        lastRangedAttackTime = Time.time;
+        // We need to check if it is ranged or melee, to decided where the "attack origin" is
+        if (Slot2_Weapon.getWeaponData().category == WeaponCategory.Melee)
+            Slot2_Weapon.Attack(meleeAttackOrigin.position, playerMove.facing, gameObject);
+        else
+            Slot2_Weapon.Attack(rangedAttackOrigin.position, playerMove.facing, gameObject);
     }
 }

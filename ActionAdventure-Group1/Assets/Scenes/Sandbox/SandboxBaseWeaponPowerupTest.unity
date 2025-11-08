@@ -901,6 +901,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 934019299}
     m_Modifications:
+    - target: {fileID: 6796864357458396140, guid: b05550814c06e6843adaf39f868975e6, type: 3}
+      propertyPath: Slot1_WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
+    - target: {fileID: 6796864357458396140, guid: b05550814c06e6843adaf39f868975e6, type: 3}
+      propertyPath: Slot2_WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: c0dcedbb09fa2aa44ab02dc5a5722611, type: 2}
     - target: {fileID: 6887283177378501917, guid: b05550814c06e6843adaf39f868975e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

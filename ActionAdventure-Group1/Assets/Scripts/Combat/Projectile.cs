@@ -7,8 +7,8 @@
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
-*
+* 2025/11/04 | Leyton McKinney | Init
+* 2025/11/07 | Leyton McKinney | Switch from AttackData to WeaponData system.
 *
 ************************************************************/
  
@@ -19,7 +19,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody rb;
-    private AttackData attackData;
+    private WeaponData weaponData;
     private float speed;
 
     private void Awake()
@@ -27,9 +27,9 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Launch(Vector3 direction, float speed, AttackData data)
+    public void Launch(Vector3 direction, float speed, WeaponData data)
     {
-        this.attackData = data;
+        this.weaponData = data;
         this.speed = speed;
         rb.linearVelocity = direction.normalized * speed;
 
@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
     {
         if(collision.collider.TryGetComponent(out IDamageable target))
         {
-            target.TakeDamage(attackData);
+            target.TakeDamage(weaponData);
         }
 
         Destroy(gameObject);

@@ -22,7 +22,6 @@ public class GenericEnemyAI : MonoBehaviour
 
     private IEnemyMovementBehavior movementBehavior;
     private IEnemyAttackBehavior attackBehavior;
-    private float lastAttackTime;
 
     public Transform target;
 
@@ -38,6 +37,6 @@ public class GenericEnemyAI : MonoBehaviour
         if (target == null) return;
 
         movementBehavior?.Move(transform, target);
-        attackBehavior?.Attack(transform, target, ref lastAttackTime);
+        attackBehavior?.Attack(transform, target);
     }
 }

@@ -9,12 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1945380f397cc4e4895bfd5c1be9be27, type: 3}
-  m_Name: TestRangedEnemyBehavior
+  m_Script: {fileID: 11500000, guid: 90893dd1f68384a4488c1e33f7f67216, type: 3}
+  m_Name: TestWeaponBow
   m_EditorClassIdentifier: 
+  weaponName: Bow
+  category: 1
+  damageType: 2
+  damage: 20
+  range: 2
+  attackCooldown: 1.35
+  manaCost: 0
+  pickupModelPrefab: {fileID: 0}
+  uiSprite: {fileID: 0}
+  attackSound: {fileID: 0}
+  pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 876032798069382608, guid: 0ca17e330a942f44e8827f01155b3321, type: 3}
-  projectileSpeed: 10
-  range: 10
-  damage: 8
-  cooldown: 2
-  damageType: 0
+  projectileSpeed: 2

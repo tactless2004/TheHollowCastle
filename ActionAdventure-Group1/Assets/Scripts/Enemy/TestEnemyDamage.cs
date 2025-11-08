@@ -14,16 +14,16 @@
 using UnityEngine;
  
 
-public class NewMonoBehaviourScript : MonoBehaviour, IDamageable
+public class TestEnemyDamage : MonoBehaviour, IDamageable
 {
     [SerializeField] private float health = 100.0f;
     
-    public void TakeDamage(AttackData attack)
+    public void TakeDamage(WeaponData damage)
     {
         // For this example ignore damage types
-        health -= attack.damage;
+        health -= damage.damage;
 
-        Debug.Log(gameObject.name + " took " + attack.damage + " " + attack.damageType + " damage from " + attack.source.name);
+        Debug.Log(gameObject.name + " took " + damage.damage + " " + damage.damageType + " damage from");
         if (health <= 0.0f) Die();
     }
 
