@@ -2,12 +2,13 @@
 * COPYRIGHT:  Year
 * PROJECT: Name of Project or Assignment
 * FILE NAME: PlayerCombat.cs
-* DESCRIPTION: Short Description of script.
+* DESCRIPTION: Describes the Combat Behaviors of the player.
 *                   
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2000/01/01 | Your Name | Created class
+* 2025/11/04 | Leyton McKinney | Init
+* 2025/11/07 | Leyton McKinney | Switch from (Range, Melee) scheme to (Slot1, Slot2 Scheme), change cooldown to be weapon specific.
 *
 *
 ************************************************************/
@@ -39,8 +40,9 @@ public class PlayerCombat : MonoBehaviour
         rangedAttack = new RangedAttack(projectilePrefab, projectileSpeed);
     }
 
-    public void Melee()
+    public void Slot1_Attack()
     {
+        Debug.Log("Slot 1 Attack");
         // Bail if the player is attacking too fast
         if (Time.time - lastMeleeAttackTime < meleeCooldown) return;
 
@@ -49,8 +51,9 @@ public class PlayerCombat : MonoBehaviour
         lastMeleeAttackTime = Time.time;
     }
 
-    public void Ranged()
+    public void Slot2_Attack()
     {
+        Debug.Log("Slot 2 Attack");
         // If player is spamming ranged, bail
         if (Time.time - lastRangedAttackTime < rangedCooldown) return;
 

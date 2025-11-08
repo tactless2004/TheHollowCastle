@@ -10,6 +10,7 @@
 * 2025/10/01 | Noah Zimmerman | Created Class
 * 2025/11/04 | Leyton McKinney | Modified to use PlayerMovement instead of MoveTransform
 * 2025/11/04 | Leyton McKinney | Add PlayerCombat bindings.
+* 2025/11/07 | Leyton McKinney | Change bindings from (Melee, Ranged), (Slot1Attack, Slot2Attack), Add weapon switch buttons (Q,E)
 *
 ************************************************************/
  
@@ -46,15 +47,24 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void OnMelee(InputValue value)
+    public void OnSlot1Attack(InputValue value)
     {
-        if(value.isPressed) _playerCombat.Melee();
+        if(value.isPressed) _playerCombat.Slot1_Attack();
     }
 
-    public void OnRanged(InputValue value)
+    public void OnSlot2Attack(InputValue value)
     {
-        if (value.isPressed) _playerCombat.Ranged();
+        if (value.isPressed) _playerCombat.Slot2_Attack();
     }
 
+    public void OnSwitchSlot1Weapon(InputValue value)
+    {
+        Debug.Log("Player Request Switch Slot 1");
+    }
+
+    public void OnSwitchSlot2Weapon(InputValue value)
+    {
+        Debug.Log("Player Request Switch Slot 2");
+    }
 
 }
