@@ -7,7 +7,8 @@
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2025/11/04 | Leyton McKinney | Init
+* 2025/11/08 | Leyton McKinney | Init
+* 2025/11/09 | Leyton McKinney | use prefab rotation instead of previous model rotation on SetWeapon() call.
 *
 ************************************************************/
  
@@ -27,6 +28,9 @@ public class PickupItem : MonoBehaviour
     {
         Transform trans = transform;
         Destroy(gameObject);
-        Instantiate(weapon.pickupModelPrefab, trans.position, trans.rotation);
+        // So, if we instantiate the new pickup weapon at the same position as the old one that seems to work
+        // as far as current testing goes, but the rotation of the prefab should probably be maintained, strictly as a convenience for now, although
+        // it's worth considering what might be a better long term solution - LGM
+        Instantiate(weapon.pickupModelPrefab, trans.position, weapon.pickupModelPrefab.transform.rotation);
     }
 }
