@@ -8,7 +8,7 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
-*
+* 2025/11/07 | Noah Zimmerman | Added auto aquiring target
 ************************************************************/
  
 using UnityEngine;
@@ -29,6 +29,7 @@ public class GenericEnemyAI : MonoBehaviour
     {
         movementBehavior = movementBehaviorSO as IEnemyMovementBehavior;
         attackBehavior = attackBehaviorSo as IEnemyAttackBehavior;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
