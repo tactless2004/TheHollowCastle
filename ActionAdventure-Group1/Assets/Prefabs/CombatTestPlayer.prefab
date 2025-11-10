@@ -72,7 +72,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1222212954365545417, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: m_Name
-      value: Player Variant
+      value: CombatTestPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 4248498948907233337, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -136,6 +136,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1222212954365545417, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6796864357458396140}
+    - targetCorrespondingSourceObject: {fileID: 1222212954365545417, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7439021333994772745}
   m_SourcePrefab: {fileID: 100100000, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
 --- !u!4 &6887283177378501917 stripped
 Transform:
@@ -208,11 +211,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangedAttackOrigin: {fileID: 6629990191509001219}
   meleeAttackOrigin: {fileID: 1657836202547316753}
-  meleeRange: 4
-  projectilePrefab: {fileID: 876032798069382608, guid: 0ca17e330a942f44e8827f01155b3321, type: 3}
-  projectileSpeed: 10
-  rangedCooldown: 0.5
-  meleeCooldown: 0.5
+  Slot1_WeaponData: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
+  Slot2_WeaponData: {fileID: 11400000, guid: c0dcedbb09fa2aa44ab02dc5a5722611, type: 2}
+--- !u!114 &7439021333994772745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8473264258799496941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216f4edd2577c7443bbf72bd00072b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon1SO: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
+  weapon2SO: {fileID: 11400000, guid: c0dcedbb09fa2aa44ab02dc5a5722611, type: 2}
+  raycastOrigin: {fileID: 6629990191509001219}
+  maxPickupDistance: 0.25
+  pickupHelpText: {fileID: 0}
 --- !u!1001 &8684787368624607768
 PrefabInstance:
   m_ObjectHideFlags: 0

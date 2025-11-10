@@ -10,6 +10,9 @@
 * 2025/10/01 | Noah Zimmerman | Created Class
 * 2025/11/04 | Leyton McKinney | Modified to use PlayerMovement instead of MoveTransform
 * 2025/11/04 | Leyton McKinney | Add PlayerCombat bindings.
+* 2025/11/07 | Leyton McKinney | Change bindings from (Melee, Ranged), (Slot1Attack, Slot2Attack), Add weapon switch buttons (Q,E)
+* 2025/11/08 | Leyton McKinney | Add inventory system controls.
+* 2025/11/08 | Leyton McKinney | Implement inventory system controls.
 *
 ************************************************************/
  
@@ -20,8 +23,9 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
+    private PlayerInventory _playerInventory;
 
-    private void Start()
+    private void Awake()
     {
         // Check if MoveTransform component DOES NOT EXIST
         if (!TryGetComponent<PlayerMove>(out _playerMove))
@@ -32,6 +36,11 @@ public class PlayerController : MonoBehaviour
         if (!TryGetComponent<PlayerCombat>(out _playerCombat))
         {
             Debug.LogError("PlayerCombat component missing!");
+        }
+
+        if(!TryGetComponent<PlayerInventory>(out _playerInventory))
+        {
+            Debug.LogError("PlayerInventory component missing!");
         }
     }
  
@@ -46,15 +55,24 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void OnMelee(InputValue value)
+    public void OnSlot1Attack(InputValue value)
     {
-        if(value.isPressed) _playerCombat.Melee();
+        if(value.isPressed) _playerCombat.Slot1_Attack();
     }
 
-    public void OnRanged(InputValue value)
+    public void OnSlot2Attack(InputValue value)
     {
-        if (value.isPressed) _playerCombat.Ranged();
+        if (value.isPressed) _playerCombat.Slot2_Attack();
     }
 
+    public void OnSwitchSlot1Weapon(InputValue value)
+    {
+        _playerInventory.pickupSlot(1);
+    }
+
+    public void OnSwitchSlot2Weapon(InputValue value)
+    {
+        _playerInventory.pickupSlot(2);
+    }
 
 }
