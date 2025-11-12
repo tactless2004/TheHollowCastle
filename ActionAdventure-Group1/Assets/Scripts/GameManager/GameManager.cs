@@ -12,11 +12,47 @@
  *
  ************************************************************/
  
+using System.Collections.Generic; 
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 // The GameManager class is derived from the Singleton pattern to ensure there is only one instance of it in the game.
 public class GameManager: Singleton<GameManager>
 {
+    
+    
+    [Header("Scene Management")]
+    [SerializeField]
+    [Tooltip("The main menu scene that loads when the game starts.")]
+    private string _mainMenuScene;
+   
+    [SerializeField]
+    [Tooltip("The HUD overlay that appears during gameplay.")]
+    private string _hudScene;
+   
+    [SerializeField]
+    [Tooltip("The pause menu overlay that appears when the game is paused.")]
+    private string _pauseMenuScene;
+   
+    [SerializeField]
+    [Tooltip("The Game Over scene that loads when the player loses or finishes the game.")]
+    private string _gameOverScene;
+   
+    [SerializeField]
+    [Tooltip("All the level scenes in the game, in the order they should be played.")]
+    private List<string> _gameLevels = new List<string>();
+   
+    
+    // Index of the currently active level in the levelScenes list
+    private int _currentLevelIndex = 0;
+   
+    // Tracks the currently loaded primary scene (menu or level)
+    private string _currentScene;
+   
+    //List of all loaded scenes
+    private List<string> _loadedScenes = new List<string>();
+    
     
     // Start is called before the first frame update
     void Start()
