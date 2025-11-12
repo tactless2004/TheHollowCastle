@@ -41,6 +41,10 @@ public class GenericEnemyAI : MonoBehaviour
             weapon = new Weapon(weaponSO as WeaponData);
         }
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        if (target == null)
+        {
+            Debug.Log("Player does not exist in scene!");
+        }
     }
 
     private void Update()
