@@ -37,6 +37,10 @@ public abstract class CombatEntity : MonoBehaviour
     public virtual void ExertMain(WeaponData attack) => mana -= attack.manaCost;
     public float GetMana() => mana;
 
+    protected virtual void Die()
+    {
+        Destroy(gameObject);
+    }
     private void Update()
     {
         if (Time.time - lastManaRegen > 1.0f / manaRegen)
@@ -50,5 +54,7 @@ public abstract class CombatEntity : MonoBehaviour
             health = Mathf.Clamp(health + 1, 0.0f, MAXHEALTH);
             lastHealthRegen = Time.time;
         }
+
+        if (health <= 0.0f) Die();
     }
 }
