@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1945380f397cc4e4895bfd5c1be9be27, type: 3}
+  m_Script: {fileID: 11500000, guid: 274bdad58d638ae4286d30e21164898a, type: 3}
   m_Name: TestRangedEnemyBehavior
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 876032798069382608, guid: 0ca17e330a942f44e8827f01155b3321, type: 3}
-  projectileSpeed: 10
-  range: 10
-  damage: 8
-  cooldown: 2
-  damageType: 0
+  weapon: {fileID: 11400000, guid: c0dcedbb09fa2aa44ab02dc5a5722611, type: 2}

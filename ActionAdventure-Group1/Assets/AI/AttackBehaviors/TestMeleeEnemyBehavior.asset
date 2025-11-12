@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274bdad58d638ae4286d30e21164898a, type: 3}
   m_Name: TestMeleeEnemyBehavior
   m_EditorClassIdentifier: 
-  range: 2
-  damage: 10
-  cooldown: 1
-  damageType: 0
+  weapon: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
