@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 274bdad58d638ae4286d30e21164898a, type: 3}
-  m_Name: TestMeleeEnemyBehavior
+  m_Name: TestRangedEnemyBehavior
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
+  weapon: {fileID: 11400000, guid: c0dcedbb09fa2aa44ab02dc5a5722611, type: 2}
