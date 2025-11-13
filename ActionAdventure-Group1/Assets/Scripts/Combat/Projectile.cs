@@ -11,6 +11,7 @@
 * 2025/11/07 | Leyton McKinney | Switch from AttackData to WeaponData system.
 * 2025/11/12 | Leyton McKinney | Destroy self, if distance traveled exceeds weapon range.
 * 2025/11/12 | Leyton McKinney | Collision detection makes sure target is off correct tag, preventing "friendly fire".
+* 2025/11/12 | Leyton McKinney | Projectiles are trigger now.
 *
 ************************************************************/
  
@@ -64,12 +65,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(
-            collision.collider.TryGetComponent(out CombatEntity target) && // hit entity is a CombatEntity
-            collision.collider.CompareTag(targetTag) // hit entity is of the target type
-        )
+        if (
+           other.TryGetComponent(out CombatEntity target) && // hit entity is a CombatEntity
+           other.CompareTag(targetTag) // hit entity is of the target type
+       )
         {
             target.TakeDamage(weaponData);
         }
