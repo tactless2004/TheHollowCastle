@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 5951983356799579928}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +228,8 @@ MonoBehaviour:
   meleeAttackOrigin: {fileID: 6626588017627742056}
   Slot1_WeaponData: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
   Slot2_WeaponData: {fileID: 11400000, guid: c0dcedbb09fa2aa44ab02dc5a5722611, type: 2}
+  showSlot1Range: 1
+  showSlot2Range: 0
 --- !u!114 &8092319358444874882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &5951983356799579928
 MonoBehaviour:
@@ -579,7 +581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4509257154044650285, guid: d4e1d52ec215eab4f8a063a6289e03c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.622
+      value: 0.364
       objectReference: {fileID: 0}
     - target: {fileID: 4509257154044650285, guid: d4e1d52ec215eab4f8a063a6289e03c9, type: 3}
       propertyPath: m_LocalRotation.w

@@ -12,6 +12,7 @@
 * 2025/11/11 | Leyton McKinney | Awake() -> Start(), because we're finding GameObjects that aren't guarenteed to exist at Awake() time.
 * 2025/11/11 | Leyton McKinney | Add attackSource for IEnemyAttackBehavior Attack() changes.
 * 2025/11/11 | Leyton McKinney | Move Attack logic into GenericEnemyAI.
+* 2025/11/12 | Leyton McKinney | Change Attack() calls to use targetTag field.
 ************************************************************/
  
 using UnityEngine;
@@ -51,19 +52,27 @@ public class GenericEnemyAI : MonoBehaviour
     {
         // If there is no target, there is nothing to do
         if (target == null) return;
+        Vector3 targetDirection = (target.position - transform.position).normalized;
 
+        // Temporary melee debug
+        Debug.DrawRay(
+            transform.position + 0.2f * targetDirection,
+            targetDirection * weapon.getWeaponData().range,
+            Color.cyan
+        );
         movementBehavior?.Move(transform, target);
 
         // Weapon Logic
         if(weapon != null)
         {
-            Vector3 targetDirection = (target.position - transform.position).normalized;
+            // Vector3 targetDirection = (target.position - transform.position).normalized;
             if (weapon.getWeaponData().category == WeaponCategory.Melee)
             {
                 weapon.Attack(
                     transform.position + 0.2f * targetDirection, // Origin of the enemy plus a small offset
                     targetDirection,
-                    gameObject
+                    gameObject,
+                    "Player"
                 );
             }
 
@@ -72,7 +81,8 @@ public class GenericEnemyAI : MonoBehaviour
                 weapon.Attack(
                     transform.position + 1.75f * targetDirection,
                     targetDirection,
-                    gameObject
+                    gameObject,
+                    "Player"
                 );
             }
         }

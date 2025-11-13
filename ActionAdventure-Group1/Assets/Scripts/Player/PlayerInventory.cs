@@ -78,7 +78,7 @@ public class PlayerInventory : MonoBehaviour
         // This should probably be handled in an other script, but putting here for now for debug purposes - LGM
 
         // Debug Ray to show pickup distance
-        Debug.DrawRay(raycastOrigin.position, playerMove.facing * maxPickupDistance, Color.green);
+        // Debug.DrawRay(raycastOrigin.position, playerMove.facing * maxPickupDistance, Color.green);
 
         // Pickup Indicator text logic
         if(Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
