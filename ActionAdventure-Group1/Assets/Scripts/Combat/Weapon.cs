@@ -73,7 +73,7 @@ public class Weapon
 
             if (projectile.TryGetComponent(out Projectile projLaunch))
             {
-                projLaunch.Launch(direction, weapon.projectileSpeed, weapon);
+                projLaunch.Launch(direction, weapon.projectileSpeed, weapon, targetTag);
             }
 
             else

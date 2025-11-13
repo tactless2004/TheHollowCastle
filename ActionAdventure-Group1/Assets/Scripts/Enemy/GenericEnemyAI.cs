@@ -13,6 +13,7 @@
 * 2025/11/11 | Leyton McKinney | Add attackSource for IEnemyAttackBehavior Attack() changes.
 * 2025/11/11 | Leyton McKinney | Move Attack logic into GenericEnemyAI.
 * 2025/11/12 | Leyton McKinney | Change Attack() calls to use targetTag field.
+* 2025/11/12 | Leyton McKinney | Reduce projectile spawn distance.
 ************************************************************/
  
 using UnityEngine;
@@ -79,7 +80,7 @@ public class GenericEnemyAI : MonoBehaviour
             else
             {
                 weapon.Attack(
-                    transform.position + 1.75f * targetDirection,
+                    transform.position + 1.0f * targetDirection,
                     targetDirection,
                     gameObject,
                     "Player"
