@@ -9,6 +9,7 @@
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/07 | Leyton McKinney | Pivot from AttackData -> WeaponData for new weapon pickup based system.
+* 2025/11/13 | Leyton McKinney | Forgot to add damage source.
 *
 ************************************************************/
  
@@ -21,6 +22,7 @@ public class WeaponData : ScriptableObject
     public string weaponName;
     public WeaponCategory category;
     public DamageType damageType;
+    public DamageSource damageSource;
 
     [Header("Stats")]
     public float damage = 10.0f;

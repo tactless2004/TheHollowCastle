@@ -30,8 +30,14 @@ public abstract class CombatEntity : MonoBehaviour
     private float lastManaRegen;
     private float lastHealthRegen;
 
+    private DamageTextSpawner damageTextSpawner;
+
     public virtual void Heal(float healAmount) => health += healAmount;
-    public virtual void TakeDamage(WeaponData attack) => health -= attack.damage;
+    public virtual void TakeDamage(WeaponData attack)
+    {
+        health -= attack.damage;
+        damageTextSpawner.Spawn(transform, attack, false, false);
+    }
     public float GetHealth() => health;
     public virtual void GainMana(float manaAmount) => mana += manaAmount;
     public virtual void ExertMain(WeaponData attack) => mana -= attack.manaCost;
@@ -40,6 +46,11 @@ public abstract class CombatEntity : MonoBehaviour
     protected virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void Awake()
+    {
+        damageTextSpawner = GameObject.FindGameObjectWithTag("DamageTextSpawner").GetComponent<DamageTextSpawner>();
     }
     private void Update()
     {
