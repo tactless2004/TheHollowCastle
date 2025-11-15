@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90893dd1f68384a4488c1e33f7f67216, type: 3}
-  m_Name: TestWeaponSword
+  m_Name: Hammer
   m_EditorClassIdentifier: 
-  weaponName: Sword
+  weaponName: Hammer
   category: 0
-  damageType: 0
+  damageType: 1
   damageSource: 0
-  damage: 20
+  damage: 6
   range: 1
-  attackCooldown: 0.7
+  attackCooldown: 1
   manaCost: 0
-  pickupModelPrefab: {fileID: 650265842487634110, guid: ccef6d2e31594984aa91cefb870f2637, type: 3}
-  uiSprite: {fileID: 0}
+  pickupModelPrefab: {fileID: 0}
+  uiSprite: {fileID: -775947680, guid: 9e5945dfed01db3469803119596db4f3, type: 3}
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 0}
