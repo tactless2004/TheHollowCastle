@@ -9,6 +9,7 @@
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/10 | Leyton McKinney | Add null checking for indicator UI text.
+* 2025/11/15 | Leyton McKinney | Add PlayerHUD mutation.
 *
 ************************************************************/
 
@@ -28,6 +29,7 @@ public class PlayerInventory : MonoBehaviour
     private WeaponData weapon2;
     private PlayerCombat playerCombat;
     private PlayerMove playerMove;
+    private PlayerHUD hud;
 
     private void Awake()
     {
@@ -44,6 +46,17 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.LogError("Player does not have PlayerMove component.");
         }
+
+        if(!TryGetComponent(out hud))
+        {
+            Debug.LogError("Player does not have PlayerHUD component.");
+        }
+    }
+
+    private void Start()
+    {
+        hud.SetWeaponSprite(weapon1.uiSprite, 1);
+        hud.SetWeaponSprite(weapon2.uiSprite, 2);
     }
 
     public void pickupSlot(int slot)
@@ -67,6 +80,7 @@ public class PlayerInventory : MonoBehaviour
                 }
 
                 playerCombat.SetWeapon(slot, weapon);
+                hud.SetWeaponSprite(weapon.uiSprite, slot);
                 Debug.Log($"Player picked up {weapon.name} in slot {slot}.");
             }
         }

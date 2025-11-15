@@ -17,7 +17,7 @@ MonoBehaviour:
   damageType: 2
   damageSource: 0
   damage: 4
-  range: 1
+  range: 4
   attackCooldown: 1
   manaCost: 0
   pickupModelPrefab: {fileID: 0}

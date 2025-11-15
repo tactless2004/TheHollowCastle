@@ -18,25 +18,22 @@ using UnityEngine;
 public abstract class CombatEntity : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] protected float health = 20.0f;
+    [SerializeField] protected float health;
     [SerializeField] protected float healthRegen = 1.0f; // health per second;
-    [SerializeField] protected const float MAXHEALTH = 20.0f;
+    [SerializeField] protected float MAXHEALTH = 20.0f;
 
     [Header("Mana")]
-    [SerializeField] protected float mana = 100.0f;
+    [SerializeField] protected float mana;
     [SerializeField] protected float manaRegen = 1.0f; // mana per second;
-    [SerializeField] protected const float MAXMANA = 100.0f;
+    [SerializeField] protected float MAXMANA = 100.0f;
 
     private float lastManaRegen;
     private float lastHealthRegen;
-
-    private DamageTextSpawner damageTextSpawner;
 
     public virtual void Heal(float healAmount) => health += healAmount;
     public virtual void TakeDamage(WeaponData attack)
     {
         health -= attack.damage;
-        damageTextSpawner.Spawn(transform, attack, false, false);
     }
     public float GetHealth() => health;
     public virtual void GainMana(float manaAmount) => mana += manaAmount;
@@ -48,9 +45,10 @@ public abstract class CombatEntity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        damageTextSpawner = GameObject.FindGameObjectWithTag("DamageTextSpawner").GetComponent<DamageTextSpawner>();
+        health = MAXHEALTH;
+        mana = MAXMANA;
     }
     private void Update()
     {
