@@ -12,11 +12,15 @@
 * 2025/11/11 | Leyton McKinney | Awake() -> Start(), because we're finding GameObjects that aren't guarenteed to exist at Awake() time.
 * 2025/11/11 | Leyton McKinney | Add attackSource for IEnemyAttackBehavior Attack() changes.
 * 2025/11/11 | Leyton McKinney | Move Attack logic into GenericEnemyAI.
+* 2025/11/12 | Leyton McKinney | Change Attack() calls to use targetTag field.
+* 2025/11/12 | Leyton McKinney | Reduce projectile spawn distance.
+* 2025/11/16 | Leyton McKinney | IEnemyMovementBehavior uses Rigidbody now.
 ************************************************************/
  
 using UnityEngine;
- 
 
+
+[RequireComponent(typeof(Rigidbody))]
 public class GenericEnemyAI : MonoBehaviour
 {
     [Header("AI Behaviors")]
@@ -29,9 +33,8 @@ public class GenericEnemyAI : MonoBehaviour
     private Weapon weapon;
 
     private IEnemyMovementBehavior movementBehavior;
-    
+    private Rigidbody rb;
 
-    
 
     private void Start()
     {
@@ -45,34 +48,47 @@ public class GenericEnemyAI : MonoBehaviour
         {
             Debug.Log("Player does not exist in scene!");
         }
+
+        if (!TryGetComponent(out rb)) {
+            Debug.LogError("Enemy does not have Rigidbody component.");
+        }
     }
 
     private void Update()
     {
         // If there is no target, there is nothing to do
         if (target == null) return;
+        Vector3 targetDirection = (target.position - transform.position).normalized;
 
-        movementBehavior?.Move(transform, target);
+        // Temporary melee debug
+        Debug.DrawRay(
+            transform.position + 0.2f * targetDirection,
+            targetDirection * weapon.getWeaponData().range,
+            Color.cyan
+        );
+        movementBehavior?.Move(transform, rb, target);
 
         // Weapon Logic
         if(weapon != null)
         {
-            Vector3 targetDirection = (target.position - transform.position).normalized;
+            // Vector3 targetDirection = (target.position - transform.position).normalized;
             if (weapon.getWeaponData().category == WeaponCategory.Melee)
             {
                 weapon.Attack(
                     transform.position + 0.2f * targetDirection, // Origin of the enemy plus a small offset
                     targetDirection,
-                    gameObject
+                    gameObject,
+                    "Player"
                 );
             }
 
             else
             {
                 weapon.Attack(
-                    transform.position + 1.75f * targetDirection,
+                    transform.position + 1.0f * targetDirection,
                     targetDirection,
-                    gameObject
+                    gameObject,
+                    "Player"
                 );
             }
         }
