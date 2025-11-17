@@ -3002,6 +3002,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6887283177378501917, guid: b05550814c06e6843adaf39f868975e6, type: 3}
   m_PrefabInstance: {fileID: 9052151082193087535}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1560295805
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279238787}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1582879018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3881,9 +3902,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1083959417}
     m_Modifications:
+    - target: {fileID: 265642508373861980, guid: 5a9010ac38f4a104b9079363da98563b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 272590266289054896, guid: 5a9010ac38f4a104b9079363da98563b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1222392341000507286, guid: 5a9010ac38f4a104b9079363da98563b, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766658473468232970, guid: 5a9010ac38f4a104b9079363da98563b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975991649150711086, guid: 5a9010ac38f4a104b9079363da98563b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7691862481584688080, guid: 5a9010ac38f4a104b9079363da98563b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4146,7 +4183,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8473264258799496941, guid: b05550814c06e6843adaf39f868975e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1560295805}
   m_SourcePrefab: {fileID: 100100000, guid: b05550814c06e6843adaf39f868975e6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
