@@ -9,7 +9,8 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/05 | Issai Gutierrez | Created class
-* 2025/11/05 | Issai Gutierrez | Added basic button functionality 
+* 2025/11/05 | Issai Gutierrez | Added basic button functionality
+ * 2025/11/17 | Chase Cone | Implemented the game starting on button press
 ************************************************************/
 
 using System;
@@ -20,6 +21,14 @@ public class ButtonFunctionality : MonoBehaviour
     [Tooltip("Reference to the singleton GameManager instance")]
     [SerializeField]
     private GameManager _gameManager;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Get the GameManager instance to access global game state methods
+        _gameManager = GameManager.Instance;
+
+    }//end Start()
 
     /// <summary>
     /// Loads the first level of the game upon clicking the button 
@@ -38,7 +47,7 @@ public class ButtonFunctionality : MonoBehaviour
     public void ResumeGame() 
     {
         // Load scene using gameManager
-        _gameManager.ChangeGameState(GameState.GamePlay);
+        _gameManager.LoadNextLevel(); 
     }
 
     /// <summary>
