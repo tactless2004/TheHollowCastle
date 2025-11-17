@@ -61,15 +61,11 @@ public class CameraFollow : MonoBehaviour
 
     private void Orbit()
     {
-        // TODO:  
-        if (Input.GetMouseButton(1))
-        {
-            yaw += Input.GetAxis("Mouse X") * orbitSpeed * Time.deltaTime;
-            // maybe reverse these axes?
-            pitch -= Input.GetAxis("Mouse Y") * orbitSpeed * Time.deltaTime;
+        yaw += Input.GetAxis("Mouse X") * orbitSpeed * Time.deltaTime;
+        // maybe reverse these axes?
+        pitch -= Input.GetAxis("Mouse Y") * orbitSpeed * Time.deltaTime;
 
-            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
-        }
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
     }
 
     private void CameraCollision()
