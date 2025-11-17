@@ -14,11 +14,13 @@
 * 2025/11/11 | Leyton McKinney | Move Attack logic into GenericEnemyAI.
 * 2025/11/12 | Leyton McKinney | Change Attack() calls to use targetTag field.
 * 2025/11/12 | Leyton McKinney | Reduce projectile spawn distance.
+* 2025/11/16 | Leyton McKinney | IEnemyMovementBehavior uses Rigidbody now.
 ************************************************************/
  
 using UnityEngine;
- 
 
+
+[RequireComponent(typeof(Rigidbody))]
 public class GenericEnemyAI : MonoBehaviour
 {
     [Header("AI Behaviors")]
@@ -31,9 +33,8 @@ public class GenericEnemyAI : MonoBehaviour
     private Weapon weapon;
 
     private IEnemyMovementBehavior movementBehavior;
-    
+    private Rigidbody rb;
 
-    
 
     private void Start()
     {
@@ -46,6 +47,10 @@ public class GenericEnemyAI : MonoBehaviour
         if (target == null)
         {
             Debug.Log("Player does not exist in scene!");
+        }
+
+        if (!TryGetComponent(out rb)) {
+            Debug.LogError("Enemy does not have Rigidbody component.");
         }
     }
 
@@ -61,7 +66,7 @@ public class GenericEnemyAI : MonoBehaviour
             targetDirection * weapon.getWeaponData().range,
             Color.cyan
         );
-        movementBehavior?.Move(transform, target);
+        movementBehavior?.Move(transform, rb, target);
 
         // Weapon Logic
         if(weapon != null)

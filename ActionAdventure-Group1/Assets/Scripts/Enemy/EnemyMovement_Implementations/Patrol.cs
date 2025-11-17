@@ -22,7 +22,7 @@ public class Patrol : ScriptableObject, IEnemyMovementBehavior
     public float speed = 3.0f;
     private int currentWaypoint = 0;
 
-    public void Move(Transform enemy, Transform target)
+    public void Move(Transform enemy, Rigidbody enemyRigidbody, Transform target)
     {
         // No waypoints -> nothing to patrol
         if (waypoints.Length == 0) return;

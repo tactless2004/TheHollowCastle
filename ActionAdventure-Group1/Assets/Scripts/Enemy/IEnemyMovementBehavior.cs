@@ -16,5 +16,5 @@ using UnityEngine;
 
 public interface IEnemyMovementBehavior
 {
-    void Move(Transform enemy, Transform target);
+    void Move(Transform enemy, Rigidbody enemyRigidbody, Transform target);
 }
