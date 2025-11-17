@@ -8,7 +8,10 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/16 | Leyton McKinney | Init
+<<<<<<< HEAD
 * 2025/11/17 | Leyton McKinney | Use URP materials fields.
+=======
+>>>>>>> 542d33346e6774b45f259523faeb98a120719775
 *
 ************************************************************/
 
@@ -39,11 +42,16 @@ public class CameraObstructions : MonoBehaviour
         Vector3 direction = target.position - transform.position;
         Ray ray = new Ray(transform.position, direction);
 
+<<<<<<< HEAD
         RaycastHit[] hits = Physics.RaycastAll(ray, direction.magnitude);
 
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.gameObject == target.gameObject) continue;
+=======
+        if(Physics.Raycast(ray, out RaycastHit hit, direction.magnitude))
+        {
+>>>>>>> 542d33346e6774b45f259523faeb98a120719775
             if (hit.collider.TryGetComponent(out Renderer r))
             {
                 currentObstructions.Add(r);
@@ -57,6 +65,7 @@ public class CameraObstructions : MonoBehaviour
     {
         foreach (Material mat in r.materials)
         {
+<<<<<<< HEAD
             Color c = mat.color;
 
             if (c.a > 0.0f && mat.GetFloat("_Mode") != 2)
@@ -69,6 +78,22 @@ public class CameraObstructions : MonoBehaviour
                 c.a = Mathf.MoveTowards(c.a, 0.0f, Time.deltaTime * fadeSpeed);
                 mat.color = c;
             }
+=======
+            mat.SetFloat("_Mode", 2); // Fade mode
+            mat.SetOverrideTag("RenderType", "Transparent");
+
+            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            mat.SetInt("_ZWrite", 0);
+
+            mat.DisableKeyword("_ALPHATEST_ON");
+            mat.EnableKeyword("_ALPHABLEND_ON");
+            mat.renderQueue = 3000;
+
+            Color c = mat.color;
+            c.a = Mathf.Lerp(c.a, 0.0f, Time.deltaTime * fadeSpeed);
+            mat.color = c;
+>>>>>>> 542d33346e6774b45f259523faeb98a120719775
         }
     }
 
@@ -77,6 +102,7 @@ public class CameraObstructions : MonoBehaviour
         foreach (Material mat in r.materials)
         {
             Color c = mat.color;
+<<<<<<< HEAD
 
             c.a = Mathf.MoveTowards(c.a, 1.0f, Time.deltaTime * fadeSpeed);
             mat.color = c;
@@ -144,4 +170,25 @@ public class CameraObstructions : MonoBehaviour
         mat.DisableKeyword("_ALPHABLEND_ON");
     }
 
+=======
+            c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime * fadeSpeed);
+            mat.color = c;
+
+            if (c.a > 0.98f)
+            {
+                // Return to opaque mode
+                mat.SetFloat("_Mode", 0);
+                mat.SetOverrideTag("RenderType", "Opaque");
+
+                mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                mat.SetInt("_ZWrite", 1);
+
+                mat.DisableKeyword("_ALPHABLEND_ON");
+                mat.EnableKeyword("_ALPHATEST_ON");
+                mat.renderQueue = -1;
+            }
+        }
+    }
+>>>>>>> 542d33346e6774b45f259523faeb98a120719775
 }
