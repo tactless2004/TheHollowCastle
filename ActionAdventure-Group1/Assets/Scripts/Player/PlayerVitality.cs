@@ -9,8 +9,10 @@
 * ------------------------------------------------------------
 * 2025/11/10 | Leyton McKinney | Init
 * 2025/11/15 | Leyton McKinney | Add PlayerHUD mutation.
+* 2025/11/17 | Leyton McKinney | Override parent Die() method to go to GameOver scene.
 ************************************************************/
- 
+
+using System;
 using UnityEngine;
  
 
@@ -22,5 +24,18 @@ public class PlayerVitality : CombatEntity
     {
         base.TakeDamage(attack);
         hud.SetHealth(health, MAXHEALTH);
+    }
+
+    protected override void Die()
+    {
+        try
+        {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ChangeGameState(GameState.GameOver);
+        }
+
+        catch (NullReferenceException)
+        {
+            Debug.LogError("Player died, thus invoking a GameState change to GameOver, however the GameManager was not found.");
+        }
     }
 }

@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         }
         catch (NullReferenceException e)
         {
-            Debug.Log("PlayerController coud not find GameManager script.");
+            Debug.LogError(e + "\n" + "PlayerController coud not find GameManager script.");
         }
     }
 

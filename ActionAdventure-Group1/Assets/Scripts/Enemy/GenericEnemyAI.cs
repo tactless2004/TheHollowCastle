@@ -1,6 +1,6 @@
 /************************************************************
 * COPYRIGHT: 2025
-* PROJECT: ActionAdventureGameNameTBA
+* PROJECT: The Hollow Castle
 * FILE NAME: GenericEnemyAI.cs
 * DESCRIPTION: Generic enemy AI used for the Move, Attack pattern.
 *                   
@@ -15,6 +15,7 @@
 * 2025/11/12 | Leyton McKinney | Change Attack() calls to use targetTag field.
 * 2025/11/12 | Leyton McKinney | Reduce projectile spawn distance.
 * 2025/11/16 | Leyton McKinney | IEnemyMovementBehavior uses Rigidbody now.
+* 2025/11/17 | Leyotn McKinney | Fix persistent NullReferenceException in Start().
 ************************************************************/
  
 using UnityEngine;
@@ -43,15 +44,30 @@ public class GenericEnemyAI : MonoBehaviour
         {
             weapon = new Weapon(weaponSO as WeaponData);
         }
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        if (target == null)
-        {
-            Debug.Log("Player does not exist in scene!");
-        }
 
-        if (!TryGetComponent(out rb)) {
+        if (!TryGetComponent(out rb))
+        {
             Debug.LogError("Enemy does not have Rigidbody component.");
         }
+
+        // 1.) Try to find player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        // 2.) Player could not be found.
+        if (player == null)
+        {
+            Debug.Log("Player does not exist in scene!");
+
+            // If there is no Player new enemies should not be spawned.
+            Destroy(gameObject);
+        }
+
+        // 3.) Player is found, set target to player's transform.
+        else
+        {
+            target = player.transform;
+        }
+
     }
 
     private void Update()
