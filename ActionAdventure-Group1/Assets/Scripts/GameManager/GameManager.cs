@@ -11,6 +11,7 @@
  * 2025/11/4 | Chase Cone |  Created Class
  *2025/11/12 |  Chase Cone | Updated Functionality and added to bootstrap
  * 2025/11/16 | Chase Cone | Added scene manager functionality
+ * 2025/11/17 | Chase Cone | Made scene manger load the first level
  ************************************************************/
  
 using System.Collections.Generic; 
@@ -88,6 +89,11 @@ public class GameManager: Singleton<GameManager>
     /// Executes the logic associated with the current game state.
     /// This method is called whenever ChangeGameState() updates the state.
     /// </summary>
+    /// <summary>
+    /// Executes the logic associated with the current game state.
+    /// This method is called whenever ChangeGameState() updates the state.
+    /// </summary>
+
     /// <summary>
     /// Executes the logic associated with the current game state.
     /// This method is called whenever ChangeGameState() updates the state.
@@ -194,7 +200,37 @@ public class GameManager: Singleton<GameManager>
     
     }//end UnloadAllScenes()
     
-    
+    /// <summary>
+    /// Loads the next level in the levelScenes list while keeping the player in the GamePlay state.
+    /// Unloads the current level, updates the current level index, and tracks the newly loaded scene.
+    /// </summary>
+    public void LoadNextLevel()
+    {
+        // Unload the current level scene if one is loaded
+        if (_currentScene != null && _loadedScenes.Contains(_currentScene))
+        {
+            UnloadScene(_currentScene);
+
+        }//end if(_currentScene)
+
+        // Increment level index
+        _currentLevelIndex++;
+
+        // If no more levels, reset index, switch to GameOver, and exit
+        if (_currentLevelIndex >= _gameLevels.Count)
+        {
+            _currentLevelIndex = 0;
+            ChangeGameState(GameState.GameOver);
+            return;
+
+        }//end
+
+        // Load the next level and set it as the current scene
+        LoadScene(_gameLevels[_currentLevelIndex]);
+
+        Debug.Log($"Loaded Level: {_gameLevels[_currentLevelIndex]}");
+
+    }//end LoadNextLevel()
     
     
  
