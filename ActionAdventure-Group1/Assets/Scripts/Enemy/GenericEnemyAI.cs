@@ -16,6 +16,7 @@
 * 2025/11/12 | Leyton McKinney | Reduce projectile spawn distance.
 * 2025/11/16 | Leyton McKinney | IEnemyMovementBehavior uses Rigidbody now.
 * 2025/11/17 | Leyotn McKinney | Fix persistent NullReferenceException in Start().
+* 2025/11/17 | Leyton McKinney | Add pause behavior.
 ************************************************************/
  
 using UnityEngine;
@@ -35,6 +36,7 @@ public class GenericEnemyAI : MonoBehaviour
 
     private IEnemyMovementBehavior movementBehavior;
     private Rigidbody rb;
+    private GameManager gameManager;
 
 
     private void Start()
@@ -68,12 +70,20 @@ public class GenericEnemyAI : MonoBehaviour
             target = player.transform;
         }
 
+        if(!GameObject.FindGameObjectWithTag("GameManager").TryGetComponent(out gameManager))
+        {
+            Debug.Log($"{name} could not find GameManager!");
+        }
     }
 
     private void Update()
     {
         // If there is no target, there is nothing to do
         if (target == null) return;
+
+        // If the game is paused enemies shouldn't move.
+        if (gameManager.CurrentState == GameState.GamePaused) return;
+
         Vector3 targetDirection = (target.position - transform.position).normalized;
 
         // Temporary melee debug

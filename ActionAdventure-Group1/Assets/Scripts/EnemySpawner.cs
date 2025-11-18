@@ -8,7 +8,8 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2000/01/01 | Your Name | Created class
-* 2025/11/07 | Noah ZImmerman | Created class
+* 2025/11/07 | Noah Zimmerman | Created class
+* 2025/11/17 | Leyton McKinney | Do not instantiate new enemies when game state is GameState.GamePaused
 *
 ************************************************************/
 
@@ -34,6 +35,8 @@ public class EnemySpawner : MonoBehaviour
     
     [SerializeField] [Tooltip("Player object")]
     private GameObject player;
+
+    private GameManager gameManager;
     
     // Start is called once before the first Update
     private void Start()
@@ -42,6 +45,11 @@ public class EnemySpawner : MonoBehaviour
         _directions.Add(transform.Find("SouthSpawn").gameObject);
         _directions.Add(transform.Find("EastSpawn").gameObject);
         _directions.Add(transform.Find("WestSpawn").gameObject);
+
+        if (!GameObject.FindGameObjectWithTag("GameManager").TryGetComponent(out gameManager))
+        {
+            Debug.LogError($"{name} could not find GameManager component.");
+        }
         StartCoroutine(WaveSpawner());
     } //end Start()
 
@@ -61,7 +69,8 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(SpawnTime);
-            DirectionalSpawner();
+            if (gameManager.CurrentState != GameState.GamePaused)
+                DirectionalSpawner();
         }
     }//end WaveSpawner()
     

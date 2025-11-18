@@ -1,8 +1,8 @@
 /************************************************************
- * COPYRIGHT:  Year
- * PROJECT: Name of Project or Assignment
+ * COPYRIGHT:  2025
+ * PROJECT: The Hollow Castle
  * FILE NAME: GameManager.cs
- * DESCRIPTION: Short Description of script.
+ * DESCRIPTION: Game State and Scene Manager.
  *
  * REVISION HISTORY:
  * Date [YYYY/MM/DD] | Author | Comments
@@ -12,6 +12,8 @@
  * 2025/11/12 |  Chase Cone | Updated Functionality and added to bootstrap
  * 2025/11/16 | Chase Cone | Added scene manager functionality
  * 2025/11/17 | Chase Cone | Made scene manger load the first level
+ * 2025/11/17 | Leyton McKinney | Modified pause behavior to not reload the level on un-pause.
+ * 2025/11/17 | Leyton McKinney | Add Pub/Sub (Observer) pattern, so other components can be informed about state changes.
  ************************************************************/
  
 using System.Collections.Generic; 
@@ -54,7 +56,9 @@ public class GameManager: Singleton<GameManager>
    
     //List of all loaded scenes
     private List<string> _loadedScenes = new List<string>();
-    
+
+    // Event to inform subscribers when the GameState changes.
+    public event System.Action<GameState> onGameStateChanged;
     
     // Start is called before the first frame update
     void Start()
@@ -80,6 +84,9 @@ public class GameManager: Singleton<GameManager>
    
         // Update the current state and manage scenes
         CurrentState = newState;
+
+        // Inform subscribers about the state change.
+        onGameStateChanged?.Invoke(CurrentState);
 
         ManageGameState();
 
@@ -247,8 +254,9 @@ public class GameManager: Singleton<GameManager>
         } else
         {
             UnloadScene(_pauseMenuScene);
-            // Intentionally don't use ChangeGameState(), because this causes the GameManager to reload the script which is bad.
+            // Intentionally don't use ChangeGameState(), because this causes the GameManager to reload the game level.
             CurrentState = GameState.GamePlay;
+            onGameStateChanged?.Invoke(CurrentState);
         }
     }
 }//end GameManager
