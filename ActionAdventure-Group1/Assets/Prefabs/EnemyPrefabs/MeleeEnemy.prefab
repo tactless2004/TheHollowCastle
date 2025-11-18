@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7595921204242693998}
   - component: {fileID: 4674533343134830335}
   - component: {fileID: 4849363160513444409}
-  - component: {fileID: 7797416607383818929}
   - component: {fileID: 8460796233211539005}
   - component: {fileID: 34233945023230759}
+  - component: {fileID: -4274189393613658920}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -104,25 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementBehaviorSO: {fileID: 11400000, guid: 17eca8e6747039a419b9c2cda291164e, type: 2}
   weaponSO: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
---- !u!114 &7797416607383818929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762513469522789849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7e84726b69a5647b619118c41a1231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 20
-  healthRegen: 0
-  MAXHEALTH: 5
-  mana: 100
-  manaRegen: 1
-  MAXMANA: 100
-  hud: {fileID: 0}
 --- !u!65 &8460796233211539005
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -171,3 +152,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-4274189393613658920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762513469522789849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077be8ac79b948e4ab44b4db5b00eca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  healthRegen: 1
+  MAXHEALTH: 10
+  mana: 0
+  manaRegen: 1
+  MAXMANA: 100

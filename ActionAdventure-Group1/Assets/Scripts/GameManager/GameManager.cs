@@ -9,7 +9,7 @@
  * ------------------------------------------------------------
  * 2000/01/01 | Your Name | Created class
  * 2025/11/4 | Chase Cone |  Created Class
- *2025/11/12 |  Chase Cone | Updated Functionality and added to bootstrap
+ * 2025/11/12 |  Chase Cone | Updated Functionality and added to bootstrap
  * 2025/11/16 | Chase Cone | Added scene manager functionality
  * 2025/11/17 | Chase Cone | Made scene manger load the first level
  ************************************************************/
@@ -101,16 +101,17 @@ public class GameManager: Singleton<GameManager>
     private void ManageGameState()
     {
         // Unload all previously loaded scenes
-        UnloadAllScenes();
         
         switch (CurrentState)
         {
             case GameState.MainMenu:
+                UnloadAllScenes();
                 Debug.Log("Game State: MainMenu");
                 LoadScene(_mainMenuScene);
                 break;
 
             case GameState.GamePlay:
+                UnloadAllScenes();
                 Debug.Log("Game State: GamePlay");
                 
                 //Load game level
@@ -121,8 +122,14 @@ public class GameManager: Singleton<GameManager>
                 break;
 
             case GameState.GameOver:
+                UnloadAllScenes();
                 Debug.Log("Game State: GameOver");
                 LoadScene(_gameOverScene);
+                break;
+
+            case GameState.GamePaused:
+                Debug.Log("Game State: Paused");
+                LoadScene(_pauseMenuScene);
                 break;
 
             default:
@@ -232,6 +239,17 @@ public class GameManager: Singleton<GameManager>
 
     }//end LoadNextLevel()
     
-    
+    public void PauseGame()
+    {
+        if (CurrentState == GameState.GamePaused)
+        {
+            ChangeGameState(GameState.GamePlay);
+            UnloadScene(_pauseMenuScene);
+        }
+        else
+        {
+            ChangeGameState(GameState.GamePaused);
+        }
+    }
  
 }//end GameManager

@@ -75,4 +75,9 @@ public class PlayerController : MonoBehaviour
         _playerInventory.pickupSlot(2);
     }
 
+    public void OnPause(InputValue value)
+    {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PauseGame();
+    }
+
 }

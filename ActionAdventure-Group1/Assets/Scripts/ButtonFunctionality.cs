@@ -10,7 +10,8 @@
 * ------------------------------------------------------------
 * 2025/11/05 | Issai Gutierrez | Created class
 * 2025/11/05 | Issai Gutierrez | Added basic button functionality
- * 2025/11/17 | Chase Cone | Implemented the game starting on button press
+* 2025/11/17 | Chase Cone | Implemented the game starting on button press
+* 2025/11/18 | Leyton McKinney | Fix Pause menu behavior to not restart the level on pause.
 ************************************************************/
 
 using System;
@@ -47,7 +48,7 @@ public class ButtonFunctionality : MonoBehaviour
     public void ResumeGame() 
     {
         // Load scene using gameManager
-        _gameManager.LoadNextLevel(); 
+        _gameManager.PauseGame(); 
     }
 
     /// <summary>

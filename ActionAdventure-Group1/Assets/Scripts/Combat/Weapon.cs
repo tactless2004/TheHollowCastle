@@ -10,12 +10,11 @@
 * 2025/11/07 | Leyton McKinney | Init
 * 2025/11/11 | Leyton McKinney | Projectiles are not instantiated at source.transfrom instead of origin.
 * 2025/11/12 | Leyton McKinney | Add targetTag, so enemy attacks do not hit enemies, and player attacks do not hit player.
-*
+* 2025/11/17 | Leyton McKinney | Additional null checking to prevent WebGL crashes.
 ************************************************************/
 
-using System.Runtime.CompilerServices;
 using UnityEngine;
- 
+using System.Collections.Generic;
 
 // This is intentionally not a MonoBehavior as it doesn't implement any MonoBehavior methods.
 public class Weapon
@@ -44,12 +43,26 @@ public class Weapon
             RaycastHit[] hits;
             // If hit on melee
             hits = Physics.RaycastAll(origin, direction, weapon.range);
+
+            List<CombatEntity> targets = new List<CombatEntity>();
             // Check if each RaycastHit is a valid target, if so apply damage.
             foreach (RaycastHit hit in hits) {
+                // Check if hit gameObject doesn't exist, crashes can be caused because of this.
+                if (hit.collider == null) continue;
+
                 if (
                     hit.collider.TryGetComponent(out CombatEntity target) && // hit a damgeable entity?
+                    target != null && // Redundant null checking to try to fix WebGL crash
                     hit.collider.CompareTag(targetTag) // is the entity of the target tag?
                 )
+                {
+                    targets.Add(target);
+                }
+            }
+
+            foreach (CombatEntity target in targets)
+            {
+                if (target != null && target.gameObject != null)
                 {
                     target.TakeDamage(weapon);
                 }
