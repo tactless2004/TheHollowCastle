@@ -127,30 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: _hudScene
-      value: UI_PlayerHUDScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: _gameOverScene
-      value: UI_EndMenuScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: _mainMenuScene
-      value: UI_MainMenuScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: _pauseMenuScene
-      value: UI_PauseMenuScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: _gameLevels.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: '_gameLevels.Array.data[0]'
-      value: SandboxBaseLevelDemo
-      objectReference: {fileID: 0}
     - target: {fileID: 2953612420966362480, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -194,10 +170,6 @@ PrefabInstance:
     - target: {fileID: 6736173654053338574, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
       propertyPath: m_Name
       value: Game Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6736173654053338574, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
-      propertyPath: m_TagString
-      value: GameManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

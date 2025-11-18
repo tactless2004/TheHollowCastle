@@ -241,15 +241,14 @@ public class GameManager: Singleton<GameManager>
     
     public void PauseGame()
     {
-        if (CurrentState == GameState.GamePaused)
-        {
-            ChangeGameState(GameState.GamePlay);
-            UnloadScene(_pauseMenuScene);
-        }
-        else
+        if (CurrentState == GameState.GamePlay)
         {
             ChangeGameState(GameState.GamePaused);
+        } else
+        {
+            UnloadScene(_pauseMenuScene);
+            // Intentionally don't use ChangeGameState(), because this causes the GameManager to reload the script which is bad.
+            CurrentState = GameState.GamePlay;
         }
     }
- 
 }//end GameManager

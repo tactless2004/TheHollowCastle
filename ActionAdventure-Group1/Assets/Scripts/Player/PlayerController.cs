@@ -15,7 +15,8 @@
 * 2025/11/08 | Leyton McKinney | Implement inventory system controls.
 *
 ************************************************************/
- 
+
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
  
@@ -77,7 +78,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnPause(InputValue value)
     {
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PauseGame();
+        try {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().PauseGame();
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.Log("PlayerController coud not find GameManager script.");
+        }
     }
 
 }

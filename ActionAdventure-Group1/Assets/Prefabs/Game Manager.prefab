@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _isPersistant: 1
-  _mainMenuScene: 
-  _hudScene: 
-  _pauseMenuScene: 
-  _gameOverScene: 
-  _gameLevels: []
+  _mainMenuScene: UI_MainMenuScene
+  _hudScene: UI_PlayerHUDScene
+  _pauseMenuScene: UI_PauseMenuScene
+  _gameOverScene: UI_EndMenuScene
+  _gameLevels:
+  - SandboxBaseLevelDemo

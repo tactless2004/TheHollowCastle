@@ -94,8 +94,8 @@ public class PlayerHUD : MonoBehaviour
             {
                 if (go.name == "UI")
                 {
-                    manaBar        = go.transform.Find("PlayerHUD/HealthBarFull").GetComponent<Image>();
-                    healthBar      = go.transform.Find("PlayerHUD/ManaBarFull").GetComponent<Image>();
+                    manaBar        = go.transform.Find("PlayerHUD/ManaBarFull").GetComponent<Image>();
+                    healthBar      = go.transform.Find("PlayerHUD/HealthBarFull").GetComponent<Image>();
                     slot1Image     = go.transform.Find("PlayerHUD/Slot1Weapon/Slot1WeaponImage").GetComponent<Image>();
                     slot2Image     = go.transform.Find("PlayerHUD/Slot2Weapon/Slot2WeaponImage").GetComponent<Image>();
                     pickupHelpText = go.transform.Find("PlayerHUD/WeaponPickupHelpText").GetComponent<TextMeshProUGUI>();
