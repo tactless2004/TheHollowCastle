@@ -8,7 +8,7 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/17 | Peyton Lenard | Created class
-*
+* 2025/11/18 | Peyton Lenard | Fixed Trigger methods and transform position logic
 *
 ************************************************************/
  
@@ -17,56 +17,24 @@ using UnityEngine;
 
 public class WallTransparency : MonoBehaviour
 {
-
-    // Awake is called once on initialization (before Start)
-    private void Awake()
+    void OnTriggerEnter(Collider outsideWall)
     {
-        
-        
-    } //end Awake()
- 
- 
-    // Start is called once before the first Update
-    private void Start()
-    {
-        
-        
-    } //end Start()
- 
- 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-        
-    } //end Update()
-
-    void OnTriggerEnter(Collider transparentWall)
-    {
-        if(tag == "MoveableWall")
+        if(outsideWall.CompareTag("MoveableWall"))
         {
-            if(TryGetComponent<Transform>(out transparentWall))
-            {
-                Debug.Log("Wall position moved.");
-                transparentWall.position = transparentWall.position + new Vector3(0, 5, 0);
-            } else
-            {
-                Debug.Log("Wall not found.");
-            }
+            //Move outer wall below backdrop
+            outsideWall.transform.position = outsideWall.transform.position + new Vector3(0, -10, 0);
+            
+            //Debug.Log("Wall entered player area.");
         }
     }
-    void OnTriggerExit(Collider transparentWall)
+    void OnTriggerExit(Collider outsideWall)
     {
-        if(tag == "MoveableWall")
+        if(outsideWall.CompareTag("MoveableWall"))
         {
-            if(TryGetComponent<Transform>(out transparentWall.transform))
-            {
-                Debug.Log("Wall position moved.");
-                transparentWall.position = transparentWall.position - new Vector3(0, 5, 0);
-            } else
-            {
-                Debug.Log("Wall not found.");
-            }
+            //Move outer wall back to original position
+            outsideWall.transform.position = outsideWall.transform.position - new Vector3(0, -10, 0);
+            
+            //Debug.Log("Wall left player area.");
         }
     }
  
