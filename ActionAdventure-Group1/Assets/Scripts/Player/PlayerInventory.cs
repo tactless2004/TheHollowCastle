@@ -10,6 +10,7 @@
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/10 | Leyton McKinney | Add null checking for indicator UI text.
 * 2025/11/15 | Leyton McKinney | Add PlayerHUD mutation.
+* 2025/11/17 | Leyton McKinney | Move weapon indicator text logic to PlayerHUD.cs
 *
 ************************************************************/
 
@@ -22,8 +23,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private ScriptableObject weapon1SO;
     [SerializeField] private ScriptableObject weapon2SO;
     [SerializeField] private Transform raycastOrigin;
-    [SerializeField] private float maxPickupDistance = 0.75f;
-    [SerializeField] private TMP_Text pickupHelpText;
+    [SerializeField] private float maxPickupDistance = 3.0f;
 
     private WeaponData weapon1;
     private WeaponData weapon2;
@@ -35,7 +35,6 @@ public class PlayerInventory : MonoBehaviour
     {
         weapon1 = weapon1SO as WeaponData;
         weapon2 = weapon2SO as WeaponData;
-        pickupHelpText.text = "";
 
         if(!TryGetComponent(out playerCombat))
         {
@@ -61,9 +60,9 @@ public class PlayerInventory : MonoBehaviour
 
     public void pickupSlot(int slot)
     {
-        if(Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
+        if (Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
         {
-            if(hit.collider.TryGetComponent(out PickupItem pickupItem))
+            if (hit.collider.TryGetComponent(out PickupItem pickupItem))
             {
                 WeaponData weapon = pickupItem.GetWeapon();
 
@@ -83,29 +82,6 @@ public class PlayerInventory : MonoBehaviour
                 hud.SetWeaponSprite(weapon.uiSprite, slot);
                 Debug.Log($"Player picked up {weapon.name} in slot {slot}.");
             }
-        }
-    }
-
-    private void Update()
-    {
-        // Note:
-        // This should probably be handled in an other script, but putting here for now for debug purposes - LGM
-
-        // Debug Ray to show pickup distance
-        // Debug.DrawRay(raycastOrigin.position, playerMove.facing * maxPickupDistance, Color.green);
-
-        // Pickup Indicator text logic
-        if(Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
-        {
-            if(hit.collider.TryGetComponent(out PickupItem pickupItem) && pickupHelpText != null)
-            {
-
-                pickupHelpText.text = $"Equip {pickupItem.GetWeapon().name}?";
-            }
-        }
-        else if (pickupHelpText != null)
-        {
-            pickupHelpText.text = "";
         }
     }
 }

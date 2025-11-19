@@ -1,17 +1,19 @@
 /************************************************************
- * COPYRIGHT:  Year
- * PROJECT: Name of Project or Assignment
+ * COPYRIGHT:  2025
+ * PROJECT: The Hollow Castle
  * FILE NAME: GameManager.cs
- * DESCRIPTION: Short Description of script.
+ * DESCRIPTION: Game State and Scene Manager.
  *
  * REVISION HISTORY:
  * Date [YYYY/MM/DD] | Author | Comments
  * ------------------------------------------------------------
  * 2000/01/01 | Your Name | Created class
  * 2025/11/4 | Chase Cone |  Created Class
- *2025/11/12 |  Chase Cone | Updated Functionality and added to bootstrap
+ * 2025/11/12 |  Chase Cone | Updated Functionality and added to bootstrap
  * 2025/11/16 | Chase Cone | Added scene manager functionality
  * 2025/11/17 | Chase Cone | Made scene manger load the first level
+ * 2025/11/17 | Leyton McKinney | Modified pause behavior to not reload the level on un-pause.
+ * 2025/11/17 | Leyton McKinney | Add Pub/Sub (Observer) pattern, so other components can be informed about state changes.
  ************************************************************/
  
 using System.Collections.Generic; 
@@ -54,7 +56,9 @@ public class GameManager: Singleton<GameManager>
    
     //List of all loaded scenes
     private List<string> _loadedScenes = new List<string>();
-    
+
+    // Event to inform subscribers when the GameState changes.
+    public event System.Action<GameState> onGameStateChanged;
     
     // Start is called before the first frame update
     void Start()
@@ -81,6 +85,9 @@ public class GameManager: Singleton<GameManager>
         // Update the current state and manage scenes
         CurrentState = newState;
 
+        // Inform subscribers about the state change.
+        onGameStateChanged?.Invoke(CurrentState);
+
         ManageGameState();
 
     }//end ChangeGameState
@@ -101,16 +108,17 @@ public class GameManager: Singleton<GameManager>
     private void ManageGameState()
     {
         // Unload all previously loaded scenes
-        UnloadAllScenes();
         
         switch (CurrentState)
         {
             case GameState.MainMenu:
+                UnloadAllScenes();
                 Debug.Log("Game State: MainMenu");
                 LoadScene(_mainMenuScene);
                 break;
 
             case GameState.GamePlay:
+                UnloadAllScenes();
                 Debug.Log("Game State: GamePlay");
                 
                 //Load game level
@@ -121,8 +129,14 @@ public class GameManager: Singleton<GameManager>
                 break;
 
             case GameState.GameOver:
+                UnloadAllScenes();
                 Debug.Log("Game State: GameOver");
                 LoadScene(_gameOverScene);
+                break;
+
+            case GameState.GamePaused:
+                Debug.Log("Game State: Paused");
+                LoadScene(_pauseMenuScene);
                 break;
 
             default:
@@ -232,6 +246,17 @@ public class GameManager: Singleton<GameManager>
 
     }//end LoadNextLevel()
     
-    
- 
+    public void PauseGame()
+    {
+        if (CurrentState == GameState.GamePlay)
+        {
+            ChangeGameState(GameState.GamePaused);
+        } else
+        {
+            UnloadScene(_pauseMenuScene);
+            // Intentionally don't use ChangeGameState(), because this causes the GameManager to reload the game level.
+            CurrentState = GameState.GamePlay;
+            onGameStateChanged?.Invoke(CurrentState);
+        }
+    }
 }//end GameManager
