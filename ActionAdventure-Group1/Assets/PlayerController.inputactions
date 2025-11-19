@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Melee",
+                    "name": "Slot1Attack",
                     "type": "Button",
                     "id": "099fb4e7-811e-4ba5-b514-0c8dfb828e10",
                     "expectedControlType": "",
@@ -28,6 +28,42 @@
                     "name": "Ranged",
                     "type": "Button",
                     "id": "804158c9-cc48-429c-9202-55961acab10c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slot2Attack",
+                    "type": "Button",
+                    "id": "e61b4adf-1bfc-468d-91a8-414bcaabbbce",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchSlot1Weapon",
+                    "type": "Button",
+                    "id": "5e82c1c1-a281-4d6f-a7ad-1523a5bbba36",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchSlot2Weapon",
+                    "type": "Button",
+                    "id": "990117da-c4e8-417b-9d0c-0eb75409cdca",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "a3d6a7a1-382e-4734-bec2-019ace3bf4d7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -97,7 +133,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Melee",
+                    "action": "Slot1Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -109,6 +145,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Ranged",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7709a741-fec8-4e24-8c23-28caeb622e97",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slot2Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6e10f9f-205c-4ba2-bdcc-f2230f57ecdc",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchSlot1Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5dd84877-e371-4590-9e16-4cc323fd90e1",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchSlot2Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d3a2f5b-9c33-428c-a793-5e42eca22042",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
