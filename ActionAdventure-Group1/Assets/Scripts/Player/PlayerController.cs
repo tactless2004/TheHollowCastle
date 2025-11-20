@@ -1,6 +1,6 @@
 /************************************************************
 * COPYRIGHT:  2025
-* PROJECT: AdventureGameNameTBA
+* PROJECT: The Hollow Castle
 * FILE NAME: PlayerController.cs
 * DESCRIPTION: A player controller that uses the new input system to contol the movement of a player.
 *                   
@@ -13,9 +13,10 @@
 * 2025/11/07 | Leyton McKinney | Change bindings from (Melee, Ranged), (Slot1Attack, Slot2Attack), Add weapon switch buttons (Q,E)
 * 2025/11/08 | Leyton McKinney | Add inventory system controls.
 * 2025/11/08 | Leyton McKinney | Implement inventory system controls.
+* 2025/11/17 | Leyton McKinney | Add pause checking.
 *
 ************************************************************/
- 
+
 using UnityEngine;
 using UnityEngine.InputSystem;
  
@@ -24,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
     private PlayerInventory _playerInventory;
+    private GameManager _gameManager;
+    
+    private bool _paused = false;
 
     private void Awake()
     {
@@ -42,11 +46,23 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("PlayerInventory component missing!");
         }
+
+        if (!GameObject.FindGameObjectWithTag("GameManager").TryGetComponent(out _gameManager))
+        {
+            Debug.LogError("GameManager could not be found!");
+        }
+        else
+        {
+            _gameManager.onGameStateChanged += HandleGameState;
+        }
     }
  
 
     public void OnMove(InputValue value)
     {
+        // Don't process standard inputs when paused.
+        if (_paused) return;
+
         Vector2 inputVector = value.Get<Vector2>();
 
         // Vec2 -> Vec3
@@ -57,22 +73,58 @@ public class PlayerController : MonoBehaviour
 
     public void OnSlot1Attack(InputValue value)
     {
-        if(value.isPressed) _playerCombat.Slot1_Attack();
+        // Don't process standard inputs when paused.
+        if (_paused) return;
+
+        if (value.isPressed) _playerCombat.Slot1_Attack();
     }
 
     public void OnSlot2Attack(InputValue value)
     {
+        // Don't process standard inputs when paused.
+        if (_paused) return;
+
         if (value.isPressed) _playerCombat.Slot2_Attack();
     }
 
     public void OnSwitchSlot1Weapon(InputValue value)
     {
+        // Don't process standard inputs when paused.
+        if (_paused) return;
+
         _playerInventory.pickupSlot(1);
     }
 
     public void OnSwitchSlot2Weapon(InputValue value)
     {
+        // Don't process standard inputs when paused.
+        if (_paused) return;
+
         _playerInventory.pickupSlot(2);
     }
 
+    public void OnPause(InputValue value)
+    {
+        // If gameManager is null, try to find it.
+        if (_gameManager == null)
+            reacquireGameManager();
+        else
+        {
+            _gameManager.PauseGame();
+        }
+    }
+
+    // Helper/util methods, not directly related to processing inputs
+    private void reacquireGameManager()
+    {
+        if (!TryGetComponent(out _gameManager))
+        {
+            Debug.LogError("PlayerController attempted to reacquire GameManager, but failed!");
+        }
+    }
+
+    private void HandleGameState(GameState state)
+    {
+        _paused = (state == GameState.GamePaused);
+    }
 }
