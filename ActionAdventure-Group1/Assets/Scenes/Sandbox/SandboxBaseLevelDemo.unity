@@ -2199,17 +2199,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!114 &415863836 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9219664834288849812, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-  m_PrefabInstance: {fileID: 1407600095}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &441649500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5670,26 +5659,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4641167814067583857, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-      propertyPath: playerHUD
-      value: 
-      objectReference: {fileID: 1407600097}
-    - target: {fileID: 4641167814067583857, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-      propertyPath: pickupHelpText
-      value: 
-      objectReference: {fileID: 415863836}
-    - target: {fileID: 5951983356799579928, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-      propertyPath: health
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5951983356799579928, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-      propertyPath: MAXHEALTH
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8092319358444874882, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-      propertyPath: maxPickupDistance
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8558117549074760567, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -5702,11 +5671,6 @@ PrefabInstance:
 --- !u!4 &1407600096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4248498948907233337, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-  m_PrefabInstance: {fileID: 1407600095}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1407600097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8427983325114651611, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
   m_PrefabInstance: {fileID: 1407600095}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1433782244
