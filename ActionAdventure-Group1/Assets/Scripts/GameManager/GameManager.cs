@@ -14,6 +14,7 @@
  * 2025/11/17 | Chase Cone | Made scene manger load the first level
  * 2025/11/17 | Leyton McKinney | Modified pause behavior to not reload the level on un-pause.
  * 2025/11/17 | Leyton McKinney | Add Pub/Sub (Observer) pattern, so other components can be informed about state changes.
+ * 2025/11/19 | Leyton McKinney | Allow the GameManager to be used when not starting in Bootstrap scene.
  ************************************************************/
  
 using System.Collections.Generic; 
@@ -63,8 +64,13 @@ public class GameManager: Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        // Set the initial game state to Main Menu
-        ChangeGameState(GameState.MainMenu);
+        // Set the initial game state to Main Menu if starting in Bootstrap scene
+        if (SceneManager.GetActiveScene().name == "Bootstrap")
+            ChangeGameState(GameState.MainMenu);
+        // If the game doesn't start in the boot strap scene, then presumably the game is startign in some level, hence we go GameState.GamePlay
+        else
+            // Intentionally don't use ChangeGameState(), because it will reload the existing scene, which is not what we want.
+            CurrentState = GameState.GamePlay;
 
     }//end Start()
     
