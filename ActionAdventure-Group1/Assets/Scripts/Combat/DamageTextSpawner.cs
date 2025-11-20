@@ -21,6 +21,7 @@ public class DamageTextSpawner : MonoBehaviour
 
     public void Spawn(Transform spawnPosition, WeaponData weapon, bool resist, bool crit)
     {
+        Debug.Log("Spawn called!");
         GameObject textInstance = Instantiate(
             textPrefab,
             spawnPosition.position,
@@ -32,6 +33,7 @@ public class DamageTextSpawner : MonoBehaviour
 
         if(textInstance.TryGetComponent(out DamageText damageText))
         {
+            damageText.transform.parent = transform;
             damageText.Setup((int) Mathf.Floor(weapon.damage), color, crit);
 
             // Least janky way to do this, it just orients the damage text in the same way the camera is oriented,
@@ -39,6 +41,7 @@ public class DamageTextSpawner : MonoBehaviour
             damageText.transform.forward = Camera.main.transform.forward;
         } else
         {
+            Debug.Log("Unload called!");
             Destroy(textInstance);
         }
     }

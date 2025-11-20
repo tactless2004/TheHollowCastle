@@ -29,7 +29,7 @@ public class DamageText : MonoBehaviour
 
     private void Awake()
     {
-        text = GetComponentInChildren<TextMeshProUGUI>();
+        text = GetComponent<TextMeshProUGUI>();
         originalColor = text.color;
     }
 
