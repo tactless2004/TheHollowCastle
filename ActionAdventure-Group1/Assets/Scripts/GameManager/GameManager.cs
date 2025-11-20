@@ -14,9 +14,11 @@
  * 2025/11/17 | Chase Cone | Made scene manger load the first level
  * 2025/11/17 | Leyton McKinney | Modified pause behavior to not reload the level on un-pause.
  * 2025/11/17 | Leyton McKinney | Add Pub/Sub (Observer) pattern, so other components can be informed about state changes.
+ * 2025/11/19 | Leyton McKinney | Allow the GameManager to be used when not starting in Bootstrap scene.
  ************************************************************/
- 
-using System.Collections.Generic; 
+
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +26,6 @@ using UnityEngine.SceneManagement;
 // The GameManager class is derived from the Singleton pattern to ensure there is only one instance of it in the game.
 public class GameManager: Singleton<GameManager>
 {
-    
-    
     [Header("Scene Management")]
     [SerializeField]
     [Tooltip("The main menu scene that loads when the game starts.")]
@@ -42,6 +42,9 @@ public class GameManager: Singleton<GameManager>
     [SerializeField]
     [Tooltip("The Game Over scene that loads when the player loses or finishes the game.")]
     private string _gameOverScene;
+
+    [SerializeField, Tooltip("Bootstrap scene containing the GameManager")]
+    private string _bootstrapScene;
    
     [SerializeField]
     [Tooltip("All the level scenes in the game, in the order they should be played.")]
@@ -60,11 +63,27 @@ public class GameManager: Singleton<GameManager>
     // Event to inform subscribers when the GameState changes.
     public event System.Action<GameState> onGameStateChanged;
     
-    // Start is called before the first frame update
+
     void Start()
     {
-        // Set the initial game state to Main Menu
-        ChangeGameState(GameState.MainMenu);
+        // Set the initial game state to Main Menu if starting in Bootstrap scene
+        if (SceneManager.GetActiveScene().name == "Bootstrap")
+            ChangeGameState(GameState.MainMenu);
+        // If the game doesn't start in the boot strap scene, then presumably the game is startign in some level.
+        else
+        {
+            Scene originalScene = SceneManager.GetActiveScene();
+            _loadedScenes.Add(originalScene.name);
+
+            // Load the bootstrap scene making it the primary scene
+            SceneManager.LoadSceneAsync(_bootstrapScene);
+
+            // Load the original scene on top of BootStrap
+            SceneManager.LoadSceneAsync(originalScene.name, LoadSceneMode.Additive);
+
+            // Bypass ChangeGameState() logic
+            CurrentState = GameState.GamePlay;
+        }
 
     }//end Start()
     
@@ -258,5 +277,10 @@ public class GameManager: Singleton<GameManager>
             CurrentState = GameState.GamePlay;
             onGameStateChanged?.Invoke(CurrentState);
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);   
     }
 }//end GameManager

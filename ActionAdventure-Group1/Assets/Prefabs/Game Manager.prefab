@@ -49,5 +49,6 @@ MonoBehaviour:
   _hudScene: UI_PlayerHUDScene
   _pauseMenuScene: UI_PauseMenuScene
   _gameOverScene: UI_EndMenuScene
+  _bootstrapScene: Bootstrap
   _gameLevels:
   - SandboxBaseLevelDemo
