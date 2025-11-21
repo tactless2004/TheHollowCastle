@@ -16,7 +16,7 @@ using UnityEngine;
 
 public class GenericEnemyVitality : CombatEntity
 {
-    [SerializeField] private DamageTextSpawner damageTextSpawner;
+    private DamageTextSpawner damageTextSpawner;
 
     public override void TakeDamage(WeaponData attack)
     {
