@@ -8,6 +8,8 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/13 | Leyton McKinney | Init
+* 2025/11/20 | Leyton McKinney | Make enemy the transform parent of the instantiated text.
+* 2025/11/20 | Leyton McKinney | Offset the instantiated text position.
 *
 ************************************************************/
  
@@ -18,13 +20,15 @@ public class DamageTextSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject textPrefab;
     [SerializeField] Color resistColor = new Color(1.0f, 0.0f, 0.0f);
+    [SerializeField] private float verticalTextOffset = 1.0f;
 
     public void Spawn(Transform spawnPosition, WeaponData weapon, bool resist, bool crit)
     {
         GameObject textInstance = Instantiate(
             textPrefab,
-            spawnPosition.position,
-            Quaternion.identity
+            spawnPosition.position + Vector3.up * verticalTextOffset,
+            Quaternion.identity,
+            spawnPosition // transform parent
         );
         
         // If resist, use resist color otherwise use white
