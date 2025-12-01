@@ -16,7 +16,6 @@
 
 using System.Collections;
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.AI;
@@ -28,12 +27,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] [Tooltip("Time between spawns")]
     private int SpawnTime = 30;
     
-    [SerializeField] [Tooltip("Amount of spawns, need to be multiple of 4")]
+    [SerializeField] [Tooltip("Amount of spawns")]
     private int SpawnAmount = 8;
     
     public List<GameObject> enemies = new List<GameObject>();
  
-    private List<GameObject> _directions = new List<GameObject>();
     
     [SerializeField] [Tooltip("Player object")]
     private GameObject player;
@@ -51,15 +49,19 @@ public class EnemySpawner : MonoBehaviour
     {
         RoundRobin,Random
     }
+
+    [SerializeField]
+    [Tooltip("radius for enemies to not spawn by player")]
+    private float safeRadius;
     
     // Start is called once before the first Update
     private void Start()
     {
        
-       /* if (!GameObject.FindGameObjectWithTag("GameManager").TryGetComponent(out gameManager))
+        if (!GameObject.FindGameObjectWithTag("GameManager").TryGetComponent(out gameManager))
         {
             Debug.LogError($"{name} could not find GameManager component.");
-        }*/
+        }
         StartCoroutine(WaveSpawner());
     } //end Start()
 
@@ -105,11 +107,24 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnRoundRobin()
     {
         NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
-        int VertexIndex = Random.Range(0, triangulation.vertices.Length);
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(triangulation.vertices[VertexIndex], out hit, radius, -1))
+        bool spawning = true;
+        int attempt = 0;
+        while (spawning && attempt < 300)
         {
-            Instantiate(enemies[enemieType], hit.position, Quaternion.identity);
+            int VertexIndex = Random.Range(0, triangulation.vertices.Length);
+            if (NavMesh.SamplePosition(triangulation.vertices[VertexIndex], out hit, radius, -1))
+            {
+                Vector3 position = hit.position;
+                position.y += 1;
+                Debug.Log(position);
+                if (Vector3.Distance(position, transform.position) > safeRadius && Vector3.Distance(position, transform.position) < radius)
+                {
+                    Instantiate(enemies[enemieType], position, Quaternion.identity);
+                    spawning = false;
+                }
+                attempt++;
+            }
         }
     }//end SpawnRoundRobin()
  
@@ -119,11 +134,24 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnRandom()
     {
         NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
-        int VertexIndex = Random.Range(0, triangulation.vertices.Length);
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(triangulation.vertices[VertexIndex], out hit, radius, -1))
+        bool spawning = true;
+        int attempt = 0;
+        while (spawning && attempt < 300)
         {
-            Instantiate(enemies[Random.Range(0,enemies.Count)], hit.position, Quaternion.identity);
+            int VertexIndex = Random.Range(0, triangulation.vertices.Length);
+            if (NavMesh.SamplePosition(triangulation.vertices[VertexIndex], out hit, radius, -1))
+            {
+                Vector3 position = hit.position;
+                position.y += 1;
+                Debug.Log(position);
+                if (Vector3.Distance(position, transform.position) > safeRadius && Vector3.Distance(position, transform.position) < radius)
+                {
+                    Instantiate(enemies[Random.Range(0, enemies.Count)], position, Quaternion.identity);
+                    spawning = false;
+                }
+                attempt++;
+            }
         }
     }//end SpawnRandom()
  
