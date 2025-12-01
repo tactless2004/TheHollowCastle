@@ -82,7 +82,7 @@ public class GenericEnemyAI : MonoBehaviour
         if (target == null) return;
 
         // If the game is paused enemies shouldn't move.
-        if (gameManager.CurrentState == GameState.GamePaused) return;
+       /* if (gameManager.CurrentState == GameState.GamePaused) return;*/
 
         Vector3 targetDirection = (target.position - transform.position).normalized;
 
