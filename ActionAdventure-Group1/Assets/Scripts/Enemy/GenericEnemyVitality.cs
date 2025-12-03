@@ -8,7 +8,7 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/15 | Leyton McKinney | Init
-*
+* 2025/12/03 | Noah Zimmerman  | added method to set game manager
 ************************************************************/
  
 using UnityEngine;
@@ -28,5 +28,10 @@ public class GenericEnemyVitality : CombatEntity
     {
         base.Awake();
         damageTextSpawner = GameObject.FindGameObjectWithTag("DamageTextSpawner").GetComponent<DamageTextSpawner>();
+    }
+
+    public void setGameManager(GameManager gameManager)
+    {
+        manager = gameManager;
     }
 }

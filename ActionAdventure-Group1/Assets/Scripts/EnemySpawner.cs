@@ -11,7 +11,7 @@
 * 2025/11/07 | Noah Zimmerman | Created class
 * 2025/11/17 | Leyton McKinney | Do not instantiate new enemies when game state is GameState.GamePaused
 * 2025/12/01 | Noah Zimmerman | Changed the spawner to spawn using navmesh
- * 
+* 2025/12/03 | Noah Zimmerman | Added way to track the amount of enemies
 ************************************************************/
 
 using System.Collections;
@@ -29,7 +29,11 @@ public class EnemySpawner : MonoBehaviour
     
     [SerializeField] [Tooltip("Amount of spawns")]
     private int SpawnAmount = 8;
-    
+
+    [SerializeField]
+    [Tooltip("Max spawns")]
+    private int maxSpawns = 20;
+
     public List<GameObject> enemies = new List<GameObject>();
  
     
@@ -81,8 +85,8 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(SpawnTime);
-           /* if (gameManager.CurrentState != GameState.GamePaused)*/
-           for (int i = 0; i < SpawnAmount; i++)
+           if (gameManager.CurrentState != GameState.GamePaused)
+           for (int i = 0; i < SpawnAmount && gameManager.currentEnemies < maxSpawns; i++)
            {
                if (spawnMethod == SpawnMethod.RoundRobin)
                    SpawnRoundRobin();
@@ -120,7 +124,9 @@ public class EnemySpawner : MonoBehaviour
                 Debug.Log(position);
                 if (Vector3.Distance(position, transform.position) > safeRadius && Vector3.Distance(position, transform.position) < radius)
                 {
-                    Instantiate(enemies[enemieType], position, Quaternion.identity);
+                    GameObject enemy = Instantiate(enemies[enemieType], position, Quaternion.identity);
+                    enemy.GetComponent<GenericEnemyVitality>().setGameManager(gameManager);
+                    gameManager.currentEnemies++;
                     spawning = false;
                 }
                 attempt++;
@@ -147,7 +153,9 @@ public class EnemySpawner : MonoBehaviour
                 Debug.Log(position);
                 if (Vector3.Distance(position, transform.position) > safeRadius && Vector3.Distance(position, transform.position) < radius)
                 {
-                    Instantiate(enemies[Random.Range(0, enemies.Count)], position, Quaternion.identity);
+                    GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Count)], position, Quaternion.identity);
+                    enemy.GetComponent<GenericEnemyVitality>().setGameManager(gameManager);
+                    gameManager.currentEnemies++;
                     spawning = false;
                 }
                 attempt++;
