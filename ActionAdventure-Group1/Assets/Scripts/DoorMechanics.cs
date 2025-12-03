@@ -9,7 +9,7 @@
  * ------------------------------------------------------------
  * 2000/01/01 | Your Name | Created class
  * 2025/12/01 | Chase Cone | Created class
- *
+ * 2024/12/3 | Chase Cone | Door opening mechanics
  ************************************************************/
 
 using Unity.VisualScripting;
@@ -18,6 +18,22 @@ using UnityEngine;
 
 public class DoorMechanics : MonoBehaviour
 {
-    public int keysRequired = 1;
+    public int keysRequired = 5;
+    [SerializeField] private float topHeight = 10.0f;
+    [SerializeField] private float speed = 2.0f;
+    public bool doorOpen = false;
+    
+
+    void Update()
+    {
+        if (doorOpen == true && transform.position.y < topHeight)
+        {
+            transform.position += new Vector3(0, Time.deltaTime * speed, 0);
+        }
+        else if (doorOpen == true)
+        {
+            Destroy(gameObject);
+        }
+    }
     
 }
