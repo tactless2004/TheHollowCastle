@@ -15,6 +15,7 @@
  * 2025/11/17 | Leyton McKinney | Modified pause behavior to not reload the level on un-pause.
  * 2025/11/17 | Leyton McKinney | Add Pub/Sub (Observer) pattern, so other components can be informed about state changes.
  * 2025/11/19 | Leyton McKinney | Allow the GameManager to be used when not starting in Bootstrap scene.
+ * 2025/12/03 | Noah Zimmerman  | Added tracking amount of enemies currently spawned
  ************************************************************/
 
 using System.Collections.Generic;
@@ -49,7 +50,9 @@ public class GameManager: Singleton<GameManager>
     [SerializeField]
     [Tooltip("All the level scenes in the game, in the order they should be played.")]
     private List<string> _gameLevels = new List<string>();
-   
+
+    // Amount of enemies currently exsisting in scene
+    public int currentEnemies = 0;
     
     // Index of the currently active level in the levelScenes list
     private int _currentLevelIndex = 0;

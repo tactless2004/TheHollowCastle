@@ -10,7 +10,7 @@
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/07 | Leyton McKinney | Change IDamegable to take a WeaponData, instead of AttackData.
 * 2025/11/08 | Leyton McKinney | IDamageable -> CombatEntity (Interface to Abstract).
-*
+* 2025/12/03 | Noah Zimmerman  | Added method to track amount of enemies through game manager.
 ************************************************************/
  
 using UnityEngine;
@@ -30,6 +30,8 @@ public abstract class CombatEntity : MonoBehaviour
     private float lastManaRegen;
     private float lastHealthRegen;
 
+    protected GameManager manager;
+
     public virtual void Heal(float healAmount) => health += healAmount;
     public virtual void TakeDamage(WeaponData attack)
     {
@@ -42,6 +44,7 @@ public abstract class CombatEntity : MonoBehaviour
 
     protected virtual void Die()
     {
+        manager.currentEnemies--;
         Destroy(gameObject);
     }
 
