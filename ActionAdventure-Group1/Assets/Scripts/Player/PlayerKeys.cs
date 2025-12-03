@@ -21,10 +21,6 @@ using UnityEngine;
 public class PlayerKeys : MonoBehaviour
 {
     [SerializeField] private int numKeys;
-    [SerializeField] private float doorOpenSpeed = 1.0f;
-    [SerializeField] private float doorTopHeight = 8.0f;
-    [SerializeField] private bool opening = false;
-    [SerializeField] private GameObject currDoor;
 
     /// <summary>
     /// Detect when a player runs into something.
