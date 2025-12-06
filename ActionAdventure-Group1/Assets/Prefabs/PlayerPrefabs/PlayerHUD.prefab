@@ -161,17 +161,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102772931736378537}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7249542667841234191}
+  m_Father: {fileID: 2576269840667309488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -731.745, y: -279}
-  m_SizeDelta: {x: 406.9609, y: 42.9787}
+  m_AnchoredPosition: {x: 2.3027, y: 76.7443}
+  m_SizeDelta: {x: 378.8345, y: 32.4857}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5333246472135925613
 CanvasRenderer:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1487120819, guid: 318702e567d73e44f81b4449fbd0592c, type: 3}
+  m_Sprite: {fileID: -429553985, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1762156526, guid: 03e227379bbc0134da8cbbd80bec7835, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -315,7 +315,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4443954050165858566}
+  - {fileID: 580929201991875453}
   m_Father: {fileID: 7249542667841234191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -351,7 +353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -443879742, guid: 318702e567d73e44f81b4449fbd0592c, type: 3}
+  m_Sprite: {fileID: 1840824445, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -394,8 +396,6 @@ RectTransform:
   m_Children:
   - {fileID: 6488631452644358556}
   - {fileID: 2576269840667309488}
-  - {fileID: 580929201991875453}
-  - {fileID: 4443954050165858566}
   - {fileID: 2370312459352696308}
   - {fileID: 5550789930738788278}
   - {fileID: 1258140662101130837}
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1762156526, guid: 03e227379bbc0134da8cbbd80bec7835, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -955,7 +955,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1637393519, guid: 318702e567d73e44f81b4449fbd0592c, type: 3}
+  m_Sprite: {fileID: -1741842738, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -990,17 +990,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7717936579631350764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7249542667841234191}
+  m_Father: {fileID: 2576269840667309488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -731.745, y: -355.83057}
-  m_SizeDelta: {x: 406.9609, y: 42.9787}
+  m_AnchoredPosition: {x: 3.3016, y: -0.1785}
+  m_SizeDelta: {x: 376.84, y: 33.2106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5073958229943506266
 CanvasRenderer:
@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1717565672, guid: 318702e567d73e44f81b4449fbd0592c, type: 3}
+  m_Sprite: {fileID: 1651583226, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
