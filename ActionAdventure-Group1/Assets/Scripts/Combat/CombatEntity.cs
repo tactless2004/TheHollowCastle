@@ -10,7 +10,7 @@
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/07 | Leyton McKinney | Change IDamegable to take a WeaponData, instead of AttackData.
 * 2025/11/08 | Leyton McKinney | IDamageable -> CombatEntity (Interface to Abstract).
-*
+* 2025/12/03 | Noah Zimmerman  | Added method to track amount of enemies through game manager.
 ************************************************************/
  
 using UnityEngine;
@@ -18,20 +18,25 @@ using UnityEngine;
 public abstract class CombatEntity : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] protected float health = 20.0f;
+    [SerializeField] protected float health;
     [SerializeField] protected float healthRegen = 1.0f; // health per second;
-    [SerializeField] protected const float MAXHEALTH = 20.0f;
+    [SerializeField] protected float MAXHEALTH = 20.0f;
 
     [Header("Mana")]
-    [SerializeField] protected float mana = 100.0f;
+    [SerializeField] protected float mana;
     [SerializeField] protected float manaRegen = 1.0f; // mana per second;
-    [SerializeField] protected const float MAXMANA = 100.0f;
+    [SerializeField] protected float MAXMANA = 100.0f;
 
     private float lastManaRegen;
     private float lastHealthRegen;
 
+    protected GameManager manager;
+
     public virtual void Heal(float healAmount) => health += healAmount;
-    public virtual void TakeDamage(WeaponData attack) => health -= attack.damage;
+    public virtual void TakeDamage(WeaponData attack)
+    {
+        health -= attack.damage;
+    }
     public float GetHealth() => health;
     public virtual void GainMana(float manaAmount) => mana += manaAmount;
     public virtual void ExertMain(WeaponData attack) => mana -= attack.manaCost;
@@ -39,7 +44,14 @@ public abstract class CombatEntity : MonoBehaviour
 
     protected virtual void Die()
     {
+        manager.currentEnemies--;
         Destroy(gameObject);
+    }
+
+    protected virtual void Awake()
+    {
+        health = MAXHEALTH;
+        mana = MAXMANA;
     }
     private void Update()
     {

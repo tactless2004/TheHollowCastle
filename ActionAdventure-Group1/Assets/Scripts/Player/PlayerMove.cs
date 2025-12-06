@@ -8,10 +8,10 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
+* 2025/11/16 | Leyton McKinney | Use camera orientation to orient player movement.
 *
 ************************************************************/
 
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using System; // Need for Enum
  
@@ -26,6 +26,8 @@ public class PlayerMove : MonoBehaviour
         FourDirection,
         EightDirection
     }
+
+    [SerializeField] private Transform cameraTransform;
 
     [Header("SNAP PARAMS")]
     [SerializeField]
@@ -65,7 +67,17 @@ public class PlayerMove : MonoBehaviour
     public Vector3 Direction
     {
         get => _direction;
-        set => _direction = value.normalized;
+        set {
+            Vector3 camForward = cameraTransform.forward;
+            camForward.y = 0.0f;
+            camForward.Normalize();
+
+            Vector3 camRight = cameraTransform.right;
+            camRight.y = 0.0f;
+            camRight.Normalize();
+
+            _direction = camForward * value.z + camRight * value.x;
+        }
     }
     // Awake is called once on initialization (before Start)
     private void Awake()
