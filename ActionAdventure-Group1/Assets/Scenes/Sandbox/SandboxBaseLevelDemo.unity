@@ -3828,12 +3828,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c6b575a94b5f74443a52f9a7685c6614, type: 3}
       propertyPath: m_Name
-      value: RolandWeaponHandTest-v4
+      value: Roland
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c6b575a94b5f74443a52f9a7685c6614, type: 3}
+      propertyPath: m_TagString
+      value: PlayerModel
       objectReference: {fileID: 0}
     - target: {fileID: 1433673171837519096, guid: c6b575a94b5f74443a52f9a7685c6614, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5173964401922839217, guid: c6b575a94b5f74443a52f9a7685c6614, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 27ebce2cade317447bf196f36d46c3b6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6248,13 +6256,21 @@ PrefabInstance:
       propertyPath: maxSpawns
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3901564678309139624, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
+      propertyPath: 'enemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6762513469522789849, guid: eef5ab76775f9d8408f4c7639635c6a1, type: 3}
+    - target: {fileID: 3901564678309139624, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
+      propertyPath: 'enemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5606385456176227396, guid: d2fa4264d9a9e654d8e0dd09a1517c89, type: 3}
     - target: {fileID: 4866883483257629226, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
       propertyPath: m_Name
       value: SpawnerMain
       objectReference: {fileID: 0}
     - target: {fileID: 4866883483257629226, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6282675132305984197, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
       propertyPath: m_LocalPosition.x

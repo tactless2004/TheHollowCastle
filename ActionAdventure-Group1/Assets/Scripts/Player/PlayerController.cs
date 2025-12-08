@@ -26,8 +26,16 @@ public class PlayerController : MonoBehaviour
     private PlayerCombat _playerCombat;
     private PlayerInventory _playerInventory;
     private GameManager _gameManager;
+    private Rigidbody _rigidbody;
     
     private bool _paused = false;
+
+    public Animator playerAnimator;
+    private void Start()
+    {
+        playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
+        _rigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+    }
 
     private void Awake()
     {
@@ -56,9 +64,21 @@ public class PlayerController : MonoBehaviour
             _gameManager.onGameStateChanged += HandleGameState;
         }
     }
- 
 
-    public void OnMove(InputValue value)
+    public void Update()
+    {
+        if (_rigidbody.linearVelocity.magnitude > 0.01f)
+        {
+            playerAnimator.Play("Walk");
+        }
+        else
+        {
+            playerAnimator.Play("Idle");
+        }
+    }
+
+
+        public void OnMove(InputValue value)
     {
         // Don't process standard inputs when paused.
         if (_paused) return;
@@ -68,7 +88,6 @@ public class PlayerController : MonoBehaviour
         // Vec2 -> Vec3
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y);
         _playerMove.Direction = direction;
-        
     }
 
     public void OnSlot1Attack(InputValue value)

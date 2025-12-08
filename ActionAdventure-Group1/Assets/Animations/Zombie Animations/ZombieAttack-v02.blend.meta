@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4223fbc7ab73fd043b26fe4aaf414d79
+guid: b878917c5e6b31d4bb9aadbda92d5ac5
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -21,7 +21,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 1
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -31,7 +31,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SpearAttack
+      name: ZombieAttack
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
@@ -58,7 +58,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []
