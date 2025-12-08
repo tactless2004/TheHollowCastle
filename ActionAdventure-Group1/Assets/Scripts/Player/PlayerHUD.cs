@@ -28,6 +28,8 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Image slot1Image;
     [SerializeField] private Image slot2Image;
     [SerializeField] private TMP_Text pickupHelpText;
+    [SerializeField] private TMP_Text keyCounter;
+    public PlayerKeys playerKeysScript;
 
     [Header("Pickup")]
     [SerializeField] private float maxPickupDistance = 3.0f;
@@ -68,6 +70,9 @@ public class PlayerHUD : MonoBehaviour
                 pickupHelpText.text = "";
             }
         }
+
+        keyCounter.text = playerKeysScript.numKeys.ToString();
+
     }
 
     private void Start()
@@ -99,9 +104,13 @@ public class PlayerHUD : MonoBehaviour
                     slot1Image     = go.transform.Find("PlayerHUD/Slot1Weapon/Slot1WeaponImage").GetComponent<Image>();
                     slot2Image     = go.transform.Find("PlayerHUD/Slot2Weapon/Slot2WeaponImage").GetComponent<Image>();
                     pickupHelpText = go.transform.Find("PlayerHUD/WeaponPickupHelpText").GetComponent<TextMeshProUGUI>();
+                    keyCounter = go.transform.Find("PlayerHUD/KeyCounter/NumberOfKeys").GetComponent<TextMeshProUGUI>();
+                    
                 }
             }
         }
         pickupHelpText.text = "";
+        
+        
     }
 }

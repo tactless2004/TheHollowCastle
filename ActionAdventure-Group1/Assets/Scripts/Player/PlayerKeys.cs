@@ -10,6 +10,8 @@
 * 2000/01/01 | Your Name | Created class
 * 2025/12/01 | Chase Cone | Created class
  * 2025/12/01 | Chase Cone | Added door opening mechanics
+ * 2025/12/8 | Chase Cone | Made keys public so UI and reference
+*
 * 2025/12/08 | Noah Zimmerman | Switched to using collision and not trigger
 ************************************************************/
 
@@ -20,7 +22,7 @@ using UnityEngine;
 
 public class PlayerKeys : MonoBehaviour
 {
-    [SerializeField] private int numKeys;
+    public int numKeys;
 
     /// <summary>
     /// Detect when a player runs into something.
