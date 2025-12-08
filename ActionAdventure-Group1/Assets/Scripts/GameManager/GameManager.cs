@@ -284,6 +284,6 @@ public class GameManager: Singleton<GameManager>
 
     private void Update()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);   
+        //Debug.Log(SceneManager.GetActiveScene().name);   
     }
 }//end GameManager
