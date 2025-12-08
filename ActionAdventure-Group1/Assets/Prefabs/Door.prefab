@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7611096834078169341}
   - component: {fileID: 7409778117349809545}
   - component: {fileID: 878532781096443427}
+  - component: {fileID: 8973835974665446404}
   m_Layer: 0
   m_Name: Door
   m_TagString: Doors
@@ -124,7 +125,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11749bd3f03e5de4d843a725ba30b5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorMechanics
+  gameManager: {fileID: 0}
   keysRequired: 1
   topHeight: 12
   speed: 5
   doorOpen: 0
+  finalDoor: 0
+--- !u!65 &8973835974665446404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539958700574794740}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 1, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
