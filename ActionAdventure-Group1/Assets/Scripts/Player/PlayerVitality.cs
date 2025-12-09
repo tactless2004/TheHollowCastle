@@ -19,23 +19,30 @@ using UnityEngine;
 
 public class PlayerVitality : CombatEntity
 {
+    private PlayerController _playerController;
     [SerializeField] private PlayerHUD hud;
 
-    public Animator playerAnimator;
+    public Animator _playerAnimator;
     private void Start()
     {
-        playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
+        _playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
     }
     public override void TakeDamage(WeaponData attack)
     {
         base.TakeDamage(attack);
         hud.SetHealth(health, MAXHEALTH);
-        playerAnimator.Play("PlayerDamage");
+        // if (_playerController.animationState == PlayerController.AnimationState.Attack || _playerController.animationState == PlayerController.AnimationState.Damage)
+        // {
+        //     return;
+        // }
+        _playerController.animationState = PlayerController.AnimationState.Damage;
+        _playerAnimator.Play("PlayerDamage");
+        _playerController.animLock = true;
     }
 
     protected override void Die()
     {
-        playerAnimator.Play("PlayerDeath");
+        _playerAnimator.Play("PlayerDeath");
         try
         {
             

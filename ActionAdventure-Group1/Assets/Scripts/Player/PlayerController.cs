@@ -14,7 +14,7 @@
 * 2025/11/08 | Leyton McKinney | Add inventory system controls.
 * 2025/11/08 | Leyton McKinney | Implement inventory system controls.
 * 2025/11/17 | Leyton McKinney | Add pause checking.
-*
+* 2025/12/08 | Peyton Lenard   | Added animation player and animLock for animation state control
 ************************************************************/
 
 using UnityEngine;
@@ -26,15 +26,24 @@ public class PlayerController : MonoBehaviour
     private PlayerCombat _playerCombat;
     private PlayerInventory _playerInventory;
     private GameManager _gameManager;
-    private Rigidbody _rigidbody;
     
     private bool _paused = false;
 
+    public bool animLock = false;
+
     public Animator playerAnimator;
+    public enum AnimationState
+    {
+        Idle,
+        Walk,
+        Attack,
+        Damage,
+        Death
+    }
+    public AnimationState animationState;
     private void Start()
     {
         playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
-        _rigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
     }
 
     private void Awake()
@@ -63,28 +72,45 @@ public class PlayerController : MonoBehaviour
         {
             _gameManager.onGameStateChanged += HandleGameState;
         }
+
+        animationState = AnimationState.Idle;
     }
 
     public void Update()
     {
-        if (_rigidbody.linearVelocity.magnitude > 0.01f)
+        Debug.Log(animationState);
+        if (animLock)
         {
-            playerAnimator.Play("Walk");
+            _playerMove.Direction = Vector3.zero;
         }
-        else
+        if (animationState == AnimationState.Idle)
         {
-            playerAnimator.Play("Idle");
+            animLock = false;
         }
     }
 
 
         public void OnMove(InputValue value)
     {
+        Vector2 inputVector = value.Get<Vector2>();
+        
         // Don't process standard inputs when paused.
         if (_paused) return;
 
-        Vector2 inputVector = value.Get<Vector2>();
+        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage) {
+            return;
+        }
 
+        if (inputVector == Vector2.zero)
+        {
+            animationState = AnimationState.Idle;
+            playerAnimator.Play("Idle");
+        }
+        else
+        {
+            animationState = AnimationState.Walk;
+            playerAnimator.Play("Walk");
+        }
         // Vec2 -> Vec3
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y);
         _playerMove.Direction = direction;
@@ -95,6 +121,14 @@ public class PlayerController : MonoBehaviour
         // Don't process standard inputs when paused.
         if (_paused) return;
 
+        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
+        {
+            return;
+        }
+        animationState = AnimationState.Attack;
+        playerAnimator.Play("SwordAttack");
+        animLock = true;
+
         if (value.isPressed) _playerCombat.Slot1_Attack();
     }
 
@@ -102,6 +136,14 @@ public class PlayerController : MonoBehaviour
     {
         // Don't process standard inputs when paused.
         if (_paused) return;
+
+        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
+        {
+            return;
+        }
+        animationState = AnimationState.Attack;
+        playerAnimator.Play("SpearAttack");
+        animLock = true;
 
         if (value.isPressed) _playerCombat.Slot2_Attack();
     }
