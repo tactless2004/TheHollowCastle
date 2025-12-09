@@ -10,7 +10,7 @@
 * 2025/11/15 | Leyton McKinney | Init
 * 2025/11/17 | Leyton McKinney | Account for PlayerHUD scene loading on top of level scene.
 * 2025/11/17 | Leyton McKinney | Move pickup help text logic to this script.
-*
+* 2025/12/08 | Noah Zimmerman  | Fixes path for ui elements
 ************************************************************/
 
 using UnityEngine;
@@ -28,6 +28,8 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Image slot1Image;
     [SerializeField] private Image slot2Image;
     [SerializeField] private TMP_Text pickupHelpText;
+    [SerializeField] private TMP_Text keyCounter;
+    public PlayerKeys playerKeysScript;
 
     [Header("Pickup")]
     [SerializeField] private float maxPickupDistance = 3.0f;
@@ -68,6 +70,9 @@ public class PlayerHUD : MonoBehaviour
                 pickupHelpText.text = "";
             }
         }
+
+        keyCounter.text = playerKeysScript.numKeys.ToString();
+
     }
 
     private void Start()
@@ -94,14 +99,18 @@ public class PlayerHUD : MonoBehaviour
             {
                 if (go.name == "UI")
                 {
-                    manaBar        = go.transform.Find("PlayerHUD/ManaBarFull").GetComponent<Image>();
-                    healthBar      = go.transform.Find("PlayerHUD/HealthBarFull").GetComponent<Image>();
+                    manaBar        = go.transform.Find("PlayerHUD/ManaBarEmpty/ManaBarFull").GetComponent<Image>();
+                    healthBar      = go.transform.Find("PlayerHUD/ManaBarEmpty/HealthBarFull").GetComponent<Image>();
                     slot1Image     = go.transform.Find("PlayerHUD/Slot1Weapon/Slot1WeaponImage").GetComponent<Image>();
                     slot2Image     = go.transform.Find("PlayerHUD/Slot2Weapon/Slot2WeaponImage").GetComponent<Image>();
                     pickupHelpText = go.transform.Find("PlayerHUD/WeaponPickupHelpText").GetComponent<TextMeshProUGUI>();
+                    keyCounter = go.transform.Find("PlayerHUD/KeyCounter/NumberOfKeys").GetComponent<TextMeshProUGUI>();
+                    
                 }
             }
         }
         pickupHelpText.text = "";
+        
+        
     }
 }

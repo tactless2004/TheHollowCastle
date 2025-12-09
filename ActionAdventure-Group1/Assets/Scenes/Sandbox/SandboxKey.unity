@@ -7519,10 +7519,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKeys
   numKeys: 0
-  doorOpenSpeed: 0.1
-  doorTopHeight: 8
-  opening: 0
-  currDoor: {fileID: 0}
 --- !u!1001 &2001185377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8188,6 +8184,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 996284695952283241, guid: a251b1a2986e3224f85a30924a24025c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611096834078169341, guid: a251b1a2986e3224f85a30924a24025c, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539958700574794740, guid: a251b1a2986e3224f85a30924a24025c, type: 3}

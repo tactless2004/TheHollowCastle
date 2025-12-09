@@ -294,7 +294,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -302,6 +301,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &827094676
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,10 +404,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1496255143}
     m_Modifications:
+    - target: {fileID: 523223883555044839, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -429553985, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
+    - target: {fileID: 768182198817318411, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1741842738, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
+    - target: {fileID: 1087545924345887234, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729257016034104842, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1840824445, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
     - target: {fileID: 4429284080634579472, guid: e2226544a3f8d794585102bca171b06f, type: 3}
       propertyPath: m_Name
       value: PlayerHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 6360817551337261369, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1762156526, guid: 03e227379bbc0134da8cbbd80bec7835, type: 3}
     - target: {fileID: 7249542667841234191, guid: e2226544a3f8d794585102bca171b06f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -488,6 +508,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7464775780545268162, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7767642353254872940, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1762156526, guid: 03e227379bbc0134da8cbbd80bec7835, type: 3}
+    - target: {fileID: 9131553235722395249, guid: e2226544a3f8d794585102bca171b06f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1651583226, guid: 1183383a2f1ad4444978a64cdbd978e3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

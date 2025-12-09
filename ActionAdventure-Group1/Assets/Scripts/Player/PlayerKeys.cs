@@ -10,7 +10,9 @@
 * 2000/01/01 | Your Name | Created class
 * 2025/12/01 | Chase Cone | Created class
  * 2025/12/01 | Chase Cone | Added door opening mechanics
+ * 2025/12/8 | Chase Cone | Made keys public so UI and reference
 *
+* 2025/12/08 | Noah Zimmerman | Switched to using collision and not trigger
 ************************************************************/
 
 using System;
@@ -20,26 +22,26 @@ using UnityEngine;
 
 public class PlayerKeys : MonoBehaviour
 {
-    [SerializeField] private int numKeys;
+    public int numKeys;
 
     /// <summary>
     /// Detect when a player runs into something.
     /// </summary>
-    /// <param name="other"> Wheat the player interacts with.
+    /// <param name="collision"> Wheat the player interacts with.
     ///</param>
-    void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         // Check if it has the "Keys" tag
-        if (other.CompareTag("Keys"))
+        if (collision.gameObject.CompareTag("Keys"))
         {
             numKeys++;
             Debug.Log("Got Key");
             //audio.PlayOneShot();
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
         } //end if("Keys")
-        else if (other.CompareTag("Doors"))
+        else if (collision.gameObject.CompareTag("Doors"))
         {
-            DoorMechanics doorData = other.gameObject.GetComponent<DoorMechanics>();
+            DoorMechanics doorData = collision.gameObject.GetComponent<DoorMechanics>();
             if (doorData != null && doorData.keysRequired <= numKeys)
             {
                 doorData.doorOpen = true;
@@ -47,5 +49,5 @@ public class PlayerKeys : MonoBehaviour
 
         } //end if("Doors")
 
-    } //end OnTriggerEnter()
+    }
 }
