@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(animationState);
         if (animLock)
         {
             _playerMove.Direction = Vector3.zero;

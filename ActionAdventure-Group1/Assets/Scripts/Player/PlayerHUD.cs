@@ -29,7 +29,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Image slot2Image;
     [SerializeField] private TMP_Text pickupHelpText;
     [SerializeField] private TMP_Text keyCounter;
-    public PlayerKeys playerKeysScript;
+    [SerializeField] private PlayerKeys playerKeysScript;
 
     [Header("Pickup")]
     [SerializeField] private float maxPickupDistance = 3.0f;
@@ -70,8 +70,8 @@ public class PlayerHUD : MonoBehaviour
                 pickupHelpText.text = "";
             }
         }
-
-        keyCounter.text = playerKeysScript.numKeys.ToString();
+        if (keyCounter != null)
+            keyCounter.text = playerKeysScript.numKeys.ToString();
 
     }
 
@@ -111,6 +111,7 @@ public class PlayerHUD : MonoBehaviour
         }
         pickupHelpText.text = "";
         
+        playerKeysScript = GetComponent<PlayerKeys>();
         
     }
 }

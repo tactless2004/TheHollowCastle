@@ -26,6 +26,7 @@ public class PlayerVitality : CombatEntity
     private void Start()
     {
         _playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
+        _playerController = GetComponent<PlayerController>();
     }
     public override void TakeDamage(WeaponData attack)
     {

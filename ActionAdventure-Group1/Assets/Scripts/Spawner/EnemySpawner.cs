@@ -121,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector3 position = hit.position;
                 position.y += 1;
-                Debug.Log(position);
+                //Debug.Log(position);
                 if (Vector3.Distance(position, transform.position) > safeRadius && Vector3.Distance(position, transform.position) < radius)
                 {
                     GameObject enemy = Instantiate(enemies[enemieType], position, Quaternion.identity);
@@ -150,7 +150,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector3 position = hit.position;
                 position.y += 1;
-                Debug.Log(position);
+                //Debug.Log(position);
                 if (Vector3.Distance(position, transform.position) > safeRadius && Vector3.Distance(position, transform.position) < radius)
                 {
                     GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Count)], position, Quaternion.identity);
