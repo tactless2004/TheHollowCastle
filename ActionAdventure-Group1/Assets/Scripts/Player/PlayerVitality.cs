@@ -32,13 +32,14 @@ public class PlayerVitality : CombatEntity
     {
         base.TakeDamage(attack);
         hud.SetHealth(health, MAXHEALTH);
-        // if (_playerController.animationState == PlayerController.AnimationState.Attack || _playerController.animationState == PlayerController.AnimationState.Damage)
-        // {
-        //     return;
-        // }
+        if (_playerController.animationState == PlayerController.AnimationState.Attack || _playerController.animationState == PlayerController.AnimationState.Damage)
+        {
+            return;
+        }
         _playerController.animationState = PlayerController.AnimationState.Damage;
         _playerAnimator.Play("PlayerDamage");
         _playerController.animLock = true;
+        Debug.Log("Player took damage");
     }
 
     protected override void Die()
