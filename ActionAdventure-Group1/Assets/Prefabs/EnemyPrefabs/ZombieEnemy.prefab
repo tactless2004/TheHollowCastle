@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8460796233211539005}
   - component: {fileID: 34233945023230759}
   - component: {fileID: -4274189393613658920}
+  - component: {fileID: -3466943115418152197}
+  - component: {fileID: 1279501657262510313}
   m_Layer: 0
   m_Name: ZombieEnemy
   m_TagString: Enemy
@@ -30,14 +32,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6762513469522789849}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 1.07, z: 4.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5442612027306089726}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &7595921204242693998
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -106,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc9bc04c560cf24ea7f174854a1766c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementBehaviorSO: {fileID: 11400000, guid: 17eca8e6747039a419b9c2cda291164e, type: 2}
+  movementBehaviorSO: {fileID: 11400000, guid: 628323cb0775c8e459fa665a85710494, type: 2}
   weaponSO: {fileID: 11400000, guid: e5f9b2a1c03c8b24a8d973b308566558, type: 2}
 --- !u!65 &8460796233211539005
 BoxCollider:
@@ -127,8 +129,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1827188, y: 2.1016724, z: 1}
-  m_Center: {x: -0.03269565, y: 0.050836325, z: 0}
+  m_Size: {x: 1.8404589, y: 3.6950865, z: 1}
+  m_Center: {x: -0.034136027, y: 0.84754324, z: 0}
 --- !u!54 &34233945023230759
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,6 +176,40 @@ MonoBehaviour:
   mana: 0
   manaRegen: 1
   MAXMANA: 100
+--- !u!195 &-3466943115418152197
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762513469522789849}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1279501657262510313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762513469522789849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cebfe97d60dc0a449c04d8385200e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavMeshPathVisualizer
 --- !u!1001 &5477137665455586069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b14a01424d69fa4e9115d7c6dbd8f68, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b14a01424d69fa4e9115d7c6dbd8f68, type: 3}
       propertyPath: m_LocalRotation.x
@@ -216,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b14a01424d69fa4e9115d7c6dbd8f68, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b14a01424d69fa4e9115d7c6dbd8f68, type: 3}
       propertyPath: m_LocalRotation.z
@@ -228,7 +264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b14a01424d69fa4e9115d7c6dbd8f68, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b14a01424d69fa4e9115d7c6dbd8f68, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

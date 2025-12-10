@@ -11,9 +11,9 @@
 *
 ************************************************************/
 
-using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.AI;
+using System; // For NotImplementedException
 
 [CreateAssetMenu(menuName = "EnemyAI/Movement/Patrol")]
 public class Patrol : ScriptableObject, IEnemyMovementBehavior
@@ -22,19 +22,8 @@ public class Patrol : ScriptableObject, IEnemyMovementBehavior
     public float speed = 3.0f;
     private int currentWaypoint = 0;
 
-    public void Move(Transform enemy, Rigidbody enemyRigidbody, Transform target)
+    public void Move(Transform enemy, NavMeshAgent enemyNavMeshAgent, Transform target)
     {
-        // No waypoints -> nothing to patrol
-        if (waypoints.Length == 0) return;
-
-        Transform waypoint = waypoints[currentWaypoint];
-        Vector3 direction = (waypoint.position - enemy.position).normalized;
-        enemy.position += direction * speed * Time.deltaTime;
-
-        // cycle through waypoints if the player is reached
-        if (Vector3.Distance(enemy.position, waypoint.position) < 0.1f)
-        {
-            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
-        }
+        throw new NotImplementedException("Patrol behavior is not implemented");
     }
 }

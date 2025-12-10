@@ -17,12 +17,13 @@
 * 2025/11/16 | Leyton McKinney | IEnemyMovementBehavior uses Rigidbody now.
 * 2025/11/17 | Leyotn McKinney | Fix persistent NullReferenceException in Start().
 * 2025/11/17 | Leyton McKinney | Add pause behavior.
+* 2025/12/08 | Leyton McKinney | Pivot to NavMesh
 ************************************************************/
  
 using UnityEngine;
+using UnityEngine.AI;
 
-
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class GenericEnemyAI : MonoBehaviour
 {
     [Header("AI Behaviors")]
@@ -35,7 +36,7 @@ public class GenericEnemyAI : MonoBehaviour
     private Weapon weapon;
 
     private IEnemyMovementBehavior movementBehavior;
-    private Rigidbody rb;
+    private NavMeshAgent navMeshAgent;
     private GameManager gameManager;
 
 
@@ -47,7 +48,7 @@ public class GenericEnemyAI : MonoBehaviour
             weapon = new Weapon(weaponSO as WeaponData);
         }
 
-        if (!TryGetComponent(out rb))
+        if (!TryGetComponent(out navMeshAgent))
         {
             Debug.LogError("Enemy does not have Rigidbody component.");
         }
@@ -92,7 +93,7 @@ public class GenericEnemyAI : MonoBehaviour
             targetDirection * weapon.getWeaponData().range,
             Color.cyan
         );
-        movementBehavior?.Move(transform, rb, target);
+        movementBehavior?.Move(transform, navMeshAgent, target);
 
         // Weapon Logic
         if(weapon != null)
