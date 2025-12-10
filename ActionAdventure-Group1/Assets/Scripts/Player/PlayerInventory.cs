@@ -62,6 +62,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
         {
+            // If is pickupWeapon
             if (hit.collider.TryGetComponent(out PickupItem pickupItem))
             {
                 WeaponData weapon = pickupItem.GetWeapon();
@@ -81,6 +82,13 @@ public class PlayerInventory : MonoBehaviour
                 playerCombat.SetWeapon(slot, weapon);
                 hud.SetWeaponSprite(weapon.uiSprite, slot);
                 Debug.Log($"Player picked up {weapon.name} in slot {slot}.");
+            }
+
+            else if (hit.collider.TryGetComponent(out Chest chest)) {
+                // don't reopen chests that already are opened
+                if (!chest.isOpened()) {
+                    chest.Open();
+                }
             }
         }
     }
