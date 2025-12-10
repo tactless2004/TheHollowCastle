@@ -27,6 +27,12 @@ public class PlayerAnimationEventHandler : MonoBehaviour
         playerController.animLock = false;
     }
 
+    public void SetStateStun()
+    {
+        playerController.animationState = PlayerController.AnimationState.Damage;
+        playerController.animLock = true;
+    }
+
     private void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();

@@ -38,6 +38,7 @@ public class PlayerVitality : CombatEntity
         _playerController.animationState = PlayerController.AnimationState.Damage;
         _playerAnimator.Play("PlayerDamage");
         _playerController.animLock = true;
+        Debug.Log("Player took damage");
     }
 
     protected override void Die()

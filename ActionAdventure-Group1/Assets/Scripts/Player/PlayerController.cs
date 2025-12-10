@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (inputVector == Vector2.zero)
+        if (inputVector == Vector2.zero && animationState != AnimationState.Damage)
         {
             animationState = AnimationState.Idle;
             playerAnimator.Play("Idle");
