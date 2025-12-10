@@ -26,8 +26,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private ScriptableObject Slot2_WeaponData;
 
     private PlayerMove playerMove;
-    private Weapon Slot1_Weapon;
-    private Weapon Slot2_Weapon;
+    public Weapon Slot1_Weapon;
+    public Weapon Slot2_Weapon;
 #if UNITY_EDITOR
     [Header("DEBUG")]
     [SerializeField] private bool showSlot1Range;

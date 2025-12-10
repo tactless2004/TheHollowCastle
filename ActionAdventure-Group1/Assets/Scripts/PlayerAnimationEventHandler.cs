@@ -25,12 +25,20 @@ public class PlayerAnimationEventHandler : MonoBehaviour
     {
         playerController.animationState = PlayerController.AnimationState.Idle;
         playerController.animLock = false;
+        playerController.swordModel.SetActive(false);
+        playerController.hammerModel.SetActive(false);
+        playerController.spearModel.SetActive(false);
+        playerController.greatswordModel.SetActive(false);
+        playerController.throwingknifeModel.SetActive(false);
     }
 
-    public void SetStateStun()
+    public void HideWeapon()
     {
-        playerController.animationState = PlayerController.AnimationState.Damage;
-        playerController.animLock = true;
+        playerController.swordModel.SetActive(false);
+        playerController.hammerModel.SetActive(false);
+        playerController.spearModel.SetActive(false);
+        playerController.greatswordModel.SetActive(false);
+        playerController.throwingknifeModel.SetActive(false);
     }
 
     private void Awake()

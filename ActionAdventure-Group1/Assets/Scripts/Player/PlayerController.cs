@@ -31,6 +31,12 @@ public class PlayerController : MonoBehaviour
 
     public bool animLock = false;
 
+    public GameObject swordModel;
+    public GameObject hammerModel;
+    public GameObject spearModel;
+    public GameObject greatswordModel;
+    public GameObject throwingknifeModel;
+
     public Animator playerAnimator;
     public enum AnimationState
     {
@@ -125,7 +131,36 @@ public class PlayerController : MonoBehaviour
             return;
         }
         animationState = AnimationState.Attack;
-        playerAnimator.Play("SwordAttack");
+        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Sword")
+        {
+            Debug.Log("Weapon: Sword");
+            playerAnimator.Play("SwordAttack");
+            swordModel.SetActive(true);
+        }
+        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Hammer")
+        {
+            Debug.Log("Weapon: Hammer");
+            playerAnimator.Play("SwordAttack");
+            hammerModel.SetActive(true);
+        }
+        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Spear")
+        {
+            Debug.Log("Weapon: Spear");
+            playerAnimator.Play("SpearAttack");
+            spearModel.SetActive(true);
+        }
+        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Greatsword")
+        {
+            Debug.Log("Weapon: Greatsword");
+            playerAnimator.Play("GreatswordAttack");
+            greatswordModel.SetActive(true);
+        }
+        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Throwing Knife")
+        {
+            Debug.Log("Weapon: Throwing Knife");
+            playerAnimator.Play("ThrowingKnifeAttack");
+            throwingknifeModel.SetActive(true);
+        }
         animLock = true;
 
         if (value.isPressed) _playerCombat.Slot1_Attack();
@@ -141,7 +176,36 @@ public class PlayerController : MonoBehaviour
             return;
         }
         animationState = AnimationState.Attack;
-        playerAnimator.Play("SpearAttack");
+        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Sword")
+        {
+            Debug.Log("Weapon: Sword");
+            playerAnimator.Play("SwordAttack");
+            swordModel.SetActive(true);
+        }
+        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Hammer")
+        {
+            Debug.Log("Weapon: Hammer");
+            playerAnimator.Play("SwordAttack");
+            hammerModel.SetActive(true);
+        }
+        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Spear")
+        {
+            Debug.Log("Weapon: Spear");
+            playerAnimator.Play("SpearAttack");
+            spearModel.SetActive(true);
+        }
+        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Greatsword")
+        {
+            Debug.Log("Weapon: Greatsword");
+            playerAnimator.Play("GreatswordAttack");
+            greatswordModel.SetActive(true);
+        }
+        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Throwing Knife")
+        {
+            Debug.Log("Weapon: Throwing Knife");
+            playerAnimator.Play("ThrowingKnifeAttack");
+            throwingknifeModel.SetActive(true);
+        }
         animLock = true;
 
         if (value.isPressed) _playerCombat.Slot2_Attack();
