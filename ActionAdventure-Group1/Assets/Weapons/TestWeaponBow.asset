@@ -15,6 +15,7 @@ MonoBehaviour:
   weaponName: Bow
   category: 1
   damageType: 2
+  damageSource: 0
   damage: 20
   range: 2
   attackCooldown: 1.35

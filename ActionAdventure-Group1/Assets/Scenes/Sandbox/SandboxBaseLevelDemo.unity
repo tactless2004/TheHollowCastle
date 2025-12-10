@@ -614,7 +614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 7
 --- !u!4 &124913725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7499406291233532283, guid: f965a9faba4e1a247a8ac4197bdea851, type: 3}
@@ -1700,7 +1699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 0
 --- !u!4 &311538702
 Transform:
   m_ObjectHideFlags: 10
@@ -2314,7 +2312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -3068,7 +3066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 5
 --- !u!1 &575746652
 GameObject:
   m_ObjectHideFlags: 0
@@ -4275,7 +4272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 0
 --- !u!4 &934019299
 Transform:
   m_ObjectHideFlags: 10
@@ -4710,7 +4706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 0
 --- !u!4 &1026424497
 Transform:
   m_ObjectHideFlags: 10
@@ -4965,7 +4960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 0
 --- !u!4 &1083959417
 Transform:
   m_ObjectHideFlags: 10
@@ -6319,7 +6313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4248498948907233337, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 4248498948907233337, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6353,10 +6347,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4641167814067583857, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-      propertyPath: playerKeysScript
-      value: 
-      objectReference: {fileID: 1407600097}
+    - target: {fileID: 6626588017627742056, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.504
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092319358444874882, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
+      propertyPath: maxPickupDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8558117549074760567, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -6371,17 +6369,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4248498948907233337, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
   m_PrefabInstance: {fileID: 1407600095}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1407600097 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 891782498047898035, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
-  m_PrefabInstance: {fileID: 1407600095}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2000060297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2736a92658361f42837395643cb2a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerKeys
 --- !u!1001 &1433782244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6766,9 +6753,21 @@ PrefabInstance:
       propertyPath: maxSpawns
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3901564678309139624, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
+      propertyPath: 'enemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6762513469522789849, guid: 75359626c47da4f46b86c8d0c6e04ddf, type: 3}
+    - target: {fileID: 3901564678309139624, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
+      propertyPath: 'enemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5606385456176227396, guid: 7938f8265f16fc148b127c41da9ed175, type: 3}
     - target: {fileID: 4866883483257629226, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
       propertyPath: m_Name
       value: SpawnerMain
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866883483257629226, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6282675132305984197, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8426,7 +8425,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878532781096443427, guid: a251b1a2986e3224f85a30924a24025c, type: 3}
       propertyPath: finalDoor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 878532781096443427, guid: a251b1a2986e3224f85a30924a24025c, type: 3}
       propertyPath: keysRequired
@@ -9076,7 +9075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1235ad9b768e4b98318d8af0ec3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProfessorAkram.SimpleUnityHierarchyFolder.Runtime::ProfessorAkram.SimpleUnityHierarchyFolder.HierarchyFolder
-  folderColor: 5
 --- !u!4 &2123864002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7499406291233532283, guid: f965a9faba4e1a247a8ac4197bdea851, type: 3}
@@ -9286,6 +9284,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7499406291233532283, guid: f965a9faba4e1a247a8ac4197bdea851, type: 3}
   m_PrefabInstance: {fileID: 4935370377504340755}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5340048894467484265
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1909633965923752413, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_Name
+      value: Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807453787745288514, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3aa153f17e63f7a45a9f86029cd5392e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -9299,3 +9354,4 @@ SceneRoots:
   - {fileID: 760935978}
   - {fileID: 1395820590}
   - {fileID: 1199593389}
+  - {fileID: 5340048894467484265}

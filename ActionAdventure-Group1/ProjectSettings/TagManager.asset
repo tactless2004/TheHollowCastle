@@ -11,6 +11,8 @@ TagManager:
   - GameManager
   - Keys
   - Doors
+  - PlayerModel
+  - Chest
   layers:
   - Default
   - TransparentFX
