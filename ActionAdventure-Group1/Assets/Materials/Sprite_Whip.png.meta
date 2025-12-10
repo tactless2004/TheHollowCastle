@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c723337637a85b469fbc42cfae9eb12
+guid: 855fde1db1328774aaa4a70248b1ac4a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,40 +93,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite_Whip
+      name: Sprite_Whip_1
       rect:
         serializedVersion: 2
-        x: 119
+        x: 130
         y: 0
-        width: 381
-        height: 598
+        width: 361
+        height: 599
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cad1e6787c457b041a869e7f498d16b8
-      internalID: 1092068114
+      spriteID: 102b1ef0a0a38a8489a26f41c438b91b
+      internalID: -552189653
       vertices: []
       indices: 
       edges: []
@@ -135,8 +122,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c0596a72c1e7eaa438bec0de699cf904
-    internalID: 0
+    spriteID: 86008231f26c05d4ba0e3d8fe98aec1a
+    internalID: 1629561422
     vertices: []
     indices: 
     edges: []
@@ -145,7 +132,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sprite_Whip: 1092068114
+      Sprite_Whip_0: 1307920686
+      Sprite_Whip_1: -552189653
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -27,10 +27,10 @@ public class PickupItem : MonoBehaviour
     public void SetWeapon(WeaponData weapon)
     {
         Transform trans = transform;
-        Destroy(gameObject);
         // So, if we instantiate the new pickup weapon at the same position as the old one that seems to work
         // as far as current testing goes, but the rotation of the prefab should probably be maintained, strictly as a convenience for now, although
         // it's worth considering what might be a better long term solution - LGM
         Instantiate(weapon.pickupModelPrefab, trans.position, weapon.pickupModelPrefab.transform.rotation);
+        Destroy(gameObject);
     }
 }

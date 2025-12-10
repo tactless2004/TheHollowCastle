@@ -26,8 +26,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private ScriptableObject Slot2_WeaponData;
 
     private PlayerMove playerMove;
-    private Weapon Slot1_Weapon;
-    private Weapon Slot2_Weapon;
+    public Weapon Slot1_Weapon;
+    public Weapon Slot2_Weapon;
 #if UNITY_EDITOR
     [Header("DEBUG")]
     [SerializeField] private bool showSlot1Range;
@@ -51,7 +51,7 @@ public class PlayerCombat : MonoBehaviour
     {
         // We need to check if it is ranged or melee, to decided where the "attack origin" is
         if (Slot1_Weapon.getWeaponData().category == WeaponCategory.Melee)
-            Slot1_Weapon.Attack(transform.position, playerMove.facing, gameObject, "Enemy");
+            Slot1_Weapon.Attack(meleeAttackOrigin.position, playerMove.facing, gameObject, "Enemy");
         else
             Slot1_Weapon.Attack(rangedAttackOrigin.position, playerMove.facing, gameObject, "Enemy");
     }
@@ -60,7 +60,7 @@ public class PlayerCombat : MonoBehaviour
     {
         // We need to check if it is ranged or melee, to decided where the "attack origin" is
         if (Slot2_Weapon.getWeaponData().category == WeaponCategory.Melee)
-            Slot2_Weapon.Attack(transform.position, playerMove.facing, gameObject, "Enemy");
+            Slot2_Weapon.Attack(meleeAttackOrigin.position, playerMove.facing, gameObject, "Enemy");
         else
             Slot2_Weapon.Attack(rangedAttackOrigin.position, playerMove.facing, gameObject, "Enemy");
     }
@@ -70,14 +70,14 @@ public class PlayerCombat : MonoBehaviour
 #if UNITY_EDITOR
         if (showSlot1Range)
             Debug.DrawRay(
-                transform.position,
+                meleeAttackOrigin.position,
                 playerMove.facing * Slot1_Weapon.getWeaponData().range,
                 Color.green
             );
 
         if (showSlot2Range)
             Debug.DrawRay(
-                transform.position,
+                meleeAttackOrigin.position,
                 playerMove.facing * Slot2_Weapon.getWeaponData().range,
                 Color.green
             );

@@ -9,6 +9,10 @@ TagManager:
   - WorldUIElements
   - DamageTextSpawner
   - GameManager
+  - Keys
+  - Doors
+  - PlayerModel
+  - Chest
   layers:
   - Default
   - TransparentFX

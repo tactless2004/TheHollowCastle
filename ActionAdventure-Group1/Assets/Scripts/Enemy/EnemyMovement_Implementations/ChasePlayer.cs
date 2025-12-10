@@ -12,26 +12,19 @@
 ************************************************************/
  
 using UnityEngine;
-
+using UnityEngine.AI;
 
 [CreateAssetMenu(menuName="EnemyAI/Movement/ChasePlayer")]
+[RequireComponent(typeof(NavMeshAgent))]
 public class ChasePlayer : ScriptableObject, IEnemyMovementBehavior
 {
     public float speed = 3.0f;
     
-    public void Move(Transform enemy, Rigidbody enemyRigidbody, Transform target)
+    public void Move(Transform enemy, NavMeshAgent enemyNavMeshAgent, Transform target)
     {
         // If there is no target set, the enemy has nothing to do.
         if (target == null) return;
 
-        Vector3 direction = target.position - enemy.position;
-        direction.y = 0.0f;
-        direction.Normalize();
-
-        Vector3 targetVelocity = direction * speed;
-
-        targetVelocity.y = enemyRigidbody.linearVelocity.y;
-
-        enemyRigidbody.linearVelocity = targetVelocity;
+        enemyNavMeshAgent.SetDestination(target.position);
     }
 }
