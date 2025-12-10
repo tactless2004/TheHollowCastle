@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.10721
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.126
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,10 +66,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_Name
-      value: Greatsword-v03
+      value: GreatswordPrefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7182139906473257125}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4397013723454879417}
   m_SourcePrefab: {fileID: 100100000, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
+--- !u!1 &403710468755374862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
+  m_PrefabInstance: {fileID: 674182432421346911}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7182139906473257125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403710468755374862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2dfe2a28aadb744a70fe315b4ebeb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  weaponSO: {fileID: 11400000, guid: 32eddaa94975ef7408aa2a4b27305702, type: 2}
+--- !u!65 &4397013723454879417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403710468755374862}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 37.647675, y: 2.919474, z: 84.33997}
+  m_Center: {x: -0.18658161, y: -0.0031128523, z: 38.660503}

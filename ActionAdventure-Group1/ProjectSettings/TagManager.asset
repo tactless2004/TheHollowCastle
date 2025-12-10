@@ -12,6 +12,7 @@ TagManager:
   - Keys
   - Doors
   - PlayerModel
+  - Chest
   layers:
   - Default
   - TransparentFX

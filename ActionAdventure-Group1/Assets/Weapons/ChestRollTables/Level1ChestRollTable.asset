@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a056af43e8d2e1a4eb05bc3783b6a028, type: 3}
+  m_Name: Level1ChestRollTable
+  m_EditorClassIdentifier: Assembly-CSharp::ChestRollTable
+  CommonProbability: 1
+  UncommonProbability: 0
+  RareProbability: 0
+  LegendaryProbability: 0
+  CommonWeapons:
+  - {fileID: 5369672489383426879, guid: ab516b28df0e2264484b58f134d8645a, type: 3}
+  - {fileID: 3594934875717684855, guid: e8ac06ba29ac6a449b640f1fe2ccc17f, type: 3}
+  - {fileID: 8629813522235111517, guid: a71e67ba5c7d875498eb86075c4ea088, type: 3}
+  - {fileID: 403710468755374862, guid: f15b5a9d92cd853438125bee888fd70c, type: 3}
+  UncommonWeapons: []
+  RareWeapons: []
+  LegendaryWeapons: []
