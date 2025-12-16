@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreatswordPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2dfe2a28aadb744a70fe315b4ebeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
-  weaponSO: {fileID: 11400000, guid: 32eddaa94975ef7408aa2a4b27305702, type: 2}
+  weaponSO: {fileID: 11400000, guid: 7b747feb2bccf5149988145294aadb20, type: 2}
 --- !u!65 &4397013723454879417
 BoxCollider:
   m_ObjectHideFlags: 0

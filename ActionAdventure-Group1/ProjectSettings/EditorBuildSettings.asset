@@ -13,19 +13,16 @@ EditorBuildSettings:
     guid: e1613dc4f0733a34d8a03f9393ae8ff9
   - enabled: 1
     path: Assets/Scenes/Production/UI_EndMenuScene.unity
-    guid: cc0eaf2e8c57ecc41adb50ee63ef59ed
+    guid: fe41d1681d6e68540abdfc90d5de4ec4
   - enabled: 1
     path: Assets/Scenes/Production/UI_MainMenuScene.unity
-    guid: c5f89faf494c243428cc5cbd52e630fd
+    guid: b50b45854dbd5de45bf1179baff46e11
   - enabled: 1
     path: Assets/Scenes/Production/UI_PauseMenuScene.unity
-    guid: 5568d361b37915147a58359a4cb24a8c
+    guid: f6c7df465c6e53c4897193c1770493b1
   - enabled: 1
     path: Assets/Scenes/Production/UI_PlayerHUDScene.unity
     guid: 1607dad44da8e7140ada336e2346da99
-  - enabled: 1
-    path: Assets/Scenes/Sandbox/SandboxBaseLevelDemo.unity
-    guid: 9c31a269311b0bf4caddd7195259232d
   - enabled: 1
     path: Assets/Scenes/Production/Level_1.unity
     guid: 7a2cf9b02308d514d817e496ebf65721

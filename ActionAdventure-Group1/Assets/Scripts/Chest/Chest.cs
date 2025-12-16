@@ -70,8 +70,8 @@ public class Chest : MonoBehaviour
             modelTransform.position + new Vector3(0.0f, 0.5f, 0.0f),//position
             Quaternion.Euler(-90.0f, 0.0f, 0.0f) //rotation
         );
-
         triggerCollider.enabled = false;
+        pickupWeaponInstance.SetActive(true);
     }
     
     public bool isOpened() {

@@ -21,6 +21,17 @@ MonoBehaviour:
   - {fileID: 3594934875717684855, guid: e8ac06ba29ac6a449b640f1fe2ccc17f, type: 3}
   - {fileID: 8629813522235111517, guid: a71e67ba5c7d875498eb86075c4ea088, type: 3}
   - {fileID: 403710468755374862, guid: f15b5a9d92cd853438125bee888fd70c, type: 3}
-  UncommonWeapons: []
-  RareWeapons: []
+  - {fileID: 5752082489629639813, guid: 421f0ada6d733014fadd2a4c11dc44c2, type: 3}
+  UncommonWeapons:
+  - {fileID: 403710468755374862, guid: b33fc7cecd493e14da14d48d7a100bf6, type: 3}
+  - {fileID: 5369672489383426879, guid: de19c0386b9a95545bdd54f5322dabbc, type: 3}
+  - {fileID: 3594934875717684855, guid: 6865edd6a54e5bc459be67dd85e1da11, type: 3}
+  - {fileID: 8629813522235111517, guid: 0d16f6fb1fe96e64db15b1983e822497, type: 3}
+  - {fileID: 5752082489629639813, guid: dc2201910557a924c90304eeb89d95ee, type: 3}
+  RareWeapons:
+  - {fileID: 403710468755374862, guid: 837f10f46051c8f4ca30d8d1077b9ca6, type: 3}
+  - {fileID: 5369672489383426879, guid: b10eef397b0f9b841af5bc5975d68b73, type: 3}
+  - {fileID: 8629813522235111517, guid: 31c2191d2a786a548b72bd62f921ec07, type: 3}
+  - {fileID: 3594934875717684855, guid: d5df4101ccf491d44a1550f1661e9fd3, type: 3}
+  - {fileID: 5752082489629639813, guid: ae566ede28a69834fa81fd727ef268a9, type: 3}
   LegendaryWeapons: []

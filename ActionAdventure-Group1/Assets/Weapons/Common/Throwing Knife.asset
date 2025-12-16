@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90893dd1f68384a4488c1e33f7f67216, type: 3}
+  m_Name: Throwing Knife
+  m_EditorClassIdentifier: 
+  weaponName: Throwing Knife
+  category: 1
+  damageType: 2
+  damageSource: 0
+  damage: 4
+  range: 2
+  attackCooldown: 0.6
+  manaCost: 0
+  pickupModelPrefab: {fileID: 5752082489629639813, guid: 421f0ada6d733014fadd2a4c11dc44c2, type: 3}
+  uiSprite: {fileID: -1080991484, guid: 83eefa66d6076ac459fd2376d9d2bd00, type: 3}
+  attackSound: {fileID: 0}
+  pickupsound: {fileID: 0}
+  projectilePrefab: {fileID: 876032798069382608, guid: 0ca17e330a942f44e8827f01155b3321, type: 3}
+  projectileSpeed: 10
+  effects: []
