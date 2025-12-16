@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 227198920922932011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.104, z: 0.538}
+  m_LocalPosition: {x: 0, y: 1.294, z: 0.538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,6 +201,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   animLock: 0
+  swordModel: {fileID: 8629813522235111517, guid: a71e67ba5c7d875498eb86075c4ea088, type: 3}
+  hammerModel: {fileID: 5369672489383426879, guid: ab516b28df0e2264484b58f134d8645a, type: 3}
+  spearModel: {fileID: 3594934875717684855, guid: e8ac06ba29ac6a449b640f1fe2ccc17f, type: 3}
+  greatswordModel: {fileID: 403710468755374862, guid: f15b5a9d92cd853438125bee888fd70c, type: 3}
+  throwingknifeModel: {fileID: 5752082489629639813, guid: 421f0ada6d733014fadd2a4c11dc44c2, type: 3}
   playerAnimator: {fileID: 3972609884168159414}
   animationState: 0
 --- !u!114 &8558117549074760567

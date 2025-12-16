@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90893dd1f68384a4488c1e33f7f67216, type: 3}
-  m_Name: Greatsword
+  m_Name: GreatswordR
   m_EditorClassIdentifier: 
   weaponName: Sword
   category: 0
   damageType: 0
   damageSource: 0
-  damage: 4
-  range: 1
-  attackCooldown: 0.75
+  damage: 18
+  range: 2.5
+  attackCooldown: 2
   manaCost: 0
-  pickupModelPrefab: {fileID: 403710468755374862, guid: f15b5a9d92cd853438125bee888fd70c, type: 3}
-  uiSprite: {fileID: -524989017, guid: e2588b657c095c6448f2b8b80c5bcaad, type: 3}
+  pickupModelPrefab: {fileID: 403710468755374862, guid: 837f10f46051c8f4ca30d8d1077b9ca6, type: 3}
+  uiSprite: {fileID: 1472470125, guid: bb8a7ebd5e0b25d46a40c7632e3db812, type: 3}
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 0}
