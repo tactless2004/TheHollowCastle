@@ -29,11 +29,6 @@ public class PlayerCombat : MonoBehaviour
     private PlayerMove playerMove;
     public Weapon Slot1_Weapon;
     public Weapon Slot2_Weapon;
-#if UNITY_EDITOR
-    [Header("DEBUG")]
-    [SerializeField] private bool showSlot1Range;
-    [SerializeField] private bool showSlot2Range;
-#endif
 
     private void Awake()
     {

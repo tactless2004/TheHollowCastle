@@ -84,5 +84,13 @@ public class Chest : MonoBehaviour
         chestAnim.Play("Open");
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Open();
+        }
+    }
+
 
 }//end Chest

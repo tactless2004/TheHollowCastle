@@ -48,6 +48,7 @@ public class Weapon
                 direction
             );
 
+            if (hits.Length == 0) Debug.Log("Attack Hit nothing!");
             List<CombatEntity> targets = new List<CombatEntity>();
             Debug.Log(hits);
             // Check if each RaycastHit is a valid target, if so apply damage.
@@ -58,7 +59,7 @@ public class Weapon
                 if (
                     hit.collider.TryGetComponent(out CombatEntity target) && // hit a damgeable entity?
                     target != null && // Redundant null checking to try to fix WebGL crash
-                    hit.collider.CompareTag(targetTag) // is the entity of the target tag?
+                    !hit.collider.CompareTag("Player") // Player should not be able to attack itself
                 )
                 {
                     targets.Add(target);
