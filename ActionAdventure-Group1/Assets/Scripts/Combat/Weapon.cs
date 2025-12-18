@@ -41,10 +41,15 @@ public class Weapon
         if (weapon.category == WeaponCategory.Melee)
         {
             RaycastHit[] hits;
-            // If hit on melee
-            hits = Physics.RaycastAll(origin, direction, weapon.range);
+            // Melee Sphere Cast
+            hits = Physics.SphereCastAll(
+                origin,
+                weapon.range,
+                direction
+            );
 
             List<CombatEntity> targets = new List<CombatEntity>();
+            Debug.Log(hits);
             // Check if each RaycastHit is a valid target, if so apply damage.
             foreach (RaycastHit hit in hits) {
                 // Check if hit gameObject doesn't exist, crashes can be caused because of this.

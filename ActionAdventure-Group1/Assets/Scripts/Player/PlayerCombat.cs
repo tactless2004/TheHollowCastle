@@ -10,6 +10,7 @@
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/07 | Leyton McKinney | Switch from (Range, Melee) scheme to (Slot1, Slot2 Scheme), change cooldown to be weapon specific.
 * 2025/11/12 | Leyton McKinney | Change Attack() calls to use targetTag field.
+* 2025/12/17 | Leyton McKinney | Remove Debug code because it is outdated
 *
 *
 ************************************************************/
@@ -63,24 +64,5 @@ public class PlayerCombat : MonoBehaviour
             Slot2_Weapon.Attack(meleeAttackOrigin.position, playerMove.facing, gameObject, "Enemy");
         else
             Slot2_Weapon.Attack(rangedAttackOrigin.position, playerMove.facing, gameObject, "Enemy");
-    }
-
-    private void Update()
-    {
-#if UNITY_EDITOR
-        if (showSlot1Range)
-            Debug.DrawRay(
-                meleeAttackOrigin.position,
-                playerMove.facing * Slot1_Weapon.getWeaponData().range,
-                Color.green
-            );
-
-        if (showSlot2Range)
-            Debug.DrawRay(
-                meleeAttackOrigin.position,
-                playerMove.facing * Slot2_Weapon.getWeaponData().range,
-                Color.green
-            );
-#endif
     }
 }
