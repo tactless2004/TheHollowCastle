@@ -25,19 +25,15 @@ public class PlayerController : MonoBehaviour
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
     private PlayerInventory _playerInventory;
+    private PlayerWeaponSpawner _playerWeaponSpawner;
     private GameManager _gameManager;
-    
+    private Animator playerAnimator;
+
     private bool _paused = false;
 
     public bool animLock = false;
 
-    public GameObject swordModel;
-    public GameObject hammerModel;
-    public GameObject spearModel;
-    public GameObject greatswordModel;
-    public GameObject throwingknifeModel;
-
-    public Animator playerAnimator;
+    
     public enum AnimationState
     {
         Idle,
@@ -47,9 +43,16 @@ public class PlayerController : MonoBehaviour
         Death
     }
     public AnimationState animationState;
+
+
     private void Start()
     {
-        playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
+        // Player animator is grabbed at start time, just in case the model isn't loaded at awake time.
+        GameObject tmpPlayerModel = GameObject.FindGameObjectWithTag("PlayerModel"); 
+        if (tmpPlayerModel != null)
+            playerAnimator = tmpPlayerModel.GetComponent<Animator>();
+        else 
+            Debug.LogError("Player Controller could not find PlayerModel.");
     }
 
     private void Awake()
@@ -77,6 +80,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             _gameManager.onGameStateChanged += HandleGameState;
+        }
+
+        if (!TryGetComponent(out _playerWeaponSpawner))
+        {
+            Debug.LogError("PlayerWeaponSpawner component missing!");
         }
 
         animationState = AnimationState.Idle;
@@ -125,41 +133,43 @@ public class PlayerController : MonoBehaviour
     {
         // Don't process standard inputs when paused.
         if (_paused) return;
+        WeaponData slot1WeaponData = _playerCombat.Slot1_Weapon.getWeaponData();
 
         if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
         {
             return;
         }
         animationState = AnimationState.Attack;
-        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Sword")
+
+        if (slot1WeaponData.name == "Sword")
         {
             Debug.Log("Weapon: Sword");
             playerAnimator.Play("SwordAttack");
-            swordModel.SetActive(true);
+            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
         }
-        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Hammer")
+        if (slot1WeaponData.name == "Hammer")
         {
             Debug.Log("Weapon: Hammer");
             playerAnimator.Play("SwordAttack");
-            hammerModel.SetActive(true);
+            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
         }
-        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Spear")
+        if (slot1WeaponData.name == "Spear")
         {
             Debug.Log("Weapon: Spear");
             playerAnimator.Play("SpearAttack");
-            spearModel.SetActive(true);
+            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
         }
-        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Greatsword")
+        if (slot1WeaponData.name == "Greatsword")
         {
             Debug.Log("Weapon: Greatsword");
             playerAnimator.Play("GreatswordAttack");
-            greatswordModel.SetActive(true);
+            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
         }
-        if (_playerCombat.Slot1_Weapon.getWeaponData().name == "Throwing Knife")
+        if (slot1WeaponData.name == "Throwing Knife")
         {
             Debug.Log("Weapon: Throwing Knife");
             playerAnimator.Play("ThrowingKnifeAttack");
-            throwingknifeModel.SetActive(true);
+            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
         }
         animLock = true;
 
@@ -180,31 +190,26 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Weapon: Sword");
             playerAnimator.Play("SwordAttack");
-            swordModel.SetActive(true);
         }
         if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Hammer")
         {
             Debug.Log("Weapon: Hammer");
             playerAnimator.Play("SwordAttack");
-            hammerModel.SetActive(true);
         }
         if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Spear")
         {
             Debug.Log("Weapon: Spear");
             playerAnimator.Play("SpearAttack");
-            spearModel.SetActive(true);
         }
         if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Greatsword")
         {
             Debug.Log("Weapon: Greatsword");
             playerAnimator.Play("GreatswordAttack");
-            greatswordModel.SetActive(true);
         }
         if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Throwing Knife")
         {
             Debug.Log("Weapon: Throwing Knife");
             playerAnimator.Play("ThrowingKnifeAttack");
-            throwingknifeModel.SetActive(true);
         }
         animLock = true;
 

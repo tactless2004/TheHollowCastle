@@ -8,65 +8,43 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/12/08 | Peyton Lenard | Created class
-*
+* 2025/12/18 | Leyton McKinney | Improved Null Reference safety and added weapon spawning.
 *
 ************************************************************/
  
 using UnityEngine;
- 
 
 public class PlayerAnimationEventHandler : MonoBehaviour
 {
     private PlayerController playerController;
+    private PlayerWeaponSpawner playerWeaponSpawner;
     public Animator PlayerAnimator;
-
 
     public void SetStateIdle()
     {
         playerController.animationState = PlayerController.AnimationState.Idle;
         playerController.animLock = false;
-        playerController.swordModel.SetActive(false);
-        playerController.hammerModel.SetActive(false);
-        playerController.spearModel.SetActive(false);
-        playerController.greatswordModel.SetActive(false);
-        playerController.throwingknifeModel.SetActive(false);
+        playerWeaponSpawner.DeleteAllWeapons();
     }
 
     public void HideWeapon()
     {
-        playerController.swordModel.SetActive(false);
-        playerController.hammerModel.SetActive(false);
-        playerController.spearModel.SetActive(false);
-        playerController.greatswordModel.SetActive(false);
-        playerController.throwingknifeModel.SetActive(false);
+        
     }
 
     private void Awake()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GameObject tmpPlayerReference = GameObject.FindGameObjectWithTag("Player"); 
+        if (tmpPlayerReference != null)
+        {
+            playerController = tmpPlayerReference.GetComponent<PlayerController>();
+            playerWeaponSpawner = tmpPlayerReference.GetComponent<PlayerWeaponSpawner>();
+        }
         PlayerAnimator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         AnimatorStateInfo stateInfo = PlayerAnimator.GetCurrentAnimatorStateInfo(0);
-        // if (stateInfo.IsName("Idle"))
-        // {
-        //     SetStateIdle();
-        // }
     }
- 
- 
-    /// <summary>
-    /// A custom method example.
-    /// </summary>
-    /// <param name="exampleParameter"> A parameter that demonstrates passing data to the method.
-    ///</param>
-    private void CustomMethod(int exampleParameter)
-    {
-        
-        
-    }//end CustomMethod(int)
- 
- 
-}//end PlayerAnimationEventHandler
+}

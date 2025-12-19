@@ -66,11 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_Name
-      value: GreatswordPrefab
+      value: GreatswordPickupPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f8aaa3b39e46bd14fbc2713a507c3a85, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

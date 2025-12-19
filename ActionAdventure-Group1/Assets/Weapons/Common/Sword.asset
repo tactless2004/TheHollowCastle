@@ -21,6 +21,7 @@ MonoBehaviour:
   attackCooldown: 0.75
   manaCost: 0
   pickupModelPrefab: {fileID: 8629813522235111517, guid: a71e67ba5c7d875498eb86075c4ea088, type: 3}
+  combatPrefab: {fileID: 8629813522235111517, guid: 40880de2a61045a48a7f52e4e1dfefcf, type: 3}
   uiSprite: {fileID: -903681695, guid: 831552c54988fed44ab0745fd9ba8de0, type: 3}
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}

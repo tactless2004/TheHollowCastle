@@ -32,6 +32,7 @@ public class WeaponData : ScriptableObject
 
     [Header("Visuals")]
     public GameObject pickupModelPrefab;
+    public GameObject combatPrefab;
     public Sprite uiSprite;
 
     [Header("Audio (Optional)")]
