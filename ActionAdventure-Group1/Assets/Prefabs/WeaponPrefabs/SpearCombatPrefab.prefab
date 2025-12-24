@@ -79,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67eb11d0e36c0f346877447fc7fe1e54, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6121704677469597109}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67eb11d0e36c0f346877447fc7fe1e54, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2057567125500732577}
   m_SourcePrefab: {fileID: 100100000, guid: 67eb11d0e36c0f346877447fc7fe1e54, type: 3}
 --- !u!1 &3594934875717684855 stripped
 GameObject:
@@ -106,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5255319, y: 0.09163369, z: 2.5142555}
   m_Center: {x: -0.012435138, y: 0.015218731, z: 1.0114955}
+--- !u!114 &-2057567125500732577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594934875717684855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c7742e22ac1b84bbb85aaec59d7867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  weaponDataSO: {fileID: 11400000, guid: 9012eac3a9e64e2469175b86d9447f22, type: 2}

@@ -19,11 +19,11 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
- 
+using UnityEngine.InputSystem.Interactions;
+
 public class PlayerController : MonoBehaviour
 {
     private PlayerMove _playerMove;
-    private PlayerCombat _playerCombat;
     private PlayerInventory _playerInventory;
     private PlayerWeaponSpawner _playerWeaponSpawner;
     private GameManager _gameManager;
@@ -61,11 +61,6 @@ public class PlayerController : MonoBehaviour
         if (!TryGetComponent<PlayerMove>(out _playerMove))
         {
             Debug.LogError("PlayerMove component missing!");
-        }
-
-        if (!TryGetComponent<PlayerCombat>(out _playerCombat))
-        {
-            Debug.LogError("PlayerCombat component missing!");
         }
 
         if(!TryGetComponent<PlayerInventory>(out _playerInventory))
@@ -131,89 +126,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnSlot1Attack(InputValue value)
     {
-        // Don't process standard inputs when paused.
-        if (_paused) return;
-        WeaponData slot1WeaponData = _playerCombat.Slot1_Weapon.getWeaponData();
-
-        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
-        {
-            return;
-        }
-        animationState = AnimationState.Attack;
-
-        if (slot1WeaponData.name == "Sword")
-        {
-            Debug.Log("Weapon: Sword");
-            playerAnimator.Play("SwordAttack");
-            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
-        }
-        if (slot1WeaponData.name == "Hammer")
-        {
-            Debug.Log("Weapon: Hammer");
-            playerAnimator.Play("SwordAttack");
-            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
-        }
-        if (slot1WeaponData.name == "Spear")
-        {
-            Debug.Log("Weapon: Spear");
-            playerAnimator.Play("SpearAttack");
-            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
-        }
-        if (slot1WeaponData.name == "Greatsword")
-        {
-            Debug.Log("Weapon: Greatsword");
-            playerAnimator.Play("GreatswordAttack");
-            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
-        }
-        if (slot1WeaponData.name == "Throwing Knife")
-        {
-            Debug.Log("Weapon: Throwing Knife");
-            playerAnimator.Play("ThrowingKnifeAttack");
-            _playerWeaponSpawner.SpawnWeapon(slot1WeaponData.combatPrefab);
-        }
-        animLock = true;
-
-        if (value.isPressed) _playerCombat.Slot1_Attack();
+        Attack(1);
     }
 
     public void OnSlot2Attack(InputValue value)
     {
-        // Don't process standard inputs when paused.
-        if (_paused) return;
-
-        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
-        {
-            return;
-        }
-        animationState = AnimationState.Attack;
-        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Sword")
-        {
-            Debug.Log("Weapon: Sword");
-            playerAnimator.Play("SwordAttack");
-        }
-        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Hammer")
-        {
-            Debug.Log("Weapon: Hammer");
-            playerAnimator.Play("SwordAttack");
-        }
-        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Spear")
-        {
-            Debug.Log("Weapon: Spear");
-            playerAnimator.Play("SpearAttack");
-        }
-        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Greatsword")
-        {
-            Debug.Log("Weapon: Greatsword");
-            playerAnimator.Play("GreatswordAttack");
-        }
-        if (_playerCombat.Slot2_Weapon.getWeaponData().name == "Throwing Knife")
-        {
-            Debug.Log("Weapon: Throwing Knife");
-            playerAnimator.Play("ThrowingKnifeAttack");
-        }
-        animLock = true;
-
-        if (value.isPressed) _playerCombat.Slot2_Attack();
+        Attack(2);
     }
 
     public void OnSwitchSlot1Weapon(InputValue value)
@@ -254,6 +172,55 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGameState(GameState state)
     {
-        _paused = (state == GameState.GamePaused);
+        _paused = state == GameState.GamePaused;
     }
+
+    private void Attack(int slot)
+    {
+        // Don't process standard inputs when paused.
+        if (_paused) return;
+
+        WeaponData weaponData = _playerInventory.getWeaponData(slot);
+        // If weaponData is null (for whatever reason) just bail lest we throw a NRE
+        if (weaponData == null) return;
+
+        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
+        {
+            return;
+        }
+        animationState = AnimationState.Attack;
+
+        if (weaponData.name == "Sword")
+        {
+            Debug.Log("Weapon: Sword");
+            playerAnimator.Play("SwordAttack");
+            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
+        }
+        if (weaponData.name == "Hammer")
+        {
+            Debug.Log("Weapon: Hammer");
+            playerAnimator.Play("SwordAttack");
+            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
+        }
+        if (weaponData.name == "Spear")
+        {
+            Debug.Log("Weapon: Spear");
+            playerAnimator.Play("SpearAttack");
+            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
+        }
+        if (weaponData.name == "Greatsword")
+        {
+            Debug.Log("Weapon: Greatsword");
+            playerAnimator.Play("GreatswordAttack");
+            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
+        }
+        if (weaponData.name == "Throwing Knife")
+        {
+            Debug.Log("Weapon: Throwing Knife");
+            playerAnimator.Play("ThrowingKnifeAttack");
+            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
+        }
+        animLock = true;        
+    }
+
 }
