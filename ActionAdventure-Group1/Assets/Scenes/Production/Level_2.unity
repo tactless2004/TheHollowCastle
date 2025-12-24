@@ -2270,6 +2270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageTextSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 301765723111742149, guid: e91bc25e3f91b074b8a51619da053198, type: 3}
+      propertyPath: verticalTextOffset
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5707003563655454146, guid: e91bc25e3f91b074b8a51619da053198, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.7442126

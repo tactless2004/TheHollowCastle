@@ -10,7 +10,9 @@
 * 2025/12/17 | Leyton McKinney | Init
 *
 ************************************************************/
- 
+
+using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
  
@@ -27,6 +29,13 @@ public class ZombieAI : EnemyAI
     [Header("Combat")]
     [SerializeField] private ScriptableObject weaponSO;
     private WeaponData weapon;
+
+    [Header("House Keeping")]
+    [SerializeField, Tooltip("This is the maximum distance the enemy can be away from the player before the enemy considers despawning")]
+    private float maxPlayerDistance = 10.0f;
+    [SerializeField, Tooltip("This is the maximum amount of time (in seconds) that the enemy can be more than maxPlayerDistance away from the Player")]
+    private float playerProximityTimeout = 5.0f; 
+    private float playerProximityTimer;
 
 
 
@@ -46,6 +55,7 @@ public class ZombieAI : EnemyAI
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         weapon = weaponSO as WeaponData;
+        playerProximityTimer = playerProximityTimeout;
     }
     private void Update()
     {
@@ -54,8 +64,13 @@ public class ZombieAI : EnemyAI
         if (idleTimer > 0.0f)
         {
             idleTimer -= Time.deltaTime;
+            // Enemies should not move if they're idle
+            navMeshAgent.SetDestination(transform.position);
             return;
         }
+
+        playerProximityTimer -= Time.deltaTime;
+        if (playerProximityTimer <= 0.0f) Die();
 
         // 1.) Try Attack
         if (Vector3.Distance(transform.position, player.transform.position) <= weapon.range)
@@ -67,12 +82,16 @@ public class ZombieAI : EnemyAI
 
         // 2.) If not close enough to attack seek player
         SeekPlayer();
+
+        // 3.) Check if can see player
+        if (Vector3.Distance(transform.position, player.transform.position) <= maxPlayerDistance)
+            playerProximityTimer = playerProximityTimeout;
     }
 
     private void ReacquirePlayer() {
         player = GameObject.FindGameObjectWithTag("Player");
         // If reaquiring a reference to the player fails, then there is no target and the Enemy should be destroyed
-        if(player == null) Destroy(gameObject);
+        if(player == null) Die();
     }
 
     public override void DamageBehavior()
@@ -109,5 +128,10 @@ public class ZombieAI : EnemyAI
     private void SeekPlayer()
     {
         navMeshAgent.SetDestination(player.transform.position);
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }

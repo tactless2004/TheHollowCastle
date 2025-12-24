@@ -57,13 +57,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        // Check if MoveTransform component DOES NOT EXIST
-        if (!TryGetComponent<PlayerMove>(out _playerMove))
+        // Check if MoveTransform component DNE
+        if (!TryGetComponent(out _playerMove))
         {
             Debug.LogError("PlayerMove component missing!");
         }
 
-        if(!TryGetComponent<PlayerInventory>(out _playerInventory))
+        if(!TryGetComponent(out _playerInventory))
         {
             Debug.LogError("PlayerInventory component missing!");
         }
