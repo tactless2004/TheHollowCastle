@@ -8,14 +8,13 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/12/17 | Leyton McKinney | Init
+* 2026/01/16 | Leyton McKinney | Add isDead flag to fix some Object lifetime bugs
 *
 ************************************************************/
 
-using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
- 
+
 
 public class ZombieAI : EnemyAI
 {
@@ -42,6 +41,8 @@ public class ZombieAI : EnemyAI
     [Header("Movement")]
 
     [SerializeField] NavMeshAgent navMeshAgent;
+
+    private bool isDead = false;
 
     private void Awake()
     {
@@ -127,11 +128,13 @@ public class ZombieAI : EnemyAI
 
     private void SeekPlayer()
     {
-        navMeshAgent.SetDestination(player.transform.position);
+        if (!isDead)
+            navMeshAgent.SetDestination(player.transform.position);
     }
 
     private void Die()
     {
+        isDead = true;
         Destroy(gameObject);
     }
 }
