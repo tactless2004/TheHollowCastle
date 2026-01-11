@@ -192,31 +192,26 @@ public class PlayerController : MonoBehaviour
 
         if (weaponData.name == "Sword")
         {
-            Debug.Log("Weapon: Sword");
             playerAnimator.Play("SwordAttack");
             _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
         }
         if (weaponData.name == "Hammer")
         {
-            Debug.Log("Weapon: Hammer");
             playerAnimator.Play("SwordAttack");
             _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
         }
         if (weaponData.name == "Spear")
         {
-            Debug.Log("Weapon: Spear");
             playerAnimator.Play("SpearAttack");
             _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
         }
         if (weaponData.name == "Greatsword")
         {
-            Debug.Log("Weapon: Greatsword");
             playerAnimator.Play("GreatswordAttack");
             _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
         }
         if (weaponData.name == "Throwing Knife")
         {
-            Debug.Log("Weapon: Throwing Knife");
             playerAnimator.Play("ThrowingKnifeAttack");
             _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
         }

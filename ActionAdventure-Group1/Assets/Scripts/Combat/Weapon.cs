@@ -39,6 +39,5 @@ public class Weapon : MonoBehaviour
         if(!other.TryGetComponent(out CombatEntity enemy)) return;
 
         enemy.TakeDamage(weapon);
-        Debug.Log($"{name} hit {other.name}");
     }
 }

@@ -48,9 +48,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // Log the current instance for debugging purposes
-        Debug.Log(Instance);
-
     } //end CheckForSingleton()
 
     void CheckForPersistance()

@@ -44,7 +44,6 @@ public abstract class CombatEntity : MonoBehaviour
 
     protected virtual void Die()
     {
-        manager.currentEnemies--;
         Destroy(gameObject);
     }
 

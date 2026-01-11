@@ -76,7 +76,6 @@ public class PlayerInventory : MonoBehaviour
                 }
 
                 hud.SetWeaponSprite(weapon.uiSprite, slot);
-                Debug.Log($"Player picked up {weapon.name} in slot {slot}.");
             }
 
             //Chests now open if the player is within a certain distance.
