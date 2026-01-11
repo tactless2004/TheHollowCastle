@@ -13,7 +13,8 @@
 ************************************************************/
  
 using UnityEngine;
-using System.Collections.Generic; // HashSet
+using System.Collections.Generic;
+using Unity.VisualScripting; // HashSet
 
 public class WallTransparency : MonoBehaviour
 {
@@ -72,13 +73,29 @@ public class WallTransparency : MonoBehaviour
             // 5b.) Once the player is hit (because we're iterating in descending order of distance from the camera),
             // then all the obstructions are disabled
             if (hit.collider.CompareTag("Player")) break;
-            
-            Renderer r = hit.collider.GetComponent<Renderer>();
-            if (r != null)
-            {
-                r.enabled = false;
-                hiddenRenderers.Add(r);
-            }
+
+            // 6.) Search up for the Moveable Wall parent, then hide all the renderes under that parent
+            searchUpGrabDown(hit.transform.parent);
+        }
+    }
+
+    private void searchUpGrabDown(Transform parent)
+    {
+        // Search UP 
+        while (parent != null)
+        {
+            if (parent.CompareTag("MoveableWall")) break;
+            parent = parent.parent;
+        }
+
+        if (parent == null) return;
+
+        // Grab Renderers Down
+        Renderer[] childRenderers = parent.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in childRenderers)
+        {
+            r.enabled = false;
+            hiddenRenderers.Add(r);
         }
     }
 
