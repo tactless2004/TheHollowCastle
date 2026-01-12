@@ -25,6 +25,13 @@ public class PlayerAnimationDriver : MonoBehaviour
 
     public event Action onAttackCancelled;
 
+    private void Awake()
+    {
+        GameObject tmpPlayerModel = GameObject.FindGameObjectWithTag("PlayerModel");
+        if (tmpPlayerModel != null)
+            animator = tmpPlayerModel.GetComponent<Animator>();
+    }
+
     public void TrySetMovement(bool isMoving)
     {
         if (IsMovementLocked || IsDead) return;
@@ -69,5 +76,6 @@ public class PlayerAnimationDriver : MonoBehaviour
     {
         IsMovementLocked = false;
         IsInAttack = false;
+        onAttackCancelled?.Invoke();
     }
 }
