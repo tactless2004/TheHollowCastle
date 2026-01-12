@@ -29,58 +29,69 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Image slot2Image;
     [SerializeField] private TMP_Text pickupHelpText;
     [SerializeField] private TMP_Text keyCounter;
-    [SerializeField] private PlayerKeys playerKeysScript;
 
     [Header("Pickup")]
     [SerializeField] private float maxPickupDistance = 3.0f;
 
-    private PlayerMove _playerMove;
+    private PlayerContext player;
 
-    public void SetHealth(float current, float max)
+    private void Awake()
+    {
+        if(!TryGetComponent(out player))
+        {
+            Debug.LogError("PlayerHUD component could not find PlayerContext component.");
+        }
+
+        pickupHelpText.text = "";
+
+        player.vitality.OnHealthChange += UpdateHealth;
+        player.vitality.OnManaChange += UpdateMana;
+        player.inventory.OnWeaponSlotChanged += UpdateWeaponSlot;
+        player.keys.OnKeysChanged += UpdateKeys;
+    }
+
+    public void UpdateHealth(float current, float max)
     {
         healthBar.fillAmount = current / max;
     }
-
-    public void SetMana(float current, float max)
+    public void UpdateMana(float current, float max)
     {
         manaBar.fillAmount = current / max;
     }
 
-    public void SetWeaponSprite(Sprite sprite, int slot)
+    public void UpdateWeaponSlot(Sprite sprite, int slot)
     {
         if (slot == 1)
             slot1Image.sprite = sprite;
         else
             slot2Image.sprite = sprite;
     }
+
+    public void UpdateKeys(int keys)
+    {
+        keyCounter.text = keys.ToString();
+    }
+
     private void Update()
     {
-        // Debug Ray to show pickup distance
-        // Debug.DrawRay(raycastOrigin.position, playerMove.facing * maxPickupDistance, Color.green);
-
         // Pickup Indicator text logic
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, _playerMove.facing, maxPickupDistance);
-        foreach (RaycastHit hit in hits) {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, player.move.facing, maxPickupDistance);
+        foreach (RaycastHit hit in hits)
+        {
             if (hit.collider.TryGetComponent(out PickupItem pickupItem) && pickupHelpText != null)
             {
                 pickupHelpText.text = $"Equip {pickupItem.GetWeapon().name}?";
+                break;
             }
             else if (pickupHelpText != null)
             {
                 pickupHelpText.text = "";
             }
         }
-        if (keyCounter != null)
-            keyCounter.text = playerKeysScript.numKeys.ToString();
-
     }
 
     private void Start()
     {
-        if(!TryGetComponent(out _playerMove))
-        {
-            Debug.LogError("Player does not have PlayerMove component");
-        }
         // The Player HUD for testing lives under the player, however if this is the build
         // runtime we need to destroy it and use the one provided by the scene.
         Scene hudScene = SceneManager.GetSceneByName("UI_PlayerHUDScene");
@@ -108,9 +119,5 @@ public class PlayerHUD : MonoBehaviour
                 }
             }
         }
-        pickupHelpText.text = "";
-        
-        playerKeysScript = GetComponent<PlayerKeys>();
-        
     }
 }

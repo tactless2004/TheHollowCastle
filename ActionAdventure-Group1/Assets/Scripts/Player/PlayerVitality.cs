@@ -20,11 +20,14 @@ using UnityEngine;
 
 public class PlayerVitality : CombatEntity
 {
-    [SerializeField] private PlayerHUD hud;
     private PlayerContext player;
 
-    private void Start()
+    public event Action<float, float> OnHealthChange;
+    public event Action<float, float> OnManaChange;
+
+    protected override void Awake()
     {
+        base.Awake();
        if(!TryGetComponent(out player))
         {
             Debug.LogError("PlayerVitality could not find PlayerContext Component!");
@@ -33,8 +36,26 @@ public class PlayerVitality : CombatEntity
     public override void TakeDamage(WeaponData attack)
     {
         base.TakeDamage(attack);
-        hud.SetHealth(health, MAXHEALTH);
+        OnHealthChange?.Invoke(GetHealth(), MAXHEALTH);
         player.animation.TryPlayDamage();
+    }
+
+    public override void Heal(float healAmount)
+    {
+        base.Heal(healAmount);
+        OnHealthChange?.Invoke(GetHealth(), MAXHEALTH);
+    }
+
+    public override void ExertMain(WeaponData attack)
+    {
+        base.ExertMain(attack);
+        OnManaChange?.Invoke(GetMana(), MAXMANA);
+    }
+
+    public override void GainMana(float manaAmount)
+    {
+        base.GainMana(manaAmount);
+        OnManaChange?.Invoke(GetMana(), MAXMANA);
     }
 
     protected override void Die()

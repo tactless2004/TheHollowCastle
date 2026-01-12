@@ -14,6 +14,7 @@
 *
 ************************************************************/
 
+using System;
 using TMPro;
 using UnityEngine;
  
@@ -29,34 +30,29 @@ public class PlayerInventory : MonoBehaviour
 
     private WeaponData weapon1;
     private WeaponData weapon2;
-    private PlayerMove playerMove;
-    private PlayerHUD hud;
+    private PlayerContext player;
 
+    public event Action<Sprite, int> OnWeaponSlotChanged;
     private void Awake()
     {
         weapon1 = weapon1SO as WeaponData;
         weapon2 = weapon2SO as WeaponData;
 
-        if(!TryGetComponent(out playerMove))
+        if(!TryGetComponent(out player))
         {
-            Debug.LogError("Player does not have PlayerMove component.");
-        }
-
-        if(!TryGetComponent(out hud))
-        {
-            Debug.LogError("Player does not have PlayerHUD component.");
+            Debug.LogError("PlayerInventory Component was unable to find Player Context component.");
         }
     }
 
     private void Start()
     {
-        hud.SetWeaponSprite(weapon1.uiSprite, 1);
-        hud.SetWeaponSprite(weapon2.uiSprite, 2);
+        OnWeaponSlotChanged?.Invoke(weapon1.uiSprite, 1);
+        OnWeaponSlotChanged?.Invoke(weapon2.uiSprite, 2);
     }
 
     public void pickupSlot(int slot)
     {
-        if (Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
+        if (Physics.Raycast(raycastOrigin.position, player.move.facing, out RaycastHit hit, maxPickupDistance))
         {
             // If is pickupWeapon
             if (hit.collider.TryGetComponent(out PickupItem pickupItem))
@@ -75,18 +71,8 @@ public class PlayerInventory : MonoBehaviour
                     weapon2 = weapon;
                 }
 
-                hud.SetWeaponSprite(weapon.uiSprite, slot);
+                OnWeaponSlotChanged?.Invoke(weapon.uiSprite, slot);
             }
-
-            //Chests now open if the player is within a certain distance.
-            /*
-            else if (hit.collider.TryGetComponent(out Chest chest)) {
-                // don't reopen chests that already are opened
-                if (!chest.isOpened()) {
-                    chest.Open();
-                }
-            }
-            */
         }
     }
 
