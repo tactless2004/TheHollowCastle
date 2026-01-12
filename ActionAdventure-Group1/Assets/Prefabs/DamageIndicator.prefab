@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 15260229842357834}
   - component: {fileID: 4160747508068756502}
   - component: {fileID: 6032802188128409091}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: DamageIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 7163696335068883580}
   - component: {fileID: 2240907391054736036}
   - component: {fileID: 972239157380268549}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: DamageIndicatorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

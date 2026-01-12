@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 2177400553464566293}
   - component: {fileID: 7361487164748213108}
   - component: {fileID: 8558117549074760567}
-  - component: {fileID: 5747413734339491935}
   - component: {fileID: 8092319358444874882}
   - component: {fileID: 7505834878497736551}
   - component: {fileID: 5951983356799579928}
@@ -108,8 +107,6 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -131,7 +128,6 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -200,12 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   animLock: 0
-  swordModel: {fileID: 8629813522235111517, guid: a71e67ba5c7d875498eb86075c4ea088, type: 3}
-  hammerModel: {fileID: 5369672489383426879, guid: ab516b28df0e2264484b58f134d8645a, type: 3}
-  spearModel: {fileID: 3594934875717684855, guid: e8ac06ba29ac6a449b640f1fe2ccc17f, type: 3}
-  greatswordModel: {fileID: 403710468755374862, guid: f15b5a9d92cd853438125bee888fd70c, type: 3}
-  throwingknifeModel: {fileID: 5752082489629639813, guid: 421f0ada6d733014fadd2a4c11dc44c2, type: 3}
-  playerAnimator: {fileID: 3972609884168159414}
   animationState: 0
 --- !u!114 &8558117549074760567
 MonoBehaviour:
@@ -228,22 +218,6 @@ MonoBehaviour:
   MAX_FORCE: 10
   _forceApplied: 8
   _direction: {x: 0, y: 0, z: 0}
---- !u!114 &5747413734339491935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222212954365545417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c43cf3ff58caafe40929af5b65f5a868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangedAttackOrigin: {fileID: 6437665938842919062}
-  meleeAttackOrigin: {fileID: 6626588017627742056}
-  Slot1_WeaponData: {fileID: 11400000, guid: bfd49230cc5b18544bbda8d750d8913e, type: 2}
-  Slot2_WeaponData: {fileID: 11400000, guid: 9012eac3a9e64e2469175b86d9447f22, type: 2}
 --- !u!114 &8092319358444874882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,10 +241,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222212954365545417}
-  serializedVersion: 5
+  serializedVersion: 4
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
