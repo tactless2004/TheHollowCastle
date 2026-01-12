@@ -16,10 +16,10 @@
  * 2025/11/17 | Leyton McKinney | Add Pub/Sub (Observer) pattern, so other components can be informed about state changes.
  * 2025/11/19 | Leyton McKinney | Allow the GameManager to be used when not starting in Bootstrap scene.
  * 2025/12/03 | Noah Zimmerman  | Added tracking amount of enemies currently spawned
+ * 2026/01/12 | Leyton McKinney | 86 the Hud being a separate scene.
  ************************************************************/
 
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -142,9 +142,6 @@ public class GameManager: Singleton<GameManager>
                 
                 //Load game level
                 LoadScene(_gameLevels[_currentLevelIndex]);
-   
-                // Load the HUD as an overlay without setting it as the current scene
-                LoadScene(_hudScene, false); 
                 break;
 
             case GameState.GameOver:

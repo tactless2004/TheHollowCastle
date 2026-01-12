@@ -23,13 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Production/UI_PlayerHUDScene.unity
     guid: 1607dad44da8e7140ada336e2346da99
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Production/Level_1.unity
     guid: 7a2cf9b02308d514d817e496ebf65721
   - enabled: 1
     path: Assets/Scenes/Production/Level_2.unity
     guid: 4e2bd43fc39e92b4b9ff52e7965942f3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Production/Level_3.unity
     guid: 44a584169097acf40834dbe836832ad6
   m_configObjects:

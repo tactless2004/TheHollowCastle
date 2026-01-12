@@ -15,7 +15,6 @@
 ************************************************************/
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -41,6 +40,7 @@ public class PlayerHUD : MonoBehaviour
         }
 
         pickupHelpText.text = "";
+        keyCounter.text = "0";
 
         player.vitality.OnHealthChange += UpdateHealth;
         player.vitality.OnManaChange += UpdateMana;
@@ -80,38 +80,5 @@ public class PlayerHUD : MonoBehaviour
     private void PickupLost()
     {
         pickupHelpText.text = "";
-    }
-
-    // TODO: There is probably a more elegant way to seek out the HUD if it is in another scene, perhaps 
-    // it shouldn't be in another scene at all.
-    private void Start()
-    {
-        // The Player HUD for testing lives under the player, however if this is the build
-        // runtime we need to destroy it and use the one provided by the scene.
-        Scene hudScene = SceneManager.GetSceneByName("UI_PlayerHUDScene");
-
-        bool isInHudScene = gameObject.scene.name == "UI_PlayerHUDScene";
-        bool hudSceneLoaded = hudScene.isLoaded;
-
-        if (!isInHudScene && hudSceneLoaded)
-            Destroy(playerHUD);
-
-        // If the Player Hud Scene is loaded, we need to reselect the UI elements.
-        if (hudSceneLoaded)
-        {
-            foreach (GameObject go in hudScene.GetRootGameObjects())
-            {
-                if (go.name == "UI")
-                {
-                    manaBar        = go.transform.Find("PlayerHUD/ManaBarEmpty/ManaBarFull").GetComponent<Image>();
-                    healthBar      = go.transform.Find("PlayerHUD/HealthBarEmpty/HealthBarFull").GetComponent<Image>();
-                    slot1Image     = go.transform.Find("PlayerHUD/Slot1Weapon/Slot1WeaponImage").GetComponent<Image>();
-                    slot2Image     = go.transform.Find("PlayerHUD/Slot2Weapon/Slot2WeaponImage").GetComponent<Image>();
-                    pickupHelpText = go.transform.Find("PlayerHUD/WeaponPickupHelpText").GetComponent<TextMeshProUGUI>();
-                    keyCounter = go.transform.Find("PlayerHUD/KeyCounter/NumberOfKeys").GetComponent<TextMeshProUGUI>();
-                    
-                }
-            }
-        }
     }
 }
