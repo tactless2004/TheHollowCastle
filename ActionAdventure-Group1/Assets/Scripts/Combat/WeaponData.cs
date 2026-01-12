@@ -34,6 +34,7 @@ public class WeaponData : ScriptableObject
     public GameObject pickupModelPrefab;
     public GameObject combatPrefab;
     public Sprite uiSprite;
+    public string animationName;
 
     [Header("Audio (Optional)")]
     public AudioClip attackSound;

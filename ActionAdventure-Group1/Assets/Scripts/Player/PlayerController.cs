@@ -15,17 +15,15 @@
 * 2025/11/08 | Leyton McKinney | Implement inventory system controls.
 * 2025/11/17 | Leyton McKinney | Add pause checking.
 * 2025/12/08 | Peyton Lenard   | Added animation player and animLock for animation state control
+* 2026/01/11 | Leyton McKinney | Use PlayerContext, and modify how animations are played.
 ************************************************************/
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerMove _playerMove;
-    private PlayerInventory _playerInventory;
-    private PlayerWeaponSpawner _playerWeaponSpawner;
+    private PlayerContext player;
     private GameManager _gameManager;
     private Animator playerAnimator;
 
@@ -57,15 +55,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        // Check if MoveTransform component DNE
-        if (!TryGetComponent(out _playerMove))
+        if(!TryGetComponent(out player))
         {
-            Debug.LogError("PlayerMove component missing!");
-        }
-
-        if(!TryGetComponent(out _playerInventory))
-        {
-            Debug.LogError("PlayerInventory component missing!");
+            Debug.LogError("PlayerController could not find PlayerContext");
         }
 
         if (!GameObject.FindGameObjectWithTag("GameManager").TryGetComponent(out _gameManager))
@@ -77,11 +69,6 @@ public class PlayerController : MonoBehaviour
             _gameManager.onGameStateChanged += HandleGameState;
         }
 
-        if (!TryGetComponent(out _playerWeaponSpawner))
-        {
-            Debug.LogError("PlayerWeaponSpawner component missing!");
-        }
-
         animationState = AnimationState.Idle;
     }
 
@@ -89,7 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         if (animLock)
         {
-            _playerMove.Direction = Vector3.zero;
+            player.move.Direction = Vector3.zero;
         }
         if (animationState == AnimationState.Idle)
         {
@@ -121,7 +108,7 @@ public class PlayerController : MonoBehaviour
         }
         // Vec2 -> Vec3
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y);
-        _playerMove.Direction = direction;
+        player.move.Direction = direction;
     }
 
     public void OnSlot1Attack(InputValue value)
@@ -139,7 +126,7 @@ public class PlayerController : MonoBehaviour
         // Don't process standard inputs when paused.
         if (_paused) return;
 
-        _playerInventory.pickupSlot(1);
+        player.inventory.pickupSlot(1);
     }
 
     public void OnSwitchSlot2Weapon(InputValue value)
@@ -147,7 +134,7 @@ public class PlayerController : MonoBehaviour
         // Don't process standard inputs when paused.
         if (_paused) return;
 
-        _playerInventory.pickupSlot(2);
+        player.inventory.pickupSlot(2);
     }
 
     public void OnPause(InputValue value)
@@ -156,17 +143,18 @@ public class PlayerController : MonoBehaviour
         if (_gameManager == null)
             reacquireGameManager();
         else
-        {
             _gameManager.PauseGame();
-        }
     }
 
-    // Helper/util methods, not directly related to processing inputs
     private void reacquireGameManager()
     {
-        if (!TryGetComponent(out _gameManager))
+        // Try to find the GameManager
+        GameObject tmpGameManager = GameObject.FindGameObjectWithTag("GameManager");
+
+        // If GameManager is not null, try to acquire it, if this fails print Error.
+        if (tmpGameManager != null && !tmpGameManager.TryGetComponent(out _gameManager))
         {
-            Debug.LogError("PlayerController attempted to reacquire GameManager, but failed!");
+            Debug.LogError("PlayerController attempted to Reacquire GameManager, but could not find it.");
         }
     }
 
@@ -180,7 +168,8 @@ public class PlayerController : MonoBehaviour
         // Don't process standard inputs when paused.
         if (_paused) return;
 
-        WeaponData weaponData = _playerInventory.getWeaponData(slot);
+        WeaponData weaponData = player.inventory.getWeaponData(slot);
+
         // If weaponData is null (for whatever reason) just bail lest we throw a NRE
         if (weaponData == null) return;
 
@@ -190,31 +179,11 @@ public class PlayerController : MonoBehaviour
         }
         animationState = AnimationState.Attack;
 
-        if (weaponData.name == "Sword")
-        {
-            playerAnimator.Play("SwordAttack");
-            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
-        }
-        if (weaponData.name == "Hammer")
-        {
-            playerAnimator.Play("SwordAttack");
-            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
-        }
-        if (weaponData.name == "Spear")
-        {
-            playerAnimator.Play("SpearAttack");
-            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
-        }
-        if (weaponData.name == "Greatsword")
-        {
-            playerAnimator.Play("GreatswordAttack");
-            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
-        }
-        if (weaponData.name == "Throwing Knife")
-        {
-            playerAnimator.Play("ThrowingKnifeAttack");
-            _playerWeaponSpawner.SpawnWeapon(weaponData.combatPrefab);
-        }
+        // Play the attack animation
+        playerAnimator.Play(weaponData.animationName);
+
+        // Spawn the weapon
+        player.weaponSpawner.SpawnWeapon(weaponData.combatPrefab);
         animLock = true;        
     }
 
