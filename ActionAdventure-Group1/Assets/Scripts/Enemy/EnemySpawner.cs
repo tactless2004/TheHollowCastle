@@ -7,7 +7,7 @@
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2026/01/11 | Leyton McKinney | Init
+* 2026/01/11 | Leyton McKinney | 
 *
 ************************************************************/
 
@@ -32,11 +32,14 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Enemies")]
     [SerializeField]
-    private List<EnemySpawnOption> enemies;
+    private List<EnemySpawnOption> enemies = new List<EnemySpawnOption>();
 
     // Used to ensure probabilities always sum up to 1.0
     private void OnValidate()
     {
+        // If the list of enemies is empty, we don't need to normalize
+        if (enemies == null || enemies.Count == 0) return;
+
         float sum = 0f;
         foreach (EnemySpawnOption e in enemies)
             sum += e.probability;
@@ -77,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
     private void Update()
     {
         // Make a list of enemies that have been spawned and subsequently destroyed
-        var enemiesToRemove = enemyInstances.Where(enemy => enemy.IsDestroyed());
+        var enemiesToRemove = enemyInstances.Where(enemy => enemy.IsDestroyed()).ToList();
 
         // Remove destroyed enemies from the instances HashSet
         // Programming Tip: Don't remove or add elements to an iterable while iterating over it

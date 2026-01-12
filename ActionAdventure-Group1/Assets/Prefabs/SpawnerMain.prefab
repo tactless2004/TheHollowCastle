@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6282675132305984197}
-  - component: {fileID: 3901564678309139624}
+  - component: {fileID: 6897897041378812642}
   m_Layer: 0
   m_Name: SpawnerMain
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3901564678309139624
+--- !u!114 &6897897041378812642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,16 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4866883483257629226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd251002d94fe6b4c8da57ad3c2066d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d23fb1b8da27444abfbc7957041c0d0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  SpawnTime: 5
-  SpawnAmount: 5
-  maxSpawns: 20
+  m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 5606385456176227396, guid: d2fa4264d9a9e654d8e0dd09a1517c89, type: 3}
-  - {fileID: 6762513469522789849, guid: eef5ab76775f9d8408f4c7639635c6a1, type: 3}
+  - prefab: {fileID: 6762513469522789849, guid: eef5ab76775f9d8408f4c7639635c6a1, type: 3}
+    probability: 1
   player: {fileID: 0}
-  radius: 10
-  spawnMethod: 0
-  safeRadius: 4
+  playerSpawnRadius: 20
+  spawnDelay: 4
+  maximumSpawns: 3
