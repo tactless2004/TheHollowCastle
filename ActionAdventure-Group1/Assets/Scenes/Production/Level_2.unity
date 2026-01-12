@@ -2247,6 +2247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnerMain
       objectReference: {fileID: 0}
+    - target: {fileID: 4866883483257629226, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6282675132305984197, guid: ec8e20a9ac14bdd4c97524af048ab3b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4
@@ -2859,6 +2863,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7504593415270664783, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
+      propertyPath: pickup
+      value: 
+      objectReference: {fileID: 1817167475}
     - target: {fileID: 8558117549074760567, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -2866,13 +2874,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1222212954365545417, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
+      insertIndex: 9
+      addedObject: {fileID: 1817167475}
   m_SourcePrefab: {fileID: 100100000, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
 --- !u!4 &1817167461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4248498948907233337, guid: 67d77b77bea7f3543b5f6caac855a2b9, type: 3}
   m_PrefabInstance: {fileID: 1817167460}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1817167475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962016722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de570a3aa0672514c9795824717d59ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupRange: 3
+  pickupMask:
+    serializedVersion: 2
+    m_Bits: 128
+  checkInterval: 0.2
 --- !u!1001 &1897991392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3228,6 +3256,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 311538702}
     m_Modifications:
+    - target: {fileID: 2282222017203240022, guid: e928c3c8d2cb11e44bd42333b0e948c6, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 191
+      objectReference: {fileID: 0}
     - target: {fileID: 2448850634315189701, guid: e928c3c8d2cb11e44bd42333b0e948c6, type: 3}
       propertyPath: player
       value: 
@@ -3276,7 +3308,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2420318719079130926, guid: e928c3c8d2cb11e44bd42333b0e948c6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

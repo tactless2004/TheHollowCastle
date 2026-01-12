@@ -31,9 +31,6 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text pickupHelpText;
     [SerializeField] private TMP_Text keyCounter;
 
-    [Header("Pickup")]
-    [SerializeField] private float maxPickupDistance = 3.0f;
-
     private PlayerContext player;
 
     private void Awake()
@@ -49,18 +46,20 @@ public class PlayerHUD : MonoBehaviour
         player.vitality.OnManaChange += UpdateMana;
         player.inventory.OnWeaponSlotChanged += UpdateWeaponSlot;
         player.keys.OnKeysChanged += UpdateKeys;
+        player.pickup.OnPickupSeen += PickupSeen;
+        player.pickup.OnPickupLost += PickupLost;
     }
 
-    public void UpdateHealth(float current, float max)
+    private void UpdateHealth(float current, float max)
     {
         healthBar.fillAmount = current / max;
     }
-    public void UpdateMana(float current, float max)
+    private void UpdateMana(float current, float max)
     {
         manaBar.fillAmount = current / max;
     }
 
-    public void UpdateWeaponSlot(Sprite sprite, int slot)
+    private void UpdateWeaponSlot(Sprite sprite, int slot)
     {
         if (slot == 1)
             slot1Image.sprite = sprite;
@@ -68,29 +67,23 @@ public class PlayerHUD : MonoBehaviour
             slot2Image.sprite = sprite;
     }
 
-    public void UpdateKeys(int keys)
+    private  void UpdateKeys(int keys)
     {
         keyCounter.text = keys.ToString();
     }
 
-    private void Update()
+    private void PickupSeen(PickupItem item)
     {
-        // Pickup Indicator text logic
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, player.move.facing, maxPickupDistance);
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.collider.TryGetComponent(out PickupItem pickupItem) && pickupHelpText != null)
-            {
-                pickupHelpText.text = $"Equip {pickupItem.GetWeapon().name}?";
-                break;
-            }
-            else if (pickupHelpText != null)
-            {
-                pickupHelpText.text = "";
-            }
-        }
+        pickupHelpText.text = $"Equip {item.GetWeapon().weaponName}? (Q/E)";
     }
 
+    private void PickupLost()
+    {
+        pickupHelpText.text = "";
+    }
+
+    // TODO: There is probably a more elegant way to seek out the HUD if it is in another scene, perhaps 
+    // it shouldn't be in another scene at all.
     private void Start()
     {
         // The Player HUD for testing lives under the player, however if this is the build

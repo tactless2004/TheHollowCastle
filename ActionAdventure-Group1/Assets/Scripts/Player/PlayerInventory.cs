@@ -25,13 +25,12 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private ScriptableObject weapon1SO;
     [SerializeField] private ScriptableObject weapon2SO;
 
-    // TODO: Get rid of raycast system use a sphere cast or entirely get rid of it.
-    [SerializeField] private Transform raycastOrigin;
-    [SerializeField] private float maxPickupDistance = 3.0f;
-
     private WeaponData weapon1;
     private WeaponData weapon2;
+    private PickupItem currentPickupSeen;
+
     private PlayerContext player;
+
 
     public event Action<Sprite, int> OnWeaponSlotChanged;
     private void Awake()
@@ -43,6 +42,9 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.LogError("PlayerInventory Component was unable to find Player Context component.");
         }
+
+        player.pickup.OnPickupLost += OnPickupItemLose;
+        player.pickup.OnPickupSeen += OnPickupItemSeen;
     }
 
     private void Start()
@@ -53,28 +55,35 @@ public class PlayerInventory : MonoBehaviour
 
     public void pickupSlot(int slot)
     {
-        if (Physics.Raycast(raycastOrigin.position, player.move.facing, out RaycastHit hit, maxPickupDistance))
+        // If there is no weapon to pickup then this input should return immediately
+        if (currentPickupSeen == null) return;
+
+        // Perform the swap
+        WeaponData tempWeapon;
+        if (slot == 1)
         {
-            // If is pickupWeapon
-            if (hit.collider.TryGetComponent(out PickupItem pickupItem))
-            {
-                WeaponData weapon = pickupItem.GetWeapon();
-
-                // swap PickupItem weapon and InventoryWeapon
-                if (slot == 1)
-                {
-                    pickupItem.SetWeapon(weapon1);
-                    weapon1 = weapon;
-                }
-                else
-                {
-                    pickupItem.SetWeapon(weapon2);
-                    weapon2 = weapon;
-                }
-
-                OnWeaponSlotChanged?.Invoke(weapon.uiSprite, slot);
-            }
+            tempWeapon = weapon1;
+            weapon1 = currentPickupSeen.GetWeapon();
+            OnWeaponSlotChanged?.Invoke(weapon1.uiSprite, slot);
         }
+        else
+        {
+            tempWeapon = weapon2;
+            weapon2 = currentPickupSeen.GetWeapon();
+            OnWeaponSlotChanged?.Invoke(weapon2.uiSprite, slot);
+        }
+
+        currentPickupSeen.SetWeapon(tempWeapon);
+    }
+
+    public void OnPickupItemSeen(PickupItem item)
+    {
+        currentPickupSeen = item;
+    }
+
+    public void OnPickupItemLose()
+    {
+        currentPickupSeen = null;
     }
 
     public WeaponData getWeaponData(int slot)

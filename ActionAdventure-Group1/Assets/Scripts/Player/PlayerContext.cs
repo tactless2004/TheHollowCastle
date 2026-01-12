@@ -19,6 +19,7 @@ public class PlayerContext : MonoBehaviour
     public PlayerController controller;
     public PlayerMove move;
     public PlayerInventory inventory;
+    public PlayerPickup pickup;
     public PlayerVitality vitality;
     public PlayerKeys keys;
     public PlayerWeaponSpawner weaponSpawner;
