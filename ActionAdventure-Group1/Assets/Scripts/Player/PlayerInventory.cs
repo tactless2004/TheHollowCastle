@@ -10,12 +10,13 @@
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/10 | Leyton McKinney | Add null checking for indicator UI text.
 * 2025/11/15 | Leyton McKinney | Add PlayerHUD mutation.
-* 2025/11/17 | Leyton McKinney | Move weapon indicator text logic to PlayerHUD.cs
+* 2025/11/17 | Leyton McKinney | Move weapon indicator text logic to PlayerHUD.cs.
+* 2025/01/11 | Leyton McKinney | Use PlayerContext paradigm.
+* 2026/01/12 | Leyton McKinney | Use events to signal when the weapon has changed.
 *
 ************************************************************/
 
 using System;
-using TMPro;
 using UnityEngine;
  
 

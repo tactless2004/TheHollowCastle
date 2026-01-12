@@ -10,7 +10,8 @@
 * 2025/11/15 | Leyton McKinney | Init
 * 2025/11/17 | Leyton McKinney | Account for PlayerHUD scene loading on top of level scene.
 * 2025/11/17 | Leyton McKinney | Move pickup help text logic to this script.
-* 2025/12/08 | Noah Zimmerman  | Fixes path for ui elements
+* 2025/12/08 | Noah Zimmerman  | Fixes path for ui elements.
+* 2026/01/11 | Leyton MCKinney | Subscribe to events for values to be changed.
 ************************************************************/
 
 using UnityEngine;

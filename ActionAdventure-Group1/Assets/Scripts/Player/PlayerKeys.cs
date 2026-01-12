@@ -12,7 +12,7 @@
 * 2025/12/01 | Chase Cone | Added door opening mechanics
 * 2025/12/8 | Chase Cone | Made keys public so UI and 
 * 2025/12/08 | Noah Zimmerman | Switched to using collision and not trigger
-* 2026/01/12 | Leyton McKinney | Switch voer to Event/Player Context Paradigm
+* 2026/01/12 | Leyton McKinney | Switch over to Event/Player Context Paradigm
 ************************************************************/
 
 using System;

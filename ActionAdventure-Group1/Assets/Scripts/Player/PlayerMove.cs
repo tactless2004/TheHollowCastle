@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
     private Quaternion gridRotationOffset;
 
     [SerializeField, Tooltip("Direction the player is facing. \nREADONLY DON'T MODIFY")]
-    public Vector3 facing;
+    public Vector3 facing { get; private set; }
 
     [SerializeField, Tooltip("If true, smoothly rotates to snap orientation instead of snapping.")]
     private bool smoothSnap = false;
@@ -87,7 +87,7 @@ public class PlayerMove : MonoBehaviour
         facing = Vector3.forward;
         cachedDirection = Vector3.zero;
         gridRotationOffset = Quaternion.Euler(0.0f, gridRotationOffsetY, 0.0f);
-        if(!TryGetComponent<Rigidbody>(out rb))
+        if(!TryGetComponent(out rb))
         {
             Debug.LogError("Rigidbody not found on Player!");
         }
@@ -111,6 +111,7 @@ public class PlayerMove : MonoBehaviour
         // If the player's movement is locked, don't allow the player to initiate new movements.
         if (player.animation.IsMovementLocked)
             targetVelocity = Vector3.zero;
+
         // This creates some semblance of momentum, so the player can't change direction on a dime
         // but, movement also doesn't feeling slippery. A good balance methinks.
         Vector3 dv = new Vector3(
