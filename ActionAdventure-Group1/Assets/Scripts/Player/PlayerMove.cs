@@ -120,8 +120,9 @@ public class PlayerMove : MonoBehaviour
         );
         rb.AddForce(dv, ForceMode.VelocityChange);
 
-        // Snap to direction
-        SnapDirection();
+        // If animation is locked, the player should not be able to rotate
+        if (!player.animation.IsMovementLocked)
+            SnapDirection();
     }
 
     private void SnapDirection()

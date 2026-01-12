@@ -46,30 +46,49 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnMove(InputValue value)
-    {
-        Vector2 inputVector = value.Get<Vector2>();
-        
+    {   
         // Don't process standard inputs when paused.
         if (_paused) return;
 
-        // Vec2 -> Vec3
+        Vector2 inputVector = value.Get<Vector2>();
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (
+            player.animation.IsInAttack && // Player is currently in attack animation
+            direction != Vector3.zero && // Player is issue movement input
+            player.animation.CanCancelToMovement // Player can cancel attack
+        )
+        {
+            player.animation.InterruptAttack();
+        }
 
         // Enact movement
         player.move.Direction = direction;
 
-        // Play movement animation if moving
+        // Play walk or idle if not attacking
         player.animation.TrySetMovement(direction != Vector3.zero);
     }
 
     public void OnSlot1Attack(InputValue value)
     {
-        Attack(1);
+        if (_paused || !value.isPressed) return;
+
+        WeaponData weaponData = player.inventory.getWeaponData(1);
+        if (weaponData == null) return;
+
+        if (player.animation.TryPlayAttack(weaponData.animationName))
+            player.weaponSpawner.Attack(weaponData);
     }
 
     public void OnSlot2Attack(InputValue value)
     {
-        Attack(2);
+        if (_paused || !value.isPressed) return;
+
+        WeaponData weaponData = player.inventory.getWeaponData(2);
+        if (weaponData == null) return;
+
+        if (player.animation.TryPlayAttack(weaponData.animationName))
+            player.weaponSpawner.Attack(weaponData);
     }
 
     public void OnSwitchSlot1Weapon(InputValue value)
@@ -113,22 +132,4 @@ public class PlayerController : MonoBehaviour
     {
         _paused = state == GameState.GamePaused;
     }
-
-    private void Attack(int slot)
-    {
-        // Don't process standard inputs when paused.
-        if (_paused) return;
-
-        WeaponData weaponData = player.inventory.getWeaponData(slot);
-
-        // If weaponData is null (for whatever reason) just bail lest we throw a NRE
-        if (weaponData == null) return;
-
-        // Play the attack animation
-        if (player.animation.TryPlayAttack(weaponData.animationName))
-        {
-            player.weaponSpawner.Attack(weaponData);
-        }    
-    }
-
 }

@@ -29,7 +29,7 @@ public class PlayerWeaponSpawner : MonoBehaviour
             Debug.LogError("PlayerWeaponSpawner could not find PlayerContext Component.");
         }
 
-        player.animation.onAttackCancelled += DeleteAllWeapons;
+        player.animation.OnAttackCancelled += DeleteAllWeapons;
     }
     public void Attack(WeaponData weapon)
     {

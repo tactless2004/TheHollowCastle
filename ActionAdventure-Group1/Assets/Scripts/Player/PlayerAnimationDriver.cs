@@ -8,6 +8,7 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2026/01/11 | Leyton McKinney | Init
+* 2026/01/12 | Leyton McKinney | Add explicit anim cancel behavior to prevent stun lock
 *
 ************************************************************/
 
@@ -23,7 +24,9 @@ public class PlayerAnimationDriver : MonoBehaviour
     public bool IsInAttack { get; private set; }
     public bool IsDead { get; private set; }
 
-    public event Action onAttackCancelled;
+    public bool CanCancelToMovement { get; private set; } = false;
+
+    public event Action OnAttackCancelled;
 
     private void Awake()
     {
@@ -34,13 +37,13 @@ public class PlayerAnimationDriver : MonoBehaviour
 
     public void TrySetMovement(bool isMoving)
     {
-        if (IsMovementLocked || IsDead) return;
+        if (IsMovementLocked || IsDead || IsInAttack) return;
         animator.Play(isMoving ? "Walk" : "Idle");
     }
 
     public bool TryPlayAttack(string animationName)
     {
-        if (IsMovementLocked || IsDead) return false;
+        if (IsMovementLocked || IsDead || IsInAttack) return false;
 
         IsMovementLocked = true;
         IsInAttack = true;
@@ -51,13 +54,10 @@ public class PlayerAnimationDriver : MonoBehaviour
 
     public bool TryPlayDamage()
     {
-        if (IsMovementLocked || IsDead) return false;
+        if (IsDead) return false;
 
         if (IsInAttack)
-        {
-            IsInAttack = false;
-            onAttackCancelled?.Invoke();
-        }
+            InterruptAttack();
 
         IsMovementLocked = true;
 
@@ -76,6 +76,19 @@ public class PlayerAnimationDriver : MonoBehaviour
     {
         IsMovementLocked = false;
         IsInAttack = false;
-        onAttackCancelled?.Invoke();
+        OnAttackCancelled?.Invoke();
+    }
+
+    public void EnableMovementCancel() => CanCancelToMovement = true;
+    public void DisableCancel() => CanCancelToMovement = false;
+    public void InterruptAttack()
+    {
+        if (!IsInAttack) return;
+
+        IsInAttack = false;
+        IsMovementLocked = false;
+        CanCancelToMovement = false;
+
+        OnAttackCancelled?.Invoke();
     }
 }
