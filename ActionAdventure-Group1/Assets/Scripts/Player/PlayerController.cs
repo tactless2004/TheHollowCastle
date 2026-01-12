@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-        public void OnMove(InputValue value)
+    public void OnMove(InputValue value)
     {
         Vector2 inputVector = value.Get<Vector2>();
         
