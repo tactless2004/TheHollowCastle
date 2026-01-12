@@ -21,7 +21,9 @@ MonoBehaviour:
   attackCooldown: 2
   manaCost: 0
   pickupModelPrefab: {fileID: 403710468755374862, guid: 837f10f46051c8f4ca30d8d1077b9ca6, type: 3}
+  combatPrefab: {fileID: 0}
   uiSprite: {fileID: 1472470125, guid: bb8a7ebd5e0b25d46a40c7632e3db812, type: 3}
+  animationName: GreatswordAttack
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 0}

@@ -21,7 +21,9 @@ MonoBehaviour:
   attackCooldown: 0.7
   manaCost: 0
   pickupModelPrefab: {fileID: 8629813522235111517, guid: 31c2191d2a786a548b72bd62f921ec07, type: 3}
+  combatPrefab: {fileID: 0}
   uiSprite: {fileID: 2056492229, guid: 8cc1fd3a03cfed4449788d9b35d42a8c, type: 3}
+  animationName: SwordAttack
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 0}

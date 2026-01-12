@@ -21,7 +21,9 @@ MonoBehaviour:
   attackCooldown: 1
   manaCost: 0
   pickupModelPrefab: {fileID: 3594934875717684855, guid: d5df4101ccf491d44a1550f1661e9fd3, type: 3}
+  combatPrefab: {fileID: 0}
   uiSprite: {fileID: -148711447, guid: 86e8b746fbdf107428db7c379a89eeb0, type: 3}
+  animationName: SpearAttack
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 0}
