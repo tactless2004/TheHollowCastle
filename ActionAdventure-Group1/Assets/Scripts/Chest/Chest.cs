@@ -35,7 +35,6 @@ public class Chest : MonoBehaviour
     private void RollWeapon() {
         float roll = Random.value; // [0.0f, 1.0f];
         float cumulative = 0.0f;
-        Debug.Log(roll);
 
         cumulative += chestRollTable.CommonProbability;
         if (roll < cumulative) {
@@ -82,6 +81,14 @@ public class Chest : MonoBehaviour
         if (open) return;
         open = true;
         chestAnim.Play("Open");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Open();
+        }
     }
 
 

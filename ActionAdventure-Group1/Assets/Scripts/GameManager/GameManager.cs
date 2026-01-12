@@ -46,13 +46,10 @@ public class GameManager: Singleton<GameManager>
 
     [SerializeField, Tooltip("Bootstrap scene containing the GameManager")]
     private string _bootstrapScene;
-   
+
     [SerializeField]
     [Tooltip("All the level scenes in the game, in the order they should be played.")]
     private List<string> _gameLevels = new List<string>();
-
-    // Amount of enemies currently exsisting in scene
-    public int currentEnemies = 0;
     
     // Index of the currently active level in the levelScenes list
     private int _currentLevelIndex = 0;

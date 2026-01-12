@@ -35,7 +35,6 @@ public class PlayerKeys : MonoBehaviour
         if (collision.gameObject.CompareTag("Keys"))
         {
             numKeys++;
-            Debug.Log("Got Key");
             //audio.PlayOneShot();
             Destroy(collision.gameObject);
         } //end if("Keys")

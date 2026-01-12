@@ -87,7 +87,6 @@ public class PlayerHUD : MonoBehaviour
 
         bool isInHudScene = gameObject.scene.name == "UI_PlayerHUDScene";
         bool hudSceneLoaded = hudScene.isLoaded;
-        Debug.Log("Is UI_PlayerHUDScene Loaded: " + hudSceneLoaded);
 
         if (!isInHudScene && hudSceneLoaded)
             Destroy(playerHUD);

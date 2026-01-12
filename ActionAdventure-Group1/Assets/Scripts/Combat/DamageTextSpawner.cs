@@ -20,7 +20,7 @@ public class DamageTextSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject textPrefab;
     [SerializeField] Color resistColor = new Color(1.0f, 0.0f, 0.0f);
-    [SerializeField] private float verticalTextOffset = 1.0f;
+    [SerializeField] private float verticalTextOffset = 3.0f;
 
     public void Spawn(Transform spawnPosition, WeaponData weapon, bool resist, bool crit)
     {

@@ -22,12 +22,13 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private ScriptableObject weapon1SO;
     [SerializeField] private ScriptableObject weapon2SO;
+
+    // TODO: Get rid of raycast system use a sphere cast or entirely get rid of it.
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private float maxPickupDistance = 3.0f;
 
     private WeaponData weapon1;
     private WeaponData weapon2;
-    private PlayerCombat playerCombat;
     private PlayerMove playerMove;
     private PlayerHUD hud;
 
@@ -35,11 +36,6 @@ public class PlayerInventory : MonoBehaviour
     {
         weapon1 = weapon1SO as WeaponData;
         weapon2 = weapon2SO as WeaponData;
-
-        if(!TryGetComponent(out playerCombat))
-        {
-            Debug.LogError("Player does not have PlayerCombat component.");
-        }
 
         if(!TryGetComponent(out playerMove))
         {
@@ -79,17 +75,28 @@ public class PlayerInventory : MonoBehaviour
                     weapon2 = weapon;
                 }
 
-                playerCombat.SetWeapon(slot, weapon);
                 hud.SetWeaponSprite(weapon.uiSprite, slot);
-                Debug.Log($"Player picked up {weapon.name} in slot {slot}.");
             }
 
+            //Chests now open if the player is within a certain distance.
+            /*
             else if (hit.collider.TryGetComponent(out Chest chest)) {
                 // don't reopen chests that already are opened
                 if (!chest.isOpened()) {
                     chest.Open();
                 }
             }
+            */
         }
+    }
+
+    public WeaponData getWeaponData(int slot)
+    {
+        if      (slot == 1) return weapon1;
+        else if (slot == 2) return weapon2;
+        
+        Debug.LogError($"PlayerInventory had an invalid get request for slot {slot}");
+        // If they ask for a weapon we aint have just return null fr
+        return null;
     }
 }

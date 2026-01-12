@@ -13,6 +13,7 @@ TagManager:
   - Doors
   - PlayerModel
   - Chest
+  - RaycastIgnore
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Environment
   - Water
   - UI
-  - 
+  - AlwaysOnTop
   - 
   - 
   - 
