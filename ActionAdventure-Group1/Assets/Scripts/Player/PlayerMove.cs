@@ -9,6 +9,7 @@
 * ------------------------------------------------------------
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/16 | Leyton McKinney | Use camera orientation to orient player movement.
+* 2026/01/11 | Leyton McKinney | Lock movement when the player is Animation Locked
 *
 ************************************************************/
 
@@ -20,7 +21,8 @@ using System; // Need for Enum
 public class PlayerMove : MonoBehaviour
 {
     private Rigidbody rb;
-    
+    private PlayerContext player;
+
     private enum SnapType
     {
         FourDirection,
@@ -89,6 +91,11 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogError("Rigidbody not found on Player!");
         }
+
+        if(!TryGetComponent(out player))
+        {
+            Debug.LogError("PlayerMove tried to find PlayerContext and was unsuccessful.");
+        }
     }
 
     private void FixedUpdate()
@@ -101,6 +108,9 @@ public class PlayerMove : MonoBehaviour
         Vector3 currentVelocity = rb.linearVelocity;
         Vector3 targetVelocity = Direction * ForceApplied;
 
+        // If the player's movement is locked, don't allow the player to initiate new movements.
+        if (player.animation.IsMovementLocked)
+            targetVelocity = Vector3.zero;
         // This creates some semblance of momentum, so the player can't change direction on a dime
         // but, movement also doesn't feeling slippery. A good balance methinks.
         Vector3 dv = new Vector3(

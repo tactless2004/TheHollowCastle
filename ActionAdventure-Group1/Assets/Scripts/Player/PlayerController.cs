@@ -25,37 +25,12 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerContext player;
     private GameManager _gameManager;
-    private Animator playerAnimator;
 
     private bool _paused = false;
 
-    public bool animLock = false;
-
-    
-    public enum AnimationState
-    {
-        Idle,
-        Walk,
-        Attack,
-        Damage,
-        Death
-    }
-    public AnimationState animationState;
-
-
-    private void Start()
-    {
-        // Player animator is grabbed at start time, just in case the model isn't loaded at awake time.
-        GameObject tmpPlayerModel = GameObject.FindGameObjectWithTag("PlayerModel"); 
-        if (tmpPlayerModel != null)
-            playerAnimator = tmpPlayerModel.GetComponent<Animator>();
-        else 
-            Debug.LogError("Player Controller could not find PlayerModel.");
-    }
-
     private void Awake()
     {
-        if(!TryGetComponent(out player))
+        if (!TryGetComponent(out player))
         {
             Debug.LogError("PlayerController could not find PlayerContext");
         }
@@ -68,22 +43,7 @@ public class PlayerController : MonoBehaviour
         {
             _gameManager.onGameStateChanged += HandleGameState;
         }
-
-        animationState = AnimationState.Idle;
     }
-
-    public void Update()
-    {
-        if (animLock)
-        {
-            player.move.Direction = Vector3.zero;
-        }
-        if (animationState == AnimationState.Idle)
-        {
-            animLock = false;
-        }
-    }
-
 
     public void OnMove(InputValue value)
     {
@@ -92,23 +52,14 @@ public class PlayerController : MonoBehaviour
         // Don't process standard inputs when paused.
         if (_paused) return;
 
-        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage) {
-            return;
-        }
-
-        if (inputVector == Vector2.zero && animationState != AnimationState.Damage)
-        {
-            animationState = AnimationState.Idle;
-            playerAnimator.Play("Idle");
-        }
-        else
-        {
-            animationState = AnimationState.Walk;
-            playerAnimator.Play("Walk");
-        }
         // Vec2 -> Vec3
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        // Enact movement
         player.move.Direction = direction;
+
+        // Play movement animation if moving
+        player.animation.TrySetMovement(direction != Vector3.zero);
     }
 
     public void OnSlot1Attack(InputValue value)
@@ -173,18 +124,11 @@ public class PlayerController : MonoBehaviour
         // If weaponData is null (for whatever reason) just bail lest we throw a NRE
         if (weaponData == null) return;
 
-        if (animationState == AnimationState.Attack || animationState == AnimationState.Damage)
-        {
-            return;
-        }
-        animationState = AnimationState.Attack;
-
         // Play the attack animation
-        playerAnimator.Play(weaponData.animationName);
-
-        // Spawn the weapon
-        player.weaponSpawner.SpawnWeapon(weaponData.combatPrefab);
-        animLock = true;        
+        if (player.animation.TryPlayAttack(weaponData.animationName))
+        {
+            player.weaponSpawner.Attack(weaponData);
+        }    
     }
 
 }

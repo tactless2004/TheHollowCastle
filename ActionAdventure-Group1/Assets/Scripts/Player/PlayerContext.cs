@@ -22,4 +22,5 @@ public class PlayerContext : MonoBehaviour
     public PlayerVitality vitality;
     public PlayerKeys keys;
     public PlayerWeaponSpawner weaponSpawner;
+    public PlayerAnimationDriver animation;
 }
