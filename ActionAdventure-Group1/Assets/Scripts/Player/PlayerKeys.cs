@@ -26,10 +26,6 @@ public class PlayerKeys : MonoBehaviour
 
     public event Action<int> OnKeysChanged;
 
-    private void Awake()
-    {
-        Debug.Log($"PlayerKeys Awake on {gameObject.name}", this);
-    }
     private void OnCollisionEnter(Collision collision)
     {
         // Check if it has the "Keys" tag
