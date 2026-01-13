@@ -8,12 +8,14 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/12/17 | Leyton McKinney | Init
-* 2026/01/16 | Leyton McKinney | Add isDead flag to fix some Object lifetime bugs
+* 2026/01/11 | Leyton McKinney | Add isDead flag to fix some Object lifetime bugs
+* 2026/01/12 | Leyton McKinney | Respect pause gamestate.
 *
 ************************************************************/
 
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Android;
 
 
 public class ZombieAI : EnemyAI
@@ -36,13 +38,12 @@ public class ZombieAI : EnemyAI
     private float playerProximityTimeout = 5.0f; 
     private float playerProximityTimer;
 
-
-
     [Header("Movement")]
 
     [SerializeField] NavMeshAgent navMeshAgent;
 
     private bool isDead = false;
+    private bool paused = false;
 
     private void Awake()
     {
@@ -57,9 +58,28 @@ public class ZombieAI : EnemyAI
 
         weapon = weaponSO as WeaponData;
         playerProximityTimer = playerProximityTimeout;
+
+        GameObject tmpGameManager = GameObject.FindGameObjectWithTag("GameManager");
+        if (tmpGameManager != null && tmpGameManager.TryGetComponent(out GameManager gameManager))
+        {
+            gameManager.onGameStateChanged += HandleGameStateChange;
+        }
+        else
+        {
+            Debug.LogError($"{name} could not find GameManager component");
+        }
     }
     private void Update()
     {
+        // Don't move or do anything
+        if (paused)
+        {
+            navMeshAgent.enabled = false;
+            return;
+        }
+        // If navMeshAgent was previously disabled, reenable
+        if (navMeshAgent.enabled == false) navMeshAgent.enabled = true;
+
         if (player == null) ReacquirePlayer();
 
         // If this script is still running, and the Enemy is Dead just bail.
@@ -144,5 +164,10 @@ public class ZombieAI : EnemyAI
 
         isDead = true;
         Destroy(gameObject);
+    }
+
+    private void HandleGameStateChange(GameState state)
+    {
+        paused = state == GameState.GamePaused;
     }
 }

@@ -7,7 +7,8 @@
 * REVISION HISTORY:
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
-* 2026/01/11 | Leyton McKinney | 
+* 2026/01/11 | Leyton McKinney | Init
+* 2026/01/12 | Leyton McKinney | Respect gamestate paused
 *
 ************************************************************/
 
@@ -70,15 +71,29 @@ public class EnemySpawner : MonoBehaviour
     private int spawns; // Internal Spawn counter, shouldn't be modified externally
     private HashSet<GameObject> enemyInstances;
 
+    // Listen for GameState to not spawn enemies when paused
+    private GameManager gameManager;
+    private bool paused = false;
+
     private void Start()
     {
         ReacquirePlayer();
         spawnTimer = spawnDelay;
         enemyInstances = new HashSet<GameObject>();
+        GameObject tmpGameManager = GameObject.FindGameObjectWithTag("GameManager");
+        if (tmpGameManager == null || !tmpGameManager.TryGetComponent(out gameManager))
+        {
+            Debug.LogError("EnemySpawner could not find GameManager object");
+            return;
+        }
+        gameManager.onGameStateChanged += HandleGameStateChange;
     }
 
     private void Update()
     {
+        // While paused do not attempt to spawn more enemies.
+
+        if (paused) return;
         // Make a list of enemies that have been spawned and subsequently destroyed
         var enemiesToRemove = enemyInstances.Where(enemy => enemy.IsDestroyed()).ToList();
 
@@ -159,6 +174,11 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return Vector3.zero;
+    }
+
+    private void HandleGameStateChange(GameState state)
+    {
+        paused = state == GameState.GamePaused;
     }
 
 }
