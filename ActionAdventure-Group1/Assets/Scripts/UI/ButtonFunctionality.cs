@@ -60,8 +60,7 @@ public class ButtonFunctionality : MonoBehaviour
             // Stop play mode in the Unity Editor
             UnityEditor.EditorApplication.isPlaying = false;
         #else
-            // Load scene using gameManager
-            _gameManager.ChangeGameState(GameState.GameOver);
+            Application.Quit();
         #endif
     }
 
