@@ -1894,9 +1894,9 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.06666667
-        value: {x: -0, y: 0, z: 0.15865684}
+        value: {x: 0, y: 0, z: 0.15865684}
         inSlope: {x: -0, y: -0, z: -0.32000187}
-        outSlope: {x: -0, y: -0, z: -0.37236485}
+        outSlope: {x: -0, y: -0, z: -0.32000187}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -1905,7 +1905,7 @@ AnimationClip:
         time: 0.18333334
         value: {x: -0, y: 0, z: 0.113177836}
         inSlope: {x: -0, y: -0, z: -0.32000187}
-        outSlope: {x: -0, y: -0, z: -0.25018218}
+        outSlope: {x: -0, y: -0, z: -0.32000187}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -1914,7 +1914,7 @@ AnimationClip:
         time: 0.21666667
         value: {x: -0, y: 0, z: 0.10629296}
         inSlope: {x: -0, y: -0, z: -0.16291024}
-        outSlope: {x: -0, y: -0, z: -0.05818248}
+        outSlope: {x: -0, y: -0, z: -0.16291024}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -11674,7 +11674,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.06666667
-        value: -0
+        value: 0
         inSlope: -0
         outSlope: -0
         tangentMode: 0
@@ -11808,7 +11808,7 @@ AnimationClip:
         time: 0.06666667
         value: 0.15865684
         inSlope: -0.32000187
-        outSlope: -0.37236485
+        outSlope: -0.32000187
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -11817,7 +11817,7 @@ AnimationClip:
         time: 0.18333334
         value: 0.113177836
         inSlope: -0.32000187
-        outSlope: -0.25018218
+        outSlope: -0.32000187
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -11826,7 +11826,7 @@ AnimationClip:
         time: 0.21666667
         value: 0.10629296
         inSlope: -0.16291024
-        outSlope: -0.05818248
+        outSlope: -0.16291024
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -20519,15 +20519,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5
-    functionName: SetStateIdle
+  - time: 0.6666667
+    functionName: EnableMovementCancel
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.98333335
-    functionName: SetStateIdle
+    functionName: UnlockMovement
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

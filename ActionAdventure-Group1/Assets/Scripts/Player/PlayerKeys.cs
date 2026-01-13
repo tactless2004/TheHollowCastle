@@ -9,35 +9,32 @@
 * ------------------------------------------------------------
 * 2000/01/01 | Your Name | Created class
 * 2025/12/01 | Chase Cone | Created class
- * 2025/12/01 | Chase Cone | Added door opening mechanics
- * 2025/12/8 | Chase Cone | Made keys public so UI and reference
-*
+* 2025/12/01 | Chase Cone | Added door opening mechanics
+* 2025/12/8 | Chase Cone | Made keys public so UI and 
 * 2025/12/08 | Noah Zimmerman | Switched to using collision and not trigger
+* 2026/01/12 | Leyton McKinney | Switch over to Event/Player Context Paradigm
 ************************************************************/
 
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class PlayerKeys : MonoBehaviour
 {
-    public int numKeys;
+    
+    [SerializeField] private int numKeys;
 
-    /// <summary>
-    /// Detect when a player runs into something.
-    /// </summary>
-    /// <param name="collision"> Wheat the player interacts with.
-    ///</param>
+    public event Action<int> OnKeysChanged;
+
     private void OnCollisionEnter(Collision collision)
     {
         // Check if it has the "Keys" tag
         if (collision.gameObject.CompareTag("Keys"))
         {
             numKeys++;
-            //audio.PlayOneShot();
+            OnKeysChanged?.Invoke(numKeys);   
             Destroy(collision.gameObject);
-        } //end if("Keys")
+        }
         else if (collision.gameObject.CompareTag("Doors"))
         {
             DoorMechanics doorData = collision.gameObject.GetComponent<DoorMechanics>();

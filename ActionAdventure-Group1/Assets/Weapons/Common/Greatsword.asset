@@ -23,6 +23,7 @@ MonoBehaviour:
   pickupModelPrefab: {fileID: 403710468755374862, guid: f15b5a9d92cd853438125bee888fd70c, type: 3}
   combatPrefab: {fileID: 403710468755374862, guid: 4c61a4725a2c3a741b093d6c885d1ece, type: 3}
   uiSprite: {fileID: -562523790, guid: 2c18837a9316be444bde8a4933bb012f, type: 3}
+  animationName: SwordAttack
   attackSound: {fileID: 0}
   pickupsound: {fileID: 0}
   projectilePrefab: {fileID: 0}

@@ -8,10 +8,10 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/12/18 | Leyton McKinney | Init
+* 2026/01/11 | Leyton McKinney | Changed public interface to Attack instead of Spawn Weapon
 *
 ************************************************************/
 
-using System.Collections.Generic;
 using UnityEngine;
  
 
@@ -20,12 +20,26 @@ public class PlayerWeaponSpawner : MonoBehaviour
     [SerializeField] private Transform weaponHolder;
     [SerializeField] private Vector3 weaponRotationOffset;
     private GameObject weaponInstance;
+    private PlayerContext player;
 
-    public void SpawnWeapon(GameObject weapon)
+    private void Awake()
     {
-        if (weaponInstance != null) return; 
+        if(!TryGetComponent(out player))
+        {
+            Debug.LogError("PlayerWeaponSpawner could not find PlayerContext Component.");
+        }
+
+        player.animation.OnAttackCancelled += DeleteAllWeapons;
+    }
+    public void Attack(WeaponData weapon)
+    {
+        // If there is already a weapon instance, don't spawn another.
+        if (weaponInstance != null) return;
+
+        var weaponPrefab = weapon.combatPrefab;
+
         weaponInstance = Instantiate(
-            weapon, // GameObject
+            weaponPrefab, // GameObject
             weaponHolder.position, // Position
             Quaternion.LookRotation(transform.forward) * Quaternion.Euler(0.0f, 180.0f, 0.0f),
             weaponHolder // Transform Parent

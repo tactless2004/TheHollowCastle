@@ -129,11 +129,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
       propertyPath: _gameLevels.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
       propertyPath: '_gameLevels.Array.data[0]'
-      value: Level_1
+      value: Level_2
       objectReference: {fileID: 0}
     - target: {fileID: 1408236324027764491, guid: 5c653eae72db9bc44808679194a0f3d7, type: 3}
       propertyPath: '_gameLevels.Array.data[1]'

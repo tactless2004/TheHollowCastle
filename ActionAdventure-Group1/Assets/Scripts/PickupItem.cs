@@ -1,6 +1,6 @@
 /************************************************************
 * COPYRIGHT:  2025
-* PROJECT: ActionAdventureGameNameTBA
+* PROJECT: TheHollowCastle
 * FILE NAME: PickupItem.cs
 * DESCRIPTION: Allows an item to be picked up by PlayerInventory.
 *                   
@@ -9,19 +9,25 @@
 * ------------------------------------------------------------
 * 2025/11/08 | Leyton McKinney | Init
 * 2025/11/09 | Leyton McKinney | use prefab rotation instead of previous model rotation on SetWeapon() call.
+* 2026/01/11 | Leyton McKinney | Slight Refactor to work with new Player Systems
 *
 ************************************************************/
  
 using UnityEngine;
-using TMPro;
 
 public class PickupItem : MonoBehaviour
 {
     [SerializeField] private ScriptableObject weaponSO;
+    private WeaponData weapon = null;
+
+    private void Awake()
+    {
+        weapon = weaponSO as WeaponData;    
+    }
 
     public WeaponData GetWeapon()
     {
-        return weaponSO as WeaponData;
+        return weapon;
     }
 
     public void SetWeapon(WeaponData weapon)

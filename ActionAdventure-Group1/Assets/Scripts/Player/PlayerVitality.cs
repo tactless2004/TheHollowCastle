@@ -11,6 +11,7 @@
 * 2025/11/15 | Leyton McKinney | Add PlayerHUD mutation.
 * 2025/11/17 | Leyton McKinney | Override parent Die() method to go to GameOver scene.
 * 2025/12/08 | Peyton Lenard   | Added animation player for TakeDamage and Die
+* 2026/01/11 | Leyton McKinney | Use PlayerContext Paradigm.
 ************************************************************/
 
 using System;
@@ -19,31 +20,47 @@ using UnityEngine;
 
 public class PlayerVitality : CombatEntity
 {
-    private PlayerController _playerController;
-    [SerializeField] private PlayerHUD hud;
+    private PlayerContext player;
 
-    public Animator _playerAnimator;
-    private void Start()
+    public event Action<float, float> OnHealthChange;
+    public event Action<float, float> OnManaChange;
+
+    protected override void Awake()
     {
-        _playerAnimator = GameObject.FindGameObjectWithTag("PlayerModel").GetComponent<Animator>();
-        _playerController = GetComponent<PlayerController>();
+        base.Awake();
+       if(!TryGetComponent(out player))
+        {
+            Debug.LogError("PlayerVitality could not find PlayerContext Component!");
+        } 
     }
     public override void TakeDamage(WeaponData attack)
     {
         base.TakeDamage(attack);
-        hud.SetHealth(health, MAXHEALTH);
-        if (_playerController.animationState == PlayerController.AnimationState.Attack || _playerController.animationState == PlayerController.AnimationState.Damage)
-        {
-            return;
-        }
-        _playerController.animationState = PlayerController.AnimationState.Damage;
-        _playerAnimator.Play("PlayerDamage");
-        _playerController.animLock = true;
+        OnHealthChange?.Invoke(GetHealth(), MAXHEALTH);
+        player.animation.TryPlayDamage();
+    }
+
+    public override void Heal(float healAmount)
+    {
+        base.Heal(healAmount);
+        OnHealthChange?.Invoke(GetHealth(), MAXHEALTH);
+    }
+
+    public override void ExertMain(WeaponData attack)
+    {
+        base.ExertMain(attack);
+        OnManaChange?.Invoke(GetMana(), MAXMANA);
+    }
+
+    public override void GainMana(float manaAmount)
+    {
+        base.GainMana(manaAmount);
+        OnManaChange?.Invoke(GetMana(), MAXMANA);
     }
 
     protected override void Die()
     {
-        _playerAnimator.Play("PlayerDeath");
+        player.animation.PlayDeath();
         try
         {
             

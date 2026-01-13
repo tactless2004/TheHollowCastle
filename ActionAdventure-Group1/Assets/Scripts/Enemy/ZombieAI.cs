@@ -61,6 +61,10 @@ public class ZombieAI : EnemyAI
     private void Update()
     {
         if (player == null) ReacquirePlayer();
+
+        // If this script is still running, and the Enemy is Dead just bail.
+        if (isDead) return;
+
         // If the enemy is idle decrement the idleTimer, then exit.
         if (idleTimer > 0.0f)
         {
@@ -71,6 +75,7 @@ public class ZombieAI : EnemyAI
         }
 
         playerProximityTimer -= Time.deltaTime;
+
         if (playerProximityTimer <= 0.0f) Die();
 
         // 1.) Try Attack
@@ -134,6 +139,9 @@ public class ZombieAI : EnemyAI
 
     private void Die()
     {
+        // If already dead, refrain from dying again
+        if (isDead) return;
+
         isDead = true;
         Destroy(gameObject);
     }

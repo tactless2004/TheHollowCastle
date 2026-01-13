@@ -10,11 +10,13 @@
 * 2025/11/04 | Leyton McKinney | Init
 * 2025/11/10 | Leyton McKinney | Add null checking for indicator UI text.
 * 2025/11/15 | Leyton McKinney | Add PlayerHUD mutation.
-* 2025/11/17 | Leyton McKinney | Move weapon indicator text logic to PlayerHUD.cs
+* 2025/11/17 | Leyton McKinney | Move weapon indicator text logic to PlayerHUD.cs.
+* 2025/01/11 | Leyton McKinney | Use PlayerContext paradigm.
+* 2026/01/12 | Leyton McKinney | Use events to signal when the weapon has changed.
 *
 ************************************************************/
 
-using TMPro;
+using System;
 using UnityEngine;
  
 
@@ -23,71 +25,65 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private ScriptableObject weapon1SO;
     [SerializeField] private ScriptableObject weapon2SO;
 
-    // TODO: Get rid of raycast system use a sphere cast or entirely get rid of it.
-    [SerializeField] private Transform raycastOrigin;
-    [SerializeField] private float maxPickupDistance = 3.0f;
-
     private WeaponData weapon1;
     private WeaponData weapon2;
-    private PlayerMove playerMove;
-    private PlayerHUD hud;
+    private PickupItem currentPickupSeen;
 
+    private PlayerContext player;
+
+
+    public event Action<Sprite, int> OnWeaponSlotChanged;
     private void Awake()
     {
         weapon1 = weapon1SO as WeaponData;
         weapon2 = weapon2SO as WeaponData;
 
-        if(!TryGetComponent(out playerMove))
+        if(!TryGetComponent(out player))
         {
-            Debug.LogError("Player does not have PlayerMove component.");
+            Debug.LogError("PlayerInventory Component was unable to find Player Context component.");
         }
 
-        if(!TryGetComponent(out hud))
-        {
-            Debug.LogError("Player does not have PlayerHUD component.");
-        }
+        player.pickup.OnPickupLost += OnPickupItemLose;
+        player.pickup.OnPickupSeen += OnPickupItemSeen;
     }
 
     private void Start()
     {
-        hud.SetWeaponSprite(weapon1.uiSprite, 1);
-        hud.SetWeaponSprite(weapon2.uiSprite, 2);
+        OnWeaponSlotChanged?.Invoke(weapon1.uiSprite, 1);
+        OnWeaponSlotChanged?.Invoke(weapon2.uiSprite, 2);
     }
 
     public void pickupSlot(int slot)
     {
-        if (Physics.Raycast(raycastOrigin.position, playerMove.facing, out RaycastHit hit, maxPickupDistance))
+        // If there is no weapon to pickup then this input should return immediately
+        if (currentPickupSeen == null) return;
+
+        // Perform the swap
+        WeaponData tempWeapon;
+        if (slot == 1)
         {
-            // If is pickupWeapon
-            if (hit.collider.TryGetComponent(out PickupItem pickupItem))
-            {
-                WeaponData weapon = pickupItem.GetWeapon();
-
-                // swap PickupItem weapon and InventoryWeapon
-                if (slot == 1)
-                {
-                    pickupItem.SetWeapon(weapon1);
-                    weapon1 = weapon;
-                }
-                else
-                {
-                    pickupItem.SetWeapon(weapon2);
-                    weapon2 = weapon;
-                }
-
-                hud.SetWeaponSprite(weapon.uiSprite, slot);
-            }
-
-            //Chests now open if the player is within a certain distance.
-            /*
-            else if (hit.collider.TryGetComponent(out Chest chest)) {
-                // don't reopen chests that already are opened
-                if (!chest.isOpened()) {
-                    chest.Open();
-                }
-            }
-            */
+            tempWeapon = weapon1;
+            weapon1 = currentPickupSeen.GetWeapon();
+            OnWeaponSlotChanged?.Invoke(weapon1.uiSprite, slot);
         }
+        else
+        {
+            tempWeapon = weapon2;
+            weapon2 = currentPickupSeen.GetWeapon();
+            OnWeaponSlotChanged?.Invoke(weapon2.uiSprite, slot);
+        }
+
+        currentPickupSeen.SetWeapon(tempWeapon);
+    }
+
+    public void OnPickupItemSeen(PickupItem item)
+    {
+        currentPickupSeen = item;
+    }
+
+    public void OnPickupItemLose()
+    {
+        currentPickupSeen = null;
     }
 
     public WeaponData getWeaponData(int slot)
