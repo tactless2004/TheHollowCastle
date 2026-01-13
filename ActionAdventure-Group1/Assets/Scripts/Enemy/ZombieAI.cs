@@ -120,7 +120,7 @@ public class ZombieAI : EnemyAI
         if(player == null) Die();
     }
 
-    public override void DamageBehavior()
+    public override void DamagedBehavior()
     {
         idleTimer = damageStunTime;
     }
@@ -129,6 +129,9 @@ public class ZombieAI : EnemyAI
     {
         // make the enemy stop moving before attack
         navMeshAgent.SetDestination(transform.position);
+
+        // RaiseAttackPerformed, even if we don't hit, because this event triggers sounds and vfx mostly
+        RaiseAttackPerformed(weapon);
 
         RaycastHit[] hits = Physics.RaycastAll(
             transform.position, // origin

@@ -8,13 +8,21 @@
 * Date [YYYY/MM/DD] | Author | Comments
 * ------------------------------------------------------------
 * 2025/12/17 | Leyton McKinney | Init
+* 2025/01/13 | Leyton McKinney | Add OnAttackPerformed event
 *
 ************************************************************/
- 
+
+using System;
 using UnityEngine;
  
 
 public abstract class EnemyAI : MonoBehaviour
 {
-    public abstract void DamageBehavior();
+    public event Action<WeaponData> OnAttackPerformed;
+    public abstract void DamagedBehavior();
+
+    protected void RaiseAttackPerformed(WeaponData weapon)
+    {
+        OnAttackPerformed?.Invoke(weapon);
+    }
 }

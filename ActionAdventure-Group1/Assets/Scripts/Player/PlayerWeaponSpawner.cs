@@ -9,9 +9,11 @@
 * ------------------------------------------------------------
 * 2025/12/18 | Leyton McKinney | Init
 * 2026/01/11 | Leyton McKinney | Changed public interface to Attack instead of Spawn Weapon
+* 2026/01/12 | Leyton McKinney | Add OnAttackPerformed event.
 *
 ************************************************************/
 
+using System;
 using UnityEngine;
  
 
@@ -22,6 +24,7 @@ public class PlayerWeaponSpawner : MonoBehaviour
     private GameObject weaponInstance;
     private PlayerContext player;
 
+    public event Action<WeaponData> OnAttackPerformed;
     private void Awake()
     {
         if(!TryGetComponent(out player))
@@ -45,6 +48,9 @@ public class PlayerWeaponSpawner : MonoBehaviour
             weaponHolder // Transform Parent
         );
         weaponInstance.SetActive(true);
+
+        // Raise attack event now that the weapon has been spawned
+        OnAttackPerformed?.Invoke(weapon);
     }
 
     public void DeleteAllWeapons()
