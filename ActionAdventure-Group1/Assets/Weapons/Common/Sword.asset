@@ -24,8 +24,8 @@ MonoBehaviour:
   combatPrefab: {fileID: 8629813522235111517, guid: 40880de2a61045a48a7f52e4e1dfefcf, type: 3}
   uiSprite: {fileID: -903681695, guid: 831552c54988fed44ab0745fd9ba8de0, type: 3}
   animationName: GreatswordAttack
-  attackSound: {fileID: 0}
-  pickupsound: {fileID: 0}
+  pickupSoundEvent: {fileID: 0}
+  attackSoundEvent: {fileID: 11400000, guid: 48dc254bc82ebf34b9e51738a2ce5ed1, type: 2}
   projectilePrefab: {fileID: 0}
   projectileSpeed: 2
   effects: []

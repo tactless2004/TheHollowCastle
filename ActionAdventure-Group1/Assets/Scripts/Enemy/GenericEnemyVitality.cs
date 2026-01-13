@@ -23,7 +23,7 @@ public class GenericEnemyVitality : CombatEntity
     public override void TakeDamage(WeaponData attack)
     {
         base.TakeDamage(attack);
-        enemyBehavior.DamageBehavior();
+        enemyBehavior.DamagedBehavior();
         damageTextSpawner.Spawn(transform, attack, false, false);
     }
 
@@ -32,10 +32,5 @@ public class GenericEnemyVitality : CombatEntity
         base.Awake();
         damageTextSpawner = GameObject.FindGameObjectWithTag("DamageTextSpawner").GetComponent<DamageTextSpawner>();
         enemyBehavior = GetComponent<EnemyAI>();
-    }
-
-    public void setGameManager(GameManager gameManager)
-    {
-        manager = gameManager;
     }
 }

@@ -37,8 +37,8 @@ public class WeaponData : ScriptableObject
     public string animationName;
 
     [Header("Audio (Optional)")]
-    public AudioClip attackSound;
-    public AudioClip pickupsound;
+    public SoundEvent pickupSoundEvent;
+    public SoundEvent attackSoundEvent;
 
     [Header("Ranged Specfic")]
     public GameObject projectilePrefab;
