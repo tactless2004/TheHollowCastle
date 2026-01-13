@@ -56,6 +56,6 @@ public class PlayerSound : MonoBehaviour
     private void HandleAttack(WeaponData weapon)
     {
         emitter.Play(attackSFX);
-        emitter.PlayOneShot(weapon.attackSoundEvent);
+        emitter.Play(weapon.attackSoundEvent);
     }
 }

@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115d296b95940654da1c1c9b7a0d1a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtSFX: {fileID: 0}
+  hurtSFX: {fileID: 11400000, guid: 721560e9fb6c5eb45a5fed5a3d638ba0, type: 2}
   attackSFX: {fileID: 0}
 --- !u!114 &1817167490
 MonoBehaviour:

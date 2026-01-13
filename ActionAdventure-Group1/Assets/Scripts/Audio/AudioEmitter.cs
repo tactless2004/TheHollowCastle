@@ -45,29 +45,21 @@ public class AudioEmitter : MonoBehaviour
         if (source.outputAudioMixerGroup != null)
             source.outputAudioMixerGroup = sound.mixerGroup;
 
-        Debug.Log("I AM PLAYING A SOUND NOW");
         source.Play();
     }
     public void PlayOneShot(SoundEvent sound)
     {
         // Don't play sounds that don't exist lol
-        if (sound == null)
-        {
-            Debug.Log("The SoundEvent Passed to PlayOneShot is null, bailing");
-            return;
-        }
+        if (sound == null) return;
+
         AudioClip clip = sound.GetRandomClip();
-        if (clip == null)
-        {
-            Debug.Log("The AudioClip From the Attack is null, bailing");
-            return;
-        }
+        if (clip == null) return;
+
         source.pitch = Random.Range(sound.pitchMin, sound.pitchMax);
         source.spatialBlend = sound.spatial ? 1.0f : 0.0f;
         if (source.outputAudioMixerGroup != null)
             source.outputAudioMixerGroup = sound.mixerGroup;
 
-        Debug.Log("I AM PLAYING A SOUND NOW (ONE SHOT)");
         source.PlayOneShot(
             clip,
             Random.Range(sound.volumeMin, sound.volumeMax)
